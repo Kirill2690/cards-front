@@ -1,0 +1,21 @@
+.default {
+    transition-duration: 0.4s;
+    background: darkseagreen;
+    color: white;
+    float: left;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+.red {
+    background: red;
+
+}
+
+
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #7BA7AB;
+}

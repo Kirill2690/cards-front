@@ -1,0 +1,23 @@
+.superInput {
+    width: 30%;
+    height: 40%;
+    border: 2px solid forestgreen;
+    border-radius: 2px;
+}
+
+.errorInput {
+    width: 10%;
+
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid red;
+    border-radius: 4px;
+    border-radius: 2px;
+}
+
+.error {
+    border: 2px solid red;
+    border-radius: 4px;
+    background: white;
+}
