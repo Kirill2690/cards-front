@@ -4,7 +4,7 @@
     appearance: none;
     cursor: pointer;
     outline: none;
-    background: blanchedalmond;
+    background: silver;
     border-radius: 50% ;
 }
 .label{
@@ -12,13 +12,13 @@
 }
 
 .radio:checked{
-    border: 2px solid khaki;
+    border: 2px solid green;
 }
 
 .radio:focus{
-    background: blue;
+    background: green;
 }
 
 .radio:hover{
-    background: blue;
+    background: greenyellow;
 }

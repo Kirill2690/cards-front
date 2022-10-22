@@ -1,23 +1,29 @@
 .superInput {
-    width: 30%;
-    height: 40%;
-    border: 2px solid forestgreen;
-    border-radius: 2px;
+    border: 2px solid #aaa;
+    border-radius: 5px;
+    margin: 8px 0;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: .3s;
+}
+.superInput:focus{
+    border-color: dodgerBlue;
+    box-shadow: 0 0 8px 0 dodgerBlue;
 }
 
 .errorInput {
-    width: 10%;
-
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 2px solid red;
-    border-radius: 4px;
-    border-radius: 2px;
+    border: 2px solid #ED5464FF;
+    border-radius: 5px;
+}
+.errorInput:focus{
+    box-shadow: 0 0 8px 0 #ED5464FF;
 }
 
 .error {
-    border: 2px solid red;
-    border-radius: 4px;
-    background: white;
+    display: block;
+    color: red;
+    width: 170px;
+    height: 20px;
+    text-align: center;
 }

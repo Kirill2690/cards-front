@@ -1,17 +1,14 @@
 .checkbox {
-    appearance: none;
-    width: 30px;
-    height: 30px;
-    background: whitesmoke;
-    border: 2px solid;
-    border-radius: 4px;
+    width: fit-content;
+    display: block;
+    position: relative;
+    padding-left: 30px;
     cursor: pointer;
-
+    user-select: none;
 }
 
 .spanClassName {
-    background: darkseagreen;
-    size: auto;
+    margin: 5px;
 }
 
 .checkbox:checked {

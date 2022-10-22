@@ -1,21 +1,40 @@
-.default {
-    transition-duration: 0.4s;
-    background: darkseagreen;
-    color: white;
-    float: left;
+.button {
+    color: #fff;
+    padding: 10px 10px;
+    margin: 16px;
+    border-radius: 10px;
     cursor: pointer;
-    border-radius: 5px;
+}
+:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+    color: black;
+    background: gray;
+    border: 1px solid #A9E0F4FF;
+
 }
 
+.default {
+    color: black;
+    border: 1px solid dodgerBlue
+}
 
 .red {
-    background: red;
-
+    background: indianred;
+    border: 1px solid #ED5464FF;
 }
 
+.red:hover {
+    border: 2px solid red;
+    background-color: red;
+    cursor: pointer;
+    color:white;
+    opacity: .8;
+    transition: .3s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+ }
 
-.disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    background: #7BA7AB;
-}
+
+
+
+
