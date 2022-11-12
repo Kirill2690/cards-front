@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import {Path} from '../pages/Pages';
+import {Path} from '../../app/pages/Pages';
 import s from './Header.module.css';
 
 export const Header = () => {

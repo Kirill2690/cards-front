@@ -1,11 +1,11 @@
 import React from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
-import {Register} from "../../../k2-features/f1-auth/a1-register/Register";
-import {Login} from "../../../k2-features/f1-auth/a0-login/Login";
-import {Password} from "../../../k2-features/f1-auth/a4-password/Password";
-import {Error404} from "../common/c7-error404/Error404";
-import {Recovery} from "../../../k2-features/f1-auth/a3-recovery/Recovery";
-import {Test} from "../../../k2-features/f0-test/Test";
+import {Register} from "../../features/auth/a1-register/Register";
+import {Login} from "../../features/auth/a0-login/Login";
+import {Password} from "../../features/auth/a4-password/Password";
+import {Error404} from "../../common/components/error404/Error404";
+import {Recovery} from "../../features/auth/a3-recovery/Recovery";
+import {Test} from "../../features/test/Test";
 
 
 export enum Path {

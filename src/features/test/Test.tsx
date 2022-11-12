@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import s from './Test.module.css'
-import SuperSelect from "../../k1-main/m1-ui/common/c5-superSelect/SuperSelect";
-import {SuperRadio} from "../../k1-main/m1-ui/common/c6-superRadio/SuperRadio";
-import {SuperButton} from "../../k1-main/m1-ui/common/c2-superButton/SuperButton";
-import SuperCheckbox from "../../k1-main/m1-ui/common/c3-superCheckbox/SuperCheckbox";
-import {SuperEditableSpan} from "../../k1-main/m1-ui/common/c4-superEditableSpan/SuperEditableSpan";
-import {SuperInputText} from "../../k1-main/m1-ui/common/c1-superInput/SuperInputText";
+import SuperSelect from "../../common/components/superSelect/SuperSelect";
+import {SuperRadio} from "../../common/components/superRadio/SuperRadio";
+import {SuperButton} from "../../common/components/superButton/SuperButton";
+import SuperCheckbox from "../../common/components/superCheckbox/SuperCheckbox";
+import {SuperEditableSpan} from "../../common/components/superEditableSpan/SuperEditableSpan";
+import {SuperInputText} from "../../common/components/superInput/SuperInputText";
 
 export const Test = () => {
     const [inputText, setInputText] = useState<string>('')
@@ -48,7 +48,7 @@ export const Test = () => {
             <SuperCheckbox
                 checked={checkboxStatus}
                 onChangeChecked={setCheckboxStatus}>
-                some text
+                {checkboxStatus?'done':'not done'}
             </SuperCheckbox>
             <SuperEditableSpan
                 value={spanValue}
