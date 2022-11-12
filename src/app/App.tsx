@@ -1,10 +1,14 @@
 import React from 'react';
-import './App.css';
-import {Main} from "./Main";
+import s from './App.module.css'
+import {Header} from "../features/header/Header";
+import {Pages} from "./pages/Pages";
 
 export const App = () => (
-    <div className="App">
-        <Main/>
+    <div className={s.app_wrapper}>
+        <Header/>
+        <div className={s.appContainer}>
+        <Pages/>
+        </div>
     </div>
 );
 
