@@ -5,6 +5,7 @@ export const Profile = () => {
     return (
         <div className={s.wrapper_profile}>
             Profile
+            Test
         </div>
     );
 };
