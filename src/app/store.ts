@@ -8,6 +8,7 @@ import {recoverPasswordReducer} from "../features/auth/recoveryPassword/recovery
 import {newPasswordReducer} from "../features/auth/newPassword/newPassword-reducer";
 
 
+
 const rootReducer = combineReducers({
     app: appReducer,
     login: loginReducer,
@@ -27,3 +28,6 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateTy
 
 // типизация dispatch
 export type AppDispatch = ThunkDispatch<AppRootStateType, unknown, AnyAction>
+
+
+
