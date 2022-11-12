@@ -4,8 +4,8 @@ import {appReducer} from "./app-reducer";
 import {profileReducer} from "../features/auth/profile/profile-reducer";
 import {registerReducer} from "../features/auth/register/register-reducer";
 import {loginReducer} from "../features/auth/login/login-reducer";
-import {recoverPasswordReducer} from "../features/auth/recoveryPassword/recoveryPassword-reducer";
-import {newPasswordReducer} from "../features/auth/newPassword/newPassword-reducer";
+import {recoverPasswordReducer} from "../features/auth/password/recoveryPassword/recoveryPassword-reducer";
+import {newPasswordReducer} from "../features/auth/password/newPassword/newPassword-reducer";
 
 
 

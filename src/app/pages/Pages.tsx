@@ -2,9 +2,9 @@ import React from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
 import {Register} from "../../features/auth/register/Register";
 import {Login} from "../../features/auth/login/Login";
-import {Password} from "../../features/auth/newPassword/Password";
+import {Password} from "../../features/auth/password/newPassword/Password";
 import {Error404} from "../../common/components/error404/Error404";
-import {Recovery} from "../../features/auth/recoveryPassword/Recovery";
+import {Recovery} from "../../features/auth/password/recoveryPassword/Recovery";
 import {Test} from "../../features/test/Test";
 
 
