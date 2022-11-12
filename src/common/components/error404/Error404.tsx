@@ -4,9 +4,8 @@ import error404 from  '../../../assets/images/error_404.png'
 
 export const Error404 = () => {
     return (
-        <div className={s.wrapper_error}>
+        <div className={s.error404}>
             <img className={s.img_error} src={error404} alt={'error'}/>
-
         </div>
     );
 };
