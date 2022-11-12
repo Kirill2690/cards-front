@@ -5,6 +5,7 @@ export const instance = axios.create({
     withCredentials: true
 })
 
+
 export const authAPI = {
     login(data: LoginDataType) {
         return instance.post<LoginDataType, AxiosResponse<ResponseType>>('/auth/login', data)
@@ -15,18 +16,13 @@ export const authAPI = {
     authMe() {
         return instance.post<{}, AxiosResponse<ResponseType>>('/auth/me')
     },
+    authRegister(data: RegisterDataType) {
+        return instance.post<RegisterDataType, AxiosResponse<ResponseType>>('auth/register', data)
+    },
     changeUserName(data: ChangeUserNameDataType) {
         return instance.put<ChangeUserNameDataType, AxiosResponse<ResponseUpdatesUserType>>('auth/me', data)
     },
-    authRegister(data: RegisterDataType) {
-        return instance.post<RegisterParamsType, AxiosResponse<ResponseType>>('auth/register', data)
-    },
-    forgotPassword(data: ForgotPasswordType) {
-        return instanceHeroku.post<ForgotPasswordType, AxiosResponse<ResponseForgotType>>('auth/forgot', data)
-    },
-    setNewPassword(data: NewPasswordType) {
-        return instanceHeroku.post<NewPasswordType, AxiosResponse<ResponseForgotType>>('auth/set-new-password', data)
-    },
+
 }
 
 //type
@@ -55,7 +51,7 @@ export type ResponseType = {
 export type ResponseUpdatesUserType = {
     token: string
     tokenDeathTime: string
-    updatedUser: ProfileType
+
 }
 
 export type ResponseForgotType = {

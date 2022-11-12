@@ -1,10 +1,10 @@
 import React from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
-import {Register} from "../../features/auth/a1-register/Register";
-import {Login} from "../../features/auth/a0-login/Login";
-import {Password} from "../../features/auth/a4-password/Password";
+import {Register} from "../../features/auth/register/Register";
+import {Login} from "../../features/auth/login/Login";
+import {Password} from "../../features/auth/newPassword/Password";
 import {Error404} from "../../common/components/error404/Error404";
-import {Recovery} from "../../features/auth/a3-recovery/Recovery";
+import {Recovery} from "../../features/auth/recoveryPassword/Recovery";
 import {Test} from "../../features/test/Test";
 
 
