@@ -1,16 +1,12 @@
 import React from 'react';
 import {NavLink, useNavigate} from 'react-router-dom';
 import s from './Header.module.css';
-import {useAppSelector} from "../../common/hooks/hooks";
 import logo from '../../assets/images/logo_learn.jpeg'
 import {Button} from "@mui/material";
-import {Profile} from "../auth/profile/Profile";
+
 
 export const Header = () => {
 
-    const user = useAppSelector(state => state.profile.user)
-    const isLoggedIn = useAppSelector(state => state.login)
-    const profile = useAppSelector(state => state.login.profile)
     const navigate = useNavigate()
 
     return (
