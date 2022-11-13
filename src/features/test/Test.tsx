@@ -6,9 +6,10 @@ import {SuperButton} from "../../common/components/superButton/SuperButton";
 import SuperCheckbox from "../../common/components/superCheckbox/SuperCheckbox";
 import {SuperEditableSpan} from "../../common/components/superEditableSpan/SuperEditableSpan";
 import {SuperInputText} from "../../common/components/superInput/SuperInputText";
+import {CheckEmail} from "../auth/password/checkEmail/CheckEmail";
 
 export const Test = () => {
-    const [inputText, setInputText] = useState<string>('')
+    /*const [inputText, setInputText] = useState<string>('')
     const error = inputText ? '' : 'error'
 
     const showAlert = () => {
@@ -24,9 +25,9 @@ export const Test = () => {
 
     const arr = ['1', '2', '3', '4', '5']
     const [value, onChangeOption] = useState(arr[2])
-
-    return (
-        <div className={s.column}>
+*/
+    return <CheckEmail/>
+       /* <div className={s.column}>
             <SuperInputText
                 value={inputText}
                 onChangeText={setInputText}
@@ -66,8 +67,8 @@ export const Test = () => {
                 value={value}
                 onChangeOption={onChangeOption}
             /></div>
+*/
 
+        /*</div>*/
 
-        </div>
-    );
 };

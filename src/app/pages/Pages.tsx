@@ -2,33 +2,37 @@ import React from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
 import {Register} from "../../features/auth/register/Register";
 import {Login} from "../../features/auth/login/Login";
-import {Password} from "../../features/auth/password/newPassword/Password";
+import {NewPassword} from "../../features/auth/password/newPassword/NewPassword";
 import {Error404} from "../../common/components/error404/Error404";
-import {Recovery} from "../../features/auth/password/recoveryPassword/Recovery";
-import {Test} from "../../features/test/Test";
+import {RecoveryPassword} from "../../features/auth/password/recoveryPassword/RecoveryPassword";
+import {CheckEmail} from "../../features/auth/password/checkEmail/CheckEmail";
+import {Profile} from "../../features/auth/profile/Profile";
 
 
 export enum Path {
     Login = '/login',
     Register = '/register',
-    PageNotFound = 'page-not-found',
+    Error404 = '/error404',
     RecoveryPassword = '/recovery-password',
+    CheckEmail='/checkEmail',
     NewPassword = '/new-password',
-    Test = '/test'
+    Profile='/profile'
+
 }
 
 export const Pages = () => {
     return (
-        <div>
+        <div >
             <Routes>
-                <Route path={'/'} element={<Navigate to={Path.Test}/>}/>
-                <Route path={Path.Login} element={<Login/>}/>
-                <Route path={Path.Register} element={<Register/>}/>
-                <Route path={Path.PageNotFound} element={<Error404/>}/>
-                <Route path={Path.RecoveryPassword} element={<Recovery/>}/>
-                <Route path={Path.NewPassword} element={<Password/>}/>
-                <Route path={Path.Test} element={<Test/>}/>
-                <Route path={'/*'} element={<Error404/>}/>
+                <Route path={'/'} element={<Navigate to={'/profile'}/>}/>
+                <Route path={'/login'} element={<Login/>}/>
+                <Route path={'/register'} element={<Register/>}/>
+                <Route path={'/recovery-password'} element={<RecoveryPassword/>}/>
+                <Route path={'/checkEmail'} element={<CheckEmail/>}/>
+                <Route path={'/new-password/:token'} element={<NewPassword/>}/>
+                <Route path={'/profile'} element={<Profile/>}/>
+                <Route path={'/error404'} element={<Error404/>}/>
+                <Route path={'*'} element={<Navigate to={'/error404'}/>}/>
             </Routes>
         </div>
     );

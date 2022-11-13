@@ -1,7 +1,7 @@
 import React from 'react';
-import s from './Recovery.module.css'
+import s from './RecoveryPassword.module.css'
 
-export const Recovery = () => {
+export const RecoveryPassword = () => {
     return (
         <div className={s.wrapper_recovery}>
             Password recovery

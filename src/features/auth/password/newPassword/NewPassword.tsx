@@ -1,7 +1,7 @@
 import React from 'react';
-import s from './Password.module.css'
+import s from './NewPassword.module.css'
 
-export const Password = () => {
+export const NewPassword = () => {
     return (
         <div className={s.wrapper_password}>
             Enter new password
