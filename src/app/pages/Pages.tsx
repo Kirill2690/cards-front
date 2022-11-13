@@ -7,6 +7,8 @@ import {Error404} from "../../common/components/error404/Error404";
 import {RecoveryPassword} from "../../features/auth/password/recoveryPassword/RecoveryPassword";
 import {CheckEmail} from "../../features/auth/password/checkEmail/CheckEmail";
 import {Profile} from "../../features/auth/profile/Profile";
+import {useAppSelector} from "../../common/hooks/hooks";
+import {LinearProgress} from "@mui/material";
 
 
 export enum Path {
@@ -21,16 +23,20 @@ export enum Path {
 }
 
 export const Pages = () => {
+    const status = useAppSelector(state => state.app.status)
     return (
         <div >
+            {status === 'loading' && (
+                <LinearProgress color={"primary"} />
+            )}
             <Routes>
                 <Route path={'/'} element={<Navigate to={'/profile'}/>}/>
+                <Route path={'/profile'} element={<Profile/>}/>
                 <Route path={'/login'} element={<Login/>}/>
                 <Route path={'/register'} element={<Register/>}/>
                 <Route path={'/recovery-password'} element={<RecoveryPassword/>}/>
                 <Route path={'/checkEmail'} element={<CheckEmail/>}/>
                 <Route path={'/new-password/:token'} element={<NewPassword/>}/>
-                <Route path={'/profile'} element={<Profile/>}/>
                 <Route path={'/error404'} element={<Error404/>}/>
                 <Route path={'*'} element={<Navigate to={'/error404'}/>}/>
             </Routes>

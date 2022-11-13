@@ -6,14 +6,17 @@
 }
 
 .form {
-    max-width: 200px;
-    margin: 0 auto;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    background: #FFF;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    margin: 0 auto;
+    width: 413px;
+    height: 408px;
+    background: #FFFFFF;
+    box-shadow: 1px 1px 10px rgba(187, 187, 187, 0.35);
+    border-radius: 10px;
+    padding: 30px 50px;
 }
 
 .title {
@@ -23,7 +26,6 @@
 .button{
     color: white;
     background-color: #366EFF;
-
 
 }
 .input {
