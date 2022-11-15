@@ -1,6 +1,8 @@
 .app_wrapper {
+    min-height: 100vh;
     font-size: 16px;
     line-height: 1.6;
+    background: #F9F9FA;
 }
 .appContainer{
     height: 100%;
