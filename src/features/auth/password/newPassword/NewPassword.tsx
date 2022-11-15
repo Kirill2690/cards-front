@@ -5,7 +5,7 @@ import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
 import {AppRootStateType} from "../../../../app/store";
 import {useFormik} from "formik";
 import {setNewPasswordTC} from "./newPassword-reducer";
-import {Button, FormControl, IconButton, Input, InputAdornment, LinearProgress, Paper} from "@mui/material";
+import {Button, IconButton, Input} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 
 type FormikErrorType = {
@@ -16,7 +16,7 @@ export const NewPassword = () => {
 
 const dispatch = useAppDispatch()
 const isPassChanged = useAppSelector((state: AppRootStateType) => state.newPassword.isPassChanged)
-const appStatus = useAppSelector(state => state.app.status)
+/*const appStatus = useAppSelector(state => state.app.status)*/
 
 const params = useParams()
 const token = params.token

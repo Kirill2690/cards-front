@@ -21,12 +21,14 @@ export const App = () => {
         </div>
     }
     return (
-        <div className={s.app_wrapper}>
-               <Header/>
-        <div className={s.app_container}>
-        <Pages/>
-        </div>
-        </div>
+       <div className={s.appBlock}>
+           <Header/>
+           <div className={s.appContainer}>
+           <Pages/>
+       </div>
+       </div>
+
+
     );
 
 }

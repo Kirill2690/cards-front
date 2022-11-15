@@ -3,12 +3,14 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    width: 330px;
     margin: 60px auto 0;
-    width: 303px;
     background: #FFFFFF;
     box-shadow: 1px 1px 10px rgba(187, 187, 187, 0.35);
     border-radius: 10px;
-    padding: 30px 30px;
+    padding: 50px 50px;
+
+
 }
 
 .form {
@@ -18,7 +20,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 15px;
+
 }
 
 .input {
@@ -47,24 +49,10 @@
     width: 347px;
     height: 36px;
     border-radius: 30px;
-
-
-}
-.input {
-    margin-bottom: 15px;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 
 .link{
     color: #366EFF;
 }
 
-.error {
-    color: red
-}

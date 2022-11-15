@@ -5,7 +5,7 @@ import {AppThunk} from "../../../../app/store";
 import {authAPI, SetNewPasswordType} from "../../../../api/api";
 
 
-const initialState: InitialStateType = {
+const initialState = {
     info: '',
     isPassChanged: false
 }
@@ -44,9 +44,6 @@ export const setInfoAC = (info: string) => ({type: 'NEW-PASSWORD-SUCCESS', info}
 export const setPassChangedAC = (isPassChanged: boolean) => ({type: 'IS-PASS-CHANGED', isPassChanged} as const)
 
 // types
-type InitialStateType = {
-    info: string
-    isPassChanged: boolean
-}
+type InitialStateType = typeof initialState
 
 type ActionsType = ReturnType<typeof setInfoAC> | ReturnType<typeof setPassChangedAC>

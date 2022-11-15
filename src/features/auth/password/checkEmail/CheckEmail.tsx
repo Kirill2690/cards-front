@@ -14,7 +14,6 @@ export const CheckEmail = () => {
                 <div className={s.img_block}>
                     <img src={email_logo} alt={'Email img'}/>
                 </div>
-
                 We've sent an Email with instructions to <b>{email}</b>
                 <div className={s.button_block}>
                     <Button onClick={()=>{navigate('/login')}} className={s.button} variant={'contained'} type="submit">Back to login</Button>

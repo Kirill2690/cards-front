@@ -144,6 +144,7 @@ export const Register = (() => {
                 <Button className={s.button} variant={'contained'} type="submit">Sign Up</Button>
                 Already have an account?
                 <Link to={'/login'} className={s.link}>Sign In</Link>
+
             </form>
         </div>
     );

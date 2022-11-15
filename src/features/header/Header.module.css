@@ -1,16 +1,19 @@
-header {
-  display: flex;
-  align-items: center;
+.header {
+  margin-bottom: 44px;
   height: 60px;
-  background-color: #fcfcfc;
-  box-shadow: 0 2px 10px rgba(109, 109, 109, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  min-width: 80vh;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, .2);
+  background-color: #FCFCFC;
+  z-index: 1;
 }
 
 .container {
+  height: 100%;
+  width: 80%;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  width: 1400px;
-  margin: 0 auto;
+  align-items: center;
 }
 
 .imgBlock {
@@ -26,8 +29,8 @@ header {
   margin : 5px 50px 10px;
 }
 .button{
-  margin-top: 15px !important;
-  width: 157px;
+  margin-top: 5px !important;
+  width: 113px;
   height: 36px;
   border-radius: 30px !important;
   background: #366EFF !important;
