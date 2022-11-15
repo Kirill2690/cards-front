@@ -27,11 +27,11 @@ export const authAPI = {
     changeUserName(data: ChangeUserNameDataType) {
         return instance.put<ChangeUserNameDataType, AxiosResponse<ResponseUpdatesUserType>>('auth/me', data)
     },
-    forgotPassword(data: ForgotPasswordType) {
-        return instanceHeroku.post<ForgotPasswordType, AxiosResponse<ResponseForgotType>>('auth/forgot', data)
+    forgotPassword(data:ForgotDataType) {
+        return instanceHeroku.post<ForgotDataType, AxiosResponse<ForgotDataResponseType>>('auth/forgot',data)
     },
     setNewPassword(data: SetNewPasswordType) {
-        return instanceHeroku.post<SetNewPasswordType, AxiosResponse<ResponseForgotType>>('auth/set-new-password', data)
+        return instanceHeroku.post<SetNewPasswordType, AxiosResponse<ResponseNewPasswordType>>('auth/set-new-password', data)
     },
 }
 
@@ -67,10 +67,8 @@ export type ResponseUpdatesUserType = {
 }
 
 export type ResponseForgotType = {
-    info: string;
-    success: boolean;
-    answer: boolean;
-    html: boolean;
+    info: string
+    error: string
 }
 export type RegisterDataType = {
     email: string
@@ -85,7 +83,18 @@ export type SetNewPasswordType = {
     resetPasswordToken: string | undefined
 }
 
-export type ForgotPasswordType = {
+
+export type ResponseNewPasswordType={
+    info: string
+    error: string
+}
+
+export type ForgotDataType = {
     email: string
     message: string
+}
+
+export type ForgotDataResponseType = {
+    info: string
+    error: string
 }
