@@ -5,6 +5,7 @@ import {Pages} from "./pages/Pages";
 import {useAppDispatch, useAppSelector} from "../common/hooks/hooks";
 import {authMeTC} from "./app-reducer";
 import {CircularProgress} from "@mui/material";
+import {ErrorSnackbar} from "../common/components/ErrorSnackBar/ErrorSnackBar";
 
 
 export const App = () => {
@@ -23,6 +24,7 @@ export const App = () => {
     return (
        <div className={s.appBlock}>
            <Header/>
+           <ErrorSnackbar/>
            <div className={s.appContainer}>
            <Pages/>
        </div>
