@@ -1,4 +1,4 @@
-import {Button, FormControl, IconButton, Input, InputAdornment} from "@mui/material";
+import {Button, CircularProgress, FormControl, IconButton, Input, InputAdornment} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
 import {Navigate, NavLink, useNavigate} from "react-router-dom";
 import {AppRootStateType} from "../../../../app/store";
@@ -14,7 +14,7 @@ export const RecoveryPassword = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const forgotPasswordSuccess = useAppSelector((state: AppRootStateType) => state.recoverPassword.forgotPasswordSuccess)
-   /* const appStatus = useAppSelector(state => state.app.status)*/
+    const appStatus = useAppSelector(state => state.app.status)
 
     const [showEmail, setShowEmail] = useState(false)
     const onClickShowEmail = () => setShowEmail(!showEmail)
@@ -51,6 +51,8 @@ export const RecoveryPassword = () => {
     }
 
     return (
+        <>
+            {appStatus === 'loading' ? <CircularProgress/> : ''}
             <div className={s.ForgotPasBlock}>
                 <h2 className={s.title}>Forgot your password?</h2>
                 <form className={s.form} onSubmit={formik.handleSubmit}>
@@ -89,6 +91,7 @@ export const RecoveryPassword = () => {
                     <NavLink to="/login" className={s.login}> Try logging in </NavLink>
                 </form>
             </div>
+        </>
 )
 }
 

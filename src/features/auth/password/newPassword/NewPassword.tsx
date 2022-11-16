@@ -5,7 +5,7 @@ import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
 import {AppRootStateType} from "../../../../app/store";
 import {useFormik} from "formik";
 import {setNewPasswordTC} from "./newPassword-reducer";
-import {Button, IconButton, Input, InputAdornment} from "@mui/material";
+import {Button, CircularProgress, IconButton, Input, InputAdornment} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 
 type FormikErrorType = {
@@ -15,7 +15,7 @@ export const NewPassword = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const newPasswordSuccess = useAppSelector((state: AppRootStateType) => state.newPassword.newPasswordSuccess)
-    /*const appStatus = useAppSelector(state => state.app.status)*/
+    const appStatus = useAppSelector(state => state.app.status)
 
 
 
@@ -47,6 +47,8 @@ export const NewPassword = () => {
         return <Navigate to={'/login'}/>
     }
     return (
+        <>
+            {appStatus === 'loading' ? <CircularProgress/> : ''}
         <div className={s.wrapper_newPassword}>
             <h2 className={s.title}>Create new password</h2>
             <form className={s.form} onSubmit={formik.handleSubmit}>
@@ -80,6 +82,7 @@ export const NewPassword = () => {
                 </div>
             </form>
         </div>
+        </>
     )
 }
 

@@ -1,12 +1,12 @@
 import {authAPI} from "../../../api/api";
 import {AppDispatch, AppThunk} from "../../../app/store";
 
-type InitialStateType={
-    name:string
-}
+
 const initialState  = {
   name:''
 }
+
+type InitialStateType=typeof initialState
 
 
 export const profileReducer = (state: InitialStateType = initialState, action: ProfileActionType): InitialStateType  => {

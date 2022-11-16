@@ -31,6 +31,7 @@ export const App = () => {
                 </div>}
                 <Pages/>
                 <ErrorSnackbar/>
+
             </div>
         </div>
 
