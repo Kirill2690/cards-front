@@ -5,7 +5,7 @@ import {Pages} from "./pages/Pages";
 import {useAppDispatch, useAppSelector} from "../common/hooks/hooks";
 import {authMeTC} from "./app-reducer";
 import {CircularProgress} from "@mui/material";
-import {ErrorSnackbar} from "../common/components/ErrorSnackBar/ErrorSnackBar";
+import {ErrorSnackbar} from "../common/components/errorSnackBar/ErrorSnackBar";
 
 
 export const App = () => {
