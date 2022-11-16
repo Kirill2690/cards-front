@@ -6,6 +6,7 @@ import {useAppDispatch, useAppSelector} from "../common/hooks/hooks";
 import {authMeTC} from "./app-reducer";
 import {CircularProgress} from "@mui/material";
 import {ErrorSnackbar} from "../common/components/errorSnackBar/ErrorSnackBar";
+import {Preloader} from "../common/components/preloader/Preloader";
 
 
 export const App = () => {
@@ -18,17 +19,13 @@ export const App = () => {
     }, [dispatch]);
 
     if (!isInitialized) {
-        return <div className={s.circular}>
-            <CircularProgress color="inherit"/>
-        </div>
+        return <Preloader/>
     }
     return (
         <div className={s.app_wrapper}>
             <Header/>
             <div className={s.app_container}>
-                {status === 'loading' && <div className={s.circular}>
-                    <CircularProgress color="inherit"/>
-                </div>}
+                {status === 'loading' && <Preloader/>}
                 <Pages/>
                 <ErrorSnackbar/>
 

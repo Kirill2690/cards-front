@@ -7,6 +7,7 @@ import s from './RecoveryPassword.module.css'
 import {recoverTC} from "./recoveryPassword-reducer";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import React, {useState} from "react";
+import {Preloader} from "../../../../common/components/preloader/Preloader";
 
 
 
@@ -52,7 +53,7 @@ export const RecoveryPassword = () => {
 
     return (
         <>
-            {appStatus === 'loading' ? <CircularProgress/> : ''}
+            {appStatus === 'loading' ? <Preloader/> : ''}
             <div className={s.ForgotPasBlock}>
                 <h2 className={s.title}>Forgot your password?</h2>
                 <form className={s.form} onSubmit={formik.handleSubmit}>

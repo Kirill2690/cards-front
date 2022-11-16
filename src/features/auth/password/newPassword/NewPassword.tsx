@@ -5,8 +5,9 @@ import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
 import {AppRootStateType} from "../../../../app/store";
 import {useFormik} from "formik";
 import {setNewPasswordTC} from "./newPassword-reducer";
-import {Button, CircularProgress, IconButton, Input, InputAdornment} from "@mui/material";
+import {Button, IconButton, Input, InputAdornment} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
+import {Preloader} from "../../../../common/components/preloader/Preloader";
 
 type FormikErrorType = {
     password?: string
@@ -24,6 +25,7 @@ export const NewPassword = () => {
     const onClickShowPassword = () => setShowPassword(!showPassword)
     const params = useParams()
     const token = params.token
+
 
 
     const formik = useFormik({
@@ -48,7 +50,7 @@ export const NewPassword = () => {
     }
     return (
         <>
-            {appStatus === 'loading' ? <CircularProgress/> : ''}
+            {appStatus === 'loading' ? <Preloader/> : ''}
         <div className={s.wrapper_newPassword}>
             <h2 className={s.title}>Create new password</h2>
             <form className={s.form} onSubmit={formik.handleSubmit}>
