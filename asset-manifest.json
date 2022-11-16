@@ -1,18 +1,19 @@
 {
   "files": {
-    "main.css": "/cards-front/static/css/main.b2f4ce2f.css",
-    "main.js": "/cards-front/static/js/main.bce87e00.js",
+    "main.css": "/cards-front/static/css/main.6bfe9bd8.css",
+    "main.js": "/cards-front/static/js/main.eeeedcd4.js",
     "static/js/787.1998cdf9.chunk.js": "/cards-front/static/js/787.1998cdf9.chunk.js",
     "static/media/logo_learn.jpeg": "/cards-front/static/media/logo_learn.d0b4a47957073addf167.jpeg",
-    "static/media/error_404.png": "/cards-front/static/media/error_404.801accc8f60f0ddb62fa.png",
+    "static/media/—Pngtree—404 error with a broken_7222901.png": "/cards-front/static/media/—Pngtree—404 error with a broken_7222901.c8a112666308ccc069f1.png",
     "static/media/email_icon.png": "/cards-front/static/media/email_icon.ab9bd8b2d6958129328b.png",
     "index.html": "/cards-front/index.html",
-    "main.b2f4ce2f.css.map": "/cards-front/static/css/main.b2f4ce2f.css.map",
-    "main.bce87e00.js.map": "/cards-front/static/js/main.bce87e00.js.map",
+    "static/media/logout.svg": "/cards-front/static/media/logout.819881059549eb959ed296b6cbf2861e.svg",
+    "main.6bfe9bd8.css.map": "/cards-front/static/css/main.6bfe9bd8.css.map",
+    "main.eeeedcd4.js.map": "/cards-front/static/js/main.eeeedcd4.js.map",
     "787.1998cdf9.chunk.js.map": "/cards-front/static/js/787.1998cdf9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b2f4ce2f.css",
-    "static/js/main.bce87e00.js"
+    "static/css/main.6bfe9bd8.css",
+    "static/js/main.eeeedcd4.js"
   ]
 }
