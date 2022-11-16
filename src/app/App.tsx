@@ -10,6 +10,7 @@ import {ErrorSnackbar} from "../common/components/errorSnackBar/ErrorSnackBar";
 
 export const App = () => {
     const isInitialized = useAppSelector(state => state.app.isInitialized);
+    const status=useAppSelector(state => state.app.status)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -22,13 +23,16 @@ export const App = () => {
         </div>
     }
     return (
-       <div className={s.appBlock}>
-           <Header/>
-           <ErrorSnackbar/>
-           <div className={s.appContainer}>
-           <Pages/>
-       </div>
-       </div>
+        <div className={s.appBlock}>
+            <Header/>
+            <div className={s.appContainer}>
+                {status === 'loading' && <div className={s.circular}>
+                    <CircularProgress color="inherit"/>
+                </div>}
+                <Pages/>
+                <ErrorSnackbar/>
+            </div>
+        </div>
 
 
     );

@@ -10,7 +10,7 @@ export const Header = () => {
     const navigate = useNavigate()
 
     return (
-        <header className={s.header}>
+        <header className={s.header_wrapper}>
             <div className={s.container}>
                 <div className={s.imgBlock}>
                     <img src={logo} alt="logo"/>
