@@ -16,7 +16,6 @@ export const Error404 = () => {
     }
     return (
         <div className={s.error404}>
-
             <div>
                 <img className={s.img_error} src={pageNotFound} alt={'error'}/>
             </div>

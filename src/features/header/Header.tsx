@@ -11,7 +11,7 @@ export const Header = () => {
 
     return (
         <header className={s.header_wrapper}>
-            <div className={s.container}>
+            <div className={s.header_container}>
                 <div className={s.imgBlock}>
                     <img src={logo} alt="logo"/>
                 </div>

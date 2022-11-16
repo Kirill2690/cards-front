@@ -23,9 +23,9 @@ export const App = () => {
         </div>
     }
     return (
-        <div className={s.appBlock}>
+        <div className={s.app_wrapper}>
             <Header/>
-            <div className={s.appContainer}>
+            <div className={s.app_container}>
                 {status === 'loading' && <div className={s.circular}>
                     <CircularProgress color="inherit"/>
                 </div>}

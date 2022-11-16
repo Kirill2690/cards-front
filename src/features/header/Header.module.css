@@ -1,19 +1,18 @@
 .header {
   margin-bottom: 44px;
   height: 60px;
-  min-width: 80vh;
-  box-shadow: 0 3px 4px rgba(0, 0, 0, .2);
+  width: 100%;
   background-color: #FCFCFC;
   z-index: 1;
 }
 
-.container {
-  height: 100%;
-  width: 80%;
+.header_container {
+  min-width: 80vh;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, .2);
 }
 
 .imgBlock {
