@@ -4,33 +4,41 @@ import {AppThunk} from "../../../../app/store";
 import {errorUtil} from "../../../../common/utils/utils-error";
 
 const initialState = {
-    forgotPasswordSuccess: false
+    forgotPasswordSuccess: false,
+    forgetEmail: null as string | null,
    }
 
 
 export const recoverPasswordReducer=(state: InitialStateType = initialState, action: ActionsType): InitialStateType =>{
     switch (action.type) {
         case 'FORGOT-PASSWORD-SUCCESS':
-            return {...state, forgotPasswordSuccess:action.forgotPasswordSuccess};
+            return {...state, forgotPasswordSuccess:action.forgotPasswordSuccess}
+        case 'SET-DATA-EMAIL':
+            return {
+                ...state,
+                forgetEmail: action.email
+            }
         default:
             return state
     }
 };
 
 export const setForgotPasswordSuccessAC = (forgotPasswordSuccess: boolean) => ({type: 'FORGOT-PASSWORD-SUCCESS', forgotPasswordSuccess} as const)
+export const setDataForgetPasswordAC = (email: string) => ({type: 'SET-DATA-EMAIL', email} as const)
 
-export const recoverTC = (forgotData: ForgotDataType): AppThunk => async dispatch=> {
+export const recoverTC = (data: ForgotDataType): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     try {
-        await authAPI.forgotPassword(forgotData)
+        await authAPI.forgotPassword(data)
+        dispatch(setDataForgetPasswordAC(data.email))
         dispatch(setForgotPasswordSuccessAC(true))
     } catch (e) {
-        errorUtil(e, dispatch);
+        errorUtil(e, dispatch)
     } finally {
-        dispatch(setAppStatusAC('succeeded'))
+        dispatch(setAppStatusAC('idle'))
     }
 }
 
 
 type InitialStateType=typeof initialState
-type ActionsType=ReturnType<typeof setForgotPasswordSuccessAC>
+type ActionsType=ReturnType<typeof setForgotPasswordSuccessAC>|ReturnType<typeof setDataForgetPasswordAC>
