@@ -6,6 +6,7 @@ import {registerReducer} from "../features/auth/register/register-reducer";
 import {loginReducer} from "../features/auth/login/login-reducer";
 import {recoverPasswordReducer} from "../features/auth/password/recoveryPassword/recoveryPassword-reducer";
 import {newPasswordReducer} from "../features/auth/password/newPassword/newPassword-reducer";
+import {useAppSelector} from "../common/hooks/hooks";
 
 
 
@@ -17,6 +18,8 @@ const rootReducer = combineReducers({
     recoverPassword: recoverPasswordReducer,
     newPassword: newPasswordReducer
 })
+
+
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
 

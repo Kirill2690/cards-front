@@ -6,16 +6,13 @@ import {authAPI, SetNewPasswordType} from "../../../../api/api";
 
 
 const initialState = {
-    info: '',
-    isPassChanged: false
+    newPasswordSuccess: false
 }
 
-export const newPasswordReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+export const newPasswordReducer = (state: InitialStateType=initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case 'NEW-PASSWORD-SUCCESS':
-            return {...state, info: action.info}
-        case 'IS-PASS-CHANGED':
-            return {...state, isPassChanged: action.isPassChanged}
+            return {...state, newPasswordSuccess: action.newPassword}
         default:
             return state
     }
@@ -27,8 +24,7 @@ export const setNewPasswordTC = (data: SetNewPasswordType): AppThunk => {
         dispatch(setAppStatusAC('loading'))
         authAPI.setNewPassword(data)
             .then((res) => {
-                dispatch(setInfoAC(res.data.info))
-                dispatch(setPassChangedAC(true))
+                dispatch(setInfoAC(true))
             })
             .catch((error: AxiosError<{ error: string }>) => {
                 errorUtil(error, dispatch)
@@ -40,10 +36,10 @@ export const setNewPasswordTC = (data: SetNewPasswordType): AppThunk => {
 }
 
 // actions
-export const setInfoAC = (info: string) => ({type: 'NEW-PASSWORD-SUCCESS', info} as const)
-export const setPassChangedAC = (isPassChanged: boolean) => ({type: 'IS-PASS-CHANGED', isPassChanged} as const)
+export const setInfoAC = (newPassword: boolean) => ({type: 'NEW-PASSWORD-SUCCESS', newPassword} as const)
 
 // types
 type InitialStateType = typeof initialState
 
-type ActionsType = ReturnType<typeof setInfoAC> | ReturnType<typeof setPassChangedAC>
+type ActionsType = ReturnType<typeof setInfoAC>
+

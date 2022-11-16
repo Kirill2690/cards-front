@@ -13,17 +13,17 @@ type FormikErrorType = {
 }
 export const NewPassword = () => {
     const navigate = useNavigate()
-
     const dispatch = useAppDispatch()
-    const isPassChanged = useAppSelector((state: AppRootStateType) => state.newPassword.isPassChanged)
+    const newPasswordSuccess = useAppSelector((state: AppRootStateType) => state.newPassword.newPasswordSuccess)
     /*const appStatus = useAppSelector(state => state.app.status)*/
 
-    const params = useParams()
-    const token = params.token
+
 
 
     const [showPassword, setShowPassword] = useState(false)
     const onClickShowPassword = () => setShowPassword(!showPassword)
+    const params = useParams()
+    const token = params.token
 
 
     const formik = useFormik({
@@ -34,7 +34,7 @@ export const NewPassword = () => {
         validate: (values) => {
             const errors: FormikErrorType = {}
             if (values.password.length < 8) {
-                errors.password = 'enter more than 7 symbols'
+                errors.password = 'enter more than 8 symbols'
             }
             return errors
         },
@@ -43,7 +43,7 @@ export const NewPassword = () => {
             formik.resetForm()
         }
     })
-    if (isPassChanged) {
+    if (newPasswordSuccess) {
         return <Navigate to={'/login'}/>
     }
     return (

@@ -24,8 +24,8 @@ export const authAPI = {
     authRegister(data: RegisterDataType) {
         return instance.post<RegisterDataType, AxiosResponse<ResponseType>>('auth/register', data)
     },
-    changeUserName(data: ChangeUserNameDataType) {
-        return instance.put<ChangeUserNameDataType, AxiosResponse<ResponseUpdatesUserType>>('auth/me', data)
+    changeUserName(name: string) {
+        return instance.put<{name:string}, AxiosResponse<ResponseUpdatesUserType>>('auth/me', name)
     },
     forgotPassword(data:ForgotDataType) {
         return instanceHeroku.post<ForgotDataType, AxiosResponse<ForgotDataResponseType>>('auth/forgot',data)
