@@ -8,9 +8,6 @@ const initialState = {
     error: null as string | null,
 }
 
-export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
-type InitialStateType = typeof initialState
-
 
 export const appReducer = (state = initialState, action: AppActionType): InitialStateType => {
     switch (action.type) {
@@ -56,3 +53,6 @@ export type AppActionType =
     | ReturnType<typeof setAppStatusAC>
     | ReturnType<typeof setInitializedAC>
     | ReturnType<typeof setAppErrorAC>
+
+export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
+type InitialStateType = typeof initialState
