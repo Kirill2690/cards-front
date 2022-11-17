@@ -7,16 +7,16 @@ import {useFormik} from "formik";
 import {setNewPasswordTC} from "./newPassword-reducer";
 import {Button, IconButton, Input, InputAdornment} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
-import {Preloader} from "../../../../common/components/preloader/Preloader";
+
 
 type FormikErrorType = {
     password?: string
 }
 export const NewPassword = () => {
-    const navigate = useNavigate()
+
     const dispatch = useAppDispatch()
     const newPasswordSuccess = useAppSelector((state: AppRootStateType) => state.newPassword.newPasswordSuccess)
-    const appStatus = useAppSelector(state => state.app.status)
+
 
 
     const [showPassword, setShowPassword] = useState(false)
@@ -47,8 +47,6 @@ export const NewPassword = () => {
         return <Navigate to={'/login'}/>
     }
     return (
-        <>
-            {appStatus === 'loading' ? <Preloader/> : ''}
         <div className={s.wrapper_newPassword}>
             <h2 className={s.title}>Create new password</h2>
             <form className={s.form} onSubmit={formik.handleSubmit}>
@@ -75,14 +73,14 @@ export const NewPassword = () => {
                     Create new password and we will send you further instructions to email
                 </div>
                 <div className={s.button_block}>
-                    <Button onClick={() => navigate('/login')}
+                    <Button type="submit"
                             className={s.button}
                             variant={'contained'}>
                         Create new password</Button>
                 </div>
             </form>
         </div>
-        </>
+
     )
 }
 

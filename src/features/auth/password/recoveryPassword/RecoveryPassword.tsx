@@ -15,7 +15,7 @@ type RegistrationErrorType = {
 }
 
 export const RecoveryPassword = () => {
-    const navigate=useNavigate()
+
     const dispatch = useAppDispatch()
     const forgotPasswordSuccess = useAppSelector(state => state.recoverPassword.forgotPasswordSuccess)
     const [showEmail, setShowEmail] = useState(false)
@@ -25,7 +25,7 @@ export const RecoveryPassword = () => {
     const formik = useFormik({
         initialValues: {
             email: '',
-            message: "<div>password recovery link: <a href='http://localhost:3000/#/new-password/$token$'>link</a></div>",
+            message: "<div>To change passwords, follow the link: <a href='http://localhost:3000/#/set-new-password/$token$'>link</a></div>",
         },
         validate: (values) => {
             const errors: RegistrationErrorType = {}
@@ -45,8 +45,6 @@ export const RecoveryPassword = () => {
     if (forgotPasswordSuccess) {
         return <Navigate to={'/checkEmail'}/>
     }
-
-
 
     return (
             <div className={s.ForgotPasBlock}>
@@ -78,7 +76,7 @@ export const RecoveryPassword = () => {
                         Enter your email address and we will send you further instructions
                     </div>
                     <div className={s.button_block}>
-                        <Button onClick={()=>{navigate('/login')}} className={s.button} variant={'contained'} type="submit">
+                        <Button className={s.button} variant={'contained'} type="submit">
                             Send Instruction</Button>
                     </div>
                     <div className={s.dontHaveAccountTitle}>
