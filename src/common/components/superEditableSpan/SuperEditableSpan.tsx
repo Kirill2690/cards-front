@@ -2,6 +2,7 @@
 import React, {DetailedHTMLProps, HTMLAttributes, InputHTMLAttributes, useState} from "react";
 import s from './SuperEditableSpan.module.css'
 import {SuperInputText} from "../superInput/SuperInputText";
+import editIcon from  "../../../assets/images/edit-pencil-write-editor-format-text-svgrepo-com.svg"
 
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 // тип пропсов обычного спана
@@ -62,13 +63,15 @@ export const SuperEditableSpan: React.FC<SuperEditableSpanType> = (
                     />
                 ) : (
                     <span
-                        onDoubleClick={onDoubleClickCallBack}
+                        onClick={onDoubleClickCallBack}
+                     /*   onDoubleClick={onDoubleClickCallBack}*/
                         className={spanClassName}
 
                         {...restSpanProps}
                     >
                         {/*если нет захардкодженного текста для спана, то значение инпута*/}
-                        ✎ {children || restProps.value}
+                         {children || restProps.value}
+                        <img src={editIcon} alt={'edit'} title={'change nickname'}/>
                     </span>
                 )
             }
