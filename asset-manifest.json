@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/cards-front/static/css/main.c734ec20.css",
-    "main.js": "/cards-front/static/js/main.2f714f8c.js",
+    "main.js": "/cards-front/static/js/main.d947e25c.js",
     "static/js/787.1998cdf9.chunk.js": "/cards-front/static/js/787.1998cdf9.chunk.js",
     "static/media/logo_learn.jpeg": "/cards-front/static/media/logo_learn.d0b4a47957073addf167.jpeg",
     "static/media/—Pngtree—404 error with a broken_7222901.png": "/cards-front/static/media/—Pngtree—404 error with a broken_7222901.c8a112666308ccc069f1.png",
@@ -9,11 +9,11 @@
     "index.html": "/cards-front/index.html",
     "static/media/edit-pencil-write-editor-format-text-svgrepo-com.svg": "/cards-front/static/media/edit-pencil-write-editor-format-text-svgrepo-com.112ca409605ed841d3ddff7f52dc8c85.svg",
     "main.c734ec20.css.map": "/cards-front/static/css/main.c734ec20.css.map",
-    "main.2f714f8c.js.map": "/cards-front/static/js/main.2f714f8c.js.map",
+    "main.d947e25c.js.map": "/cards-front/static/js/main.d947e25c.js.map",
     "787.1998cdf9.chunk.js.map": "/cards-front/static/js/787.1998cdf9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c734ec20.css",
-    "static/js/main.2f714f8c.js"
+    "static/js/main.d947e25c.js"
   ]
 }
