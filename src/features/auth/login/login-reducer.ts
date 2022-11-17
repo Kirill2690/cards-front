@@ -30,7 +30,7 @@ export const loginTC = (values: LoginDataType) => {
         dispatch(setAppStatusAC('loading'))
         authAPI.login(values).then((response) => {
             dispatch(authLoginAC(true))
-            // dispatch(ProfileAC(response.data))
+            dispatch(setProfileAC(response.data))
             dispatch(setAppStatusAC('succeeded'))
         }).catch((e: AxiosError<{ error: string }>) => {
             const error = e.response
