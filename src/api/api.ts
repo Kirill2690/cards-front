@@ -24,8 +24,8 @@ export const authAPI = {
     authRegister(data: RegisterDataType) {
         return instance.post<RegisterDataType, AxiosResponse<ResponseType>>('auth/register', data)
     },
-    changeUserName(name: string) {
-        return instance.put<{name:string}, AxiosResponse<ResponseUpdatesUserType>>('auth/me', name)
+    changeUserName(name:string) {
+        return instance.put<{name:string}, AxiosResponse<{updateUser:UserType}>>('auth/me', {name})
     },
     forgotPassword(data:ForgotDataType) {
         return instanceHeroku.post<ForgotDataType, AxiosResponse<ForgotDataResponseType>>('auth/forgot',data)
@@ -113,17 +113,17 @@ export type ForgotDataResponseType = {
     error: string
 }
 export type UserType = {
-    avatar: string
-    created: string
-    email: string
-    isAdmin: boolean
-    name: string
-    publicCardPacksCount: number
-    rememberMe: boolean
-    token: string
-    tokenDeathTime: number
-    updated: string
-    verified: boolean
-    __v: number
-    _id: string
+    avatar?: string
+    created?: string
+    email?: string
+    isAdmin?: boolean
+    name?: string
+    publicCardPacksCount?: number
+    rememberMe?: boolean
+    token?: string
+    tokenDeathTime?: number
+    updated?: string
+    verified?: boolean
+    __v?: number
+    _id?: string
 }

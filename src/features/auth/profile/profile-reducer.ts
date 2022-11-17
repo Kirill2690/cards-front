@@ -7,12 +7,9 @@ import {setIsLoggedInAC} from "../login/login-reducer";
 
 
 const initialState = {
-    _id: '',
-    email: '',
-    name: '',
-    avatar: '',
-    publicCardPacksCount: 0,
-    rememberMe: false,
+        avatar: '',
+        email: '',
+        name: ''
 }
 
 type InitialStateType = typeof initialState
@@ -23,7 +20,7 @@ export const profileReducer = (state: InitialStateType = initialState, action: P
         case 'SET-NEW-PROFILE':
             return { ...state, ...action.user };
         case "CHANGE-USER-NAME":
-            return { ...state, name: action.newText }
+            return { ...state, name: action.newText}
         default:
             return state
     }
@@ -40,10 +37,11 @@ export type SetProfileACType = ReturnType<typeof setProfileAC>
 export type SetNewUserNameACType = ReturnType<typeof updateUserNameAC>
 
 
-export const changeUserNameTC = (name: string): AppThunk => (dispatch: AppDispatch) => {
+export const changeUserNameTC = (name:string): AppThunk => (dispatch: AppDispatch) => {
     authAPI.changeUserName(name)
         .then(() => {
             dispatch(updateUserNameAC(name))
+           // dispatch(setProfileAC())
         })
         .catch((error: AxiosError<{ error: string }>) => {
             errorUtil(error, dispatch)
