@@ -1,6 +1,108 @@
-.wrapper_login {
-    margin-top: 50px;
-    font-weight: bold;
+.projectsBlock{
+    display: flex;
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    justify-content:center;
+
+
+}
+.page{
+    display: flex;
+    flex-wrap: wrap;
+    align-items:center;
+    flex-direction:column;
+    justify-content:flex-start;
+    width: 413px;
+    height: 552px;
+    background: #FFFFFF;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    margin-top: 120px;
+
+}
+
+
+.title {
+    width: 93px;
+    height: 32px;
+    margin-top: 35px;
+
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 32px;
+    color: #000000;
+}
+.containerEmail{
+    margin-top: 41px;
+}
+.email {
+    width: 347px;
+    height: 48px;
+}
+.password {
+    width: 347px;
+    height: 48px;
+    margin-top: 24px;
+
+}
+.containerCheck {
+    width: 347px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items:normal;
+    flex-direction:column;
+    justify-content:flex-start;
+    margin-top: 12px;
+}
+
+.check {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
     text-align: center;
+    color: #000000;
+}
+.containerForgot{
+    width: 347px;
+    display: flex;
+    justify-content:flex-end;
+}
+.forgot {
+    width: 128px;
+    height: 17px;
+    margin-top: 29px;
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #000000;
+    text-decoration: none;
+}
+
+.buttonS {
+    margin-top: 69px;
+    border-radius: 30px;
+    width: 347px;
+}
+.question {
+    margin-top: 31px;
+    margin-bottom: 11px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+}
+.singUp {
+    display: flex;
+    justify-content:center;
+    color: #366EFF;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
 
 }
