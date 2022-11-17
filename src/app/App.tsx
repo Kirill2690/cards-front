@@ -4,14 +4,13 @@ import {Header} from "../features/header/Header";
 import {Pages} from "./pages/Pages";
 import {useAppDispatch, useAppSelector} from "../common/hooks/hooks";
 import {authMeTC} from "./app-reducer";
-import {CircularProgress} from "@mui/material";
 import {ErrorSnackbar} from "../common/components/errorSnackBar/ErrorSnackBar";
 import {Preloader} from "../common/components/preloader/Preloader";
 
 
 export const App = () => {
     const isInitialized = useAppSelector(state => state.app.isInitialized);
-    const status=useAppSelector(state => state.app.status)
+
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -25,7 +24,6 @@ export const App = () => {
         <div className={s.app_wrapper}>
             <Header/>
             <div className={s.app_container}>
-                {status === 'loading' && <Preloader/>}
                 <Pages/>
                 <ErrorSnackbar/>
 
