@@ -19,8 +19,6 @@ export const NewPassword = () => {
     const appStatus = useAppSelector(state => state.app.status)
 
 
-
-
     const [showPassword, setShowPassword] = useState(false)
     const onClickShowPassword = () => setShowPassword(!showPassword)
     const params = useParams()

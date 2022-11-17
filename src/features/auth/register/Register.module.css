@@ -1,29 +1,20 @@
 .wrapper_register {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 330px;
-    margin: 60px auto 0;
-    background: #FFFFFF;
-    box-shadow: 1px 1px 10px rgba(187, 187, 187, 0.35);
-    border-radius: 10px;
-    padding: 50px 50px;
+    margin-top: 60px;
+    text-align: center;
 }
 
 .form {
-    width: 100%;
-    text-align: center;
+    width: 330px;
+    margin: 0 auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.input {
-    margin-bottom: 10px;
-    width: 300px;
+.input{
+    margin-bottom: 15px;
 }
 
 .error {
@@ -40,11 +31,12 @@
 }
 .button_block{
     margin: 10px;
+    align-items: center;
 }
 .button{
     color: white;
     background-color: #366EFF;
-    width: 347px;
+    width: 320px;
     height: 36px;
     border-radius: 30px;
 }

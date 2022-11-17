@@ -1,41 +1,36 @@
 import {Button, CircularProgress, FormControl, IconButton, Input, InputAdornment} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
 import {Navigate, NavLink, useNavigate} from "react-router-dom";
-import {AppRootStateType} from "../../../../app/store";
 import {useFormik} from "formik";
 import s from './RecoveryPassword.module.css'
 import {recoverTC} from "./recoveryPassword-reducer";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import React, {useState} from "react";
-import {Preloader} from "../../../../common/components/preloader/Preloader";
 
 
+
+
+type RegistrationErrorType = {
+    email?: string
+}
 
 export const RecoveryPassword = () => {
-    const navigate = useNavigate()
+    const navigate=useNavigate()
     const dispatch = useAppDispatch()
-    const forgotPasswordSuccess = useAppSelector((state: AppRootStateType) => state.recoverPassword.forgotPasswordSuccess)
-    const appStatus = useAppSelector(state => state.app.status)
-
+    const forgotPasswordSuccess = useAppSelector(state => state.recoverPassword.forgotPasswordSuccess)
     const [showEmail, setShowEmail] = useState(false)
     const onClickShowEmail = () => setShowEmail(!showEmail)
+
 
     const formik = useFormik({
         initialValues: {
             email: '',
-            message: `<div style="background-color: blue; padding: 15px">
-                        password recovery link(для корректной работы скопируйте ссылку и вставьте в адресную строку 
-                        открытой страницы приложения): 
-                       <a href='https://Kirill2690.github.io/cards-front/cards/#/set-new-password/$token$'>
-                        link</a>
-                        </div>`
+            message: "<div>password recovery link: <a href='http://localhost:3000/#/new-password/$token$'>link</a></div>",
         },
         validate: (values) => {
-
             const errors: RegistrationErrorType = {}
-
             if (!values.email) {
-                errors.email = 'Email is required'
+                errors.email = 'email required'
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
                 errors.email = 'Invalid email address'
             }
@@ -44,16 +39,16 @@ export const RecoveryPassword = () => {
         onSubmit: values => {
             dispatch(recoverTC(values))
             formik.resetForm()
-        },
-    });
+        }
+    })
 
     if (forgotPasswordSuccess) {
         return <Navigate to={'/checkEmail'}/>
     }
 
+
+
     return (
-        <>
-            {appStatus === 'loading' ? <Preloader/> : ''}
             <div className={s.ForgotPasBlock}>
                 <h2 className={s.title}>Forgot your password?</h2>
                 <form className={s.form} onSubmit={formik.handleSubmit}>
@@ -92,10 +87,7 @@ export const RecoveryPassword = () => {
                     <NavLink to="/login" className={s.login}> Try logging in </NavLink>
                 </form>
             </div>
-        </>
+
 )
 }
 
-type RegistrationErrorType = {
-    email?: string
-}

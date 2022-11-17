@@ -16,7 +16,7 @@ export const authAPI = {
         return instance.post<LoginDataType, AxiosResponse<ResponseType>>('/auth/login', data)
     },
     logout() {
-        return instance.delete<AxiosResponse<ResponseType>>('/auth/me')
+        return instance.delete<LoginResponseType>('auth/me')
     },
     authMe() {
         return instance.post<{}, AxiosResponse<ResponseType>>('/auth/me')
@@ -42,6 +42,19 @@ export type LoginDataType = {
     email: string
     password: string
     rememberMe: boolean
+}
+export type LoginResponseType = {
+    _id: string
+    email: string
+    name: string
+    avatar?: string
+    publicCardPacksCount: number
+    created: Date
+    updated: Date
+    isAdmin: boolean
+    verified: boolean
+    rememberMe: boolean
+    error?: string
 }
 
 export type ResponseType = {

@@ -2,10 +2,11 @@ import { useNavigate, useParams} from "react-router-dom";
 import s from './CheckEmail.module.css'
 import email_logo from '../../../../assets/images/email_icon.png'
 import {Button} from "@mui/material";
+import {useAppSelector} from "../../../../common/hooks/hooks";
 
 export const CheckEmail = () => {
 
-    const {email} = useParams()
+    const email = useAppSelector(state => state.recoverPassword.forgetEmail)
     const navigate=useNavigate()
 
     return (
