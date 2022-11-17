@@ -13,8 +13,6 @@ import {useFormik} from "formik";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {loginTC} from "./login-reducer";
 
-
-
 type  LocalStateType = {
     password: string;
     showPassword: boolean;
@@ -25,10 +23,9 @@ type FormikErrorType = {
     rememberMe?: boolean
 }
 
-
 export const Login = () => {
 
-    const isLogged = useAppSelector(state=>state.login.isLoggedIn)
+    const isLogged = useAppSelector(state => state.login.isLoggedIn)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const formik = useFormik({
@@ -58,7 +55,6 @@ export const Login = () => {
         }
     })
 
-
     const [values, setValues] = React.useState<LocalStateType>({
         password: '',
         showPassword: false,
@@ -70,14 +66,18 @@ export const Login = () => {
         event.preventDefault();
     };
 
-    const onClickSingUp =()=>{navigate('/register')}
-    const onClickForgotPas =()=>{navigate('/recovery-password')}
-    if(isLogged) {
-        return <Navigate to={'/profile'}/>}
+    const onClickSingUp = () => {
+        navigate('/register')
+    }
+    const onClickForgotPas = () => {
+        navigate('/recovery-password')
+    }
+    if (isLogged) {
+        return <Navigate to={'/profile'}/>
+    }
 
     return (
         <div className={s.projectsBlock}>
-            <Header/>
             <div className={s.page}>
                 <span className={s.title}>Sing in</span>
                 <form onSubmit={formik.handleSubmit}>
@@ -112,7 +112,7 @@ export const Login = () => {
                     <div className={s.containerCheck}>
                         <FormControlLabel label={'Remember me'}
                                           control={<Checkbox{...formik.getFieldProps('rememberMe')}
-                                          checked={formik.values.rememberMe}/>}/>
+                                                            checked={formik.values.rememberMe}/>}/>
                     </div>
                     <div className={s.containerForgot}>
                         <span className={s.forgot} onClick={onClickForgotPas}>

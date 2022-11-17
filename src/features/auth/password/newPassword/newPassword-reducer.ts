@@ -40,6 +40,5 @@ export const setInfoAC = (newPassword: boolean) => ({type: 'NEW-PASSWORD-SUCCESS
 
 // types
 type InitialStateType = typeof initialState
-
 type ActionsType = ReturnType<typeof setInfoAC>
 

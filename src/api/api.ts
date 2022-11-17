@@ -31,7 +31,7 @@ export const authAPI = {
         return instanceHeroku.post<ForgotDataType, AxiosResponse<ForgotDataResponseType>>('auth/forgot',data)
     },
     setNewPassword(data: SetNewPasswordType) {
-        return instanceHeroku.post<SetNewPasswordType, AxiosResponse<ResponseNewPasswordType>>('auth/set-new-password', data)
+        return instanceHeroku.post<SetNewPasswordType,AxiosResponse<ResponseNewPasswordType>>('auth/set-new-password', data)
     },
 }
 
@@ -100,6 +100,9 @@ export type SetNewPasswordType = {
 
 export type ResponseNewPasswordType={
     info: string
+    success: boolean
+    answer: boolean
+    html: boolean
     error: string
 }
 

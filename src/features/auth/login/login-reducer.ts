@@ -2,6 +2,8 @@ import {AppDispatch} from "../../../app/store";
 import {authAPI, LoginDataType} from "../../../api/api";
 import {setAppStatusAC} from "../../../app/app-reducer";
 import {AxiosError} from "axios";
+import {setProfileAC} from "../profile/profile-reducer";
+import {errorUtil} from "../../../common/utils/utils-error";
 
 type AuthLoginACType = ReturnType<typeof authLoginAC>
 type ActionType = AuthLoginACType
@@ -33,11 +35,12 @@ export const loginTC = (values: LoginDataType) => {
 
             dispatch(setProfileAC(response.data))
             dispatch(setAppStatusAC('succeeded'))
-        }).catch((e: AxiosError<{ error: string }>) => {
-            const error = e.response
-                ? e.response.data.error
-                : (e.message + ', more details in the console')
-            console.log('error: ', error)
         })
+                .catch((error: AxiosError<{ error: string }>) => {
+                    errorUtil(error, dispatch)
+                })
+                .finally(() => {
+                    dispatch(setAppStatusAC('idle'))
+                })
+        }
     }
-}

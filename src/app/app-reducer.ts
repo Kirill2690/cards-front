@@ -1,6 +1,6 @@
 import {authAPI} from "../api/api";
 import {AppThunk} from "./store";
-import {setIsLoggedInAC} from "../features/auth/login/login-reducer";
+import {authLoginAC} from "../features/auth/login/login-reducer";
 import {setProfileAC} from "../features/auth/profile/profile-reducer";
 
 
@@ -38,7 +38,7 @@ export const authMeTC = (): AppThunk => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     authAPI.authMe()
         .then((res) => {
-            dispatch(setIsLoggedInAC(true));
+            dispatch(authLoginAC(true));
             dispatch(setAppStatusAC('succeeded'));
             dispatch(setProfileAC(res.data));
         })

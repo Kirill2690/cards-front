@@ -7,8 +7,6 @@ import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import {logoutTC} from "../auth/profile/profile-reducer";
 
 
-
-
 export const Header = () => {
     const dispatch = useAppDispatch()
     const profile = useAppSelector(state => state.profile);

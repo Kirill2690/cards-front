@@ -1,4 +1,4 @@
-import { useNavigate, useParams} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import s from './CheckEmail.module.css'
 import email_logo from '../../../../assets/images/email_icon.png'
 import {Button} from "@mui/material";

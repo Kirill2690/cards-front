@@ -3,7 +3,7 @@ import {AppDispatch, AppThunk} from "../../../app/store";
 import {errorUtil} from "../../../common/utils/utils-error";
 import {setAppStatusAC} from "../../../app/app-reducer";
 import {AxiosError} from "axios";
-import {setIsLoggedInAC} from "../login/login-reducer";
+import {authLoginAC} from "../login/login-reducer";
 
 
 const initialState = {
@@ -41,7 +41,6 @@ export const changeUserNameTC = (name:string): AppThunk => (dispatch: AppDispatc
     authAPI.changeUserName(name)
         .then(() => {
             dispatch(updateUserNameAC(name))
-           // dispatch(setProfileAC())
         })
         .catch((error: AxiosError<{ error: string }>) => {
             errorUtil(error, dispatch)
@@ -54,7 +53,7 @@ export const logoutTC = (): AppThunk => async dispatch => {
     dispatch(setAppStatusAC('loading'))
     try {
         await authAPI.logout()
-        dispatch(setIsLoggedInAC(false))
+        dispatch(authLoginAC(false))
         dispatch(setProfileAC(null))
         dispatch(setAppStatusAC('succeeded'))
     } catch(e) {

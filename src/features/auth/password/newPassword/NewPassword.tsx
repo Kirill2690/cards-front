@@ -16,15 +16,10 @@ export const NewPassword = () => {
 
     const dispatch = useAppDispatch()
     const newPasswordSuccess = useAppSelector((state: AppRootStateType) => state.newPassword.newPasswordSuccess)
-
-
-
     const [showPassword, setShowPassword] = useState(false)
+
     const onClickShowPassword = () => setShowPassword(!showPassword)
-    const params = useParams()
-    const token = params.token
-
-
+    const {token} = useParams()
 
     const formik = useFormik({
         initialValues: {
@@ -59,7 +54,7 @@ export const NewPassword = () => {
                         color={'primary'}
                         endAdornment={
                             <InputAdornment position="end">
-                                <IconButton  onClick={onClickShowPassword}>
+                                <IconButton onClick={onClickShowPassword}>
                                     {showPassword ? <VisibilityOff/> : <Visibility/>}
                                 </IconButton>
                             </InputAdornment>

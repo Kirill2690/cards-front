@@ -42,7 +42,7 @@ export const Profile = React.memo(() => {
 
                 <SuperEditableSpan value={value}
                                    onChangeText={setValue}
-                                   spanProps={{children: value ? undefined : 'enter nickname...'}}
+                                   spanProps={{children: value ? value : 'enter nickname...'}}
                                    onKeyDown={(e) => onKeyDownHandler(e)}
                 />
 
