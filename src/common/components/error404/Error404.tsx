@@ -14,6 +14,7 @@ export const Error404 = () => {
     if (error) {
         return <Navigate to={'/login'}/>
     }
+
     return (
         <div className={s.error404}>
             <div>

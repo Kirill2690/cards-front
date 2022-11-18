@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import s from './NewPassword.module.css'
-import {Navigate, useNavigate, useParams} from "react-router-dom";
+import {Navigate, useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
 import {AppRootStateType} from "../../../../app/store";
 import {useFormik} from "formik";
@@ -9,17 +9,14 @@ import {Button, IconButton, Input, InputAdornment} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 
 
-type FormikErrorType = {
-    password?: string
-}
 export const NewPassword = () => {
 
     const dispatch = useAppDispatch()
     const newPasswordSuccess = useAppSelector((state: AppRootStateType) => state.newPassword.newPasswordSuccess)
     const [showPassword, setShowPassword] = useState(false)
+    const {token} = useParams()
 
     const onClickShowPassword = () => setShowPassword(!showPassword)
-    const {token} = useParams()
 
     const formik = useFormik({
         initialValues: {
@@ -79,3 +76,7 @@ export const NewPassword = () => {
     )
 }
 
+//type
+type FormikErrorType = {
+    password?: string
+}

@@ -7,10 +7,8 @@ import {authMeTC} from "./app-reducer";
 import {ErrorSnackbar} from "../common/components/errorSnackBar/ErrorSnackBar";
 import {Preloader} from "../common/components/preloader/Preloader";
 
-
 export const App = () => {
     const isInitialized = useAppSelector(state => state.app.isInitialized);
-
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -29,8 +27,6 @@ export const App = () => {
 
             </div>
         </div>
-
-
     );
 
 }

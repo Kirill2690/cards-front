@@ -22,6 +22,7 @@
 .button_block{
     margin: 10px;
 }
+
 .button{
     color: white;
     background-color: #366EFF;
@@ -29,6 +30,7 @@
     height: 36px;
     border-radius: 30px;
 }
+
 .input {
     margin-bottom: 15px;
 }
@@ -40,15 +42,12 @@
     justify-content: center;
 }
 
-
-
 .error {
     color: red
 }
 
 .img_block {
     padding-top: 10px;
-
 }
 
 .img_block img {

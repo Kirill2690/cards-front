@@ -27,14 +27,14 @@ export enum Path {
 export const Pages = () => {
     const navigate = useNavigate()
     const isLogged = useAppSelector((state: AppRootStateType) => state.login)
-
+    const status = useAppSelector(state => state.app.status)
 
     useEffect(() => {
         if (!isLogged) {
             navigate('/login')
         }
     }, [])
-    const status = useAppSelector(state => state.app.status)
+
     return (
         <div >
             {status === 'loading' && (
