@@ -28,10 +28,13 @@
     height: 20px;
     user-select: none;
 }
+
 .title {
-    text-align: center;
-    font-size: 50px;
+    font-size: 1.8rem;
+    font-weight: 600;
+    user-select: none;
 }
+
 
 .text {
     margin-top: 30px;

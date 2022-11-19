@@ -35,14 +35,13 @@ export const authAPI = {
     },
 }
 
-
-
 //type
 export type LoginDataType = {
     email: string
     password: string
     rememberMe: boolean
 }
+
 export type LoginResponseType = {
     _id: string
     email: string
@@ -92,11 +91,11 @@ export type RegisterDataType = {
 export type ChangeUserNameDataType = {
     name?: string
 }
+
 export type SetNewPasswordType = {
     password: string
     resetPasswordToken: string | undefined
 }
-
 
 export type ResponseNewPasswordType={
     info: string
@@ -115,6 +114,7 @@ export type ForgotDataResponseType = {
     info: string
     error: string
 }
+
 export type UserType = {
     avatar?: string
     created?: string

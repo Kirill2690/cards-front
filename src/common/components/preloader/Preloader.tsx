@@ -1,10 +1,9 @@
-import {CircularProgress} from "@mui/material";
+import {Box, CircularProgress} from "@mui/material";
 
 export const Preloader = () => {
     return (
-        <div
-            style={{position: 'fixed', top: '45%', textAlign: 'center', width: '100%', height: '100vh'}}>
-            <CircularProgress color={'inherit'}/>
-        </div>
+        <Box sx={{textAlign: 'center',position: 'fixed', top: '45%',width: '100%', height: '100vh'}}>
+            <CircularProgress />
+        </Box>
     );
 };

@@ -75,10 +75,9 @@ export const RecoveryPassword = () => {
                     <div className={s.dontHaveAccountTitle}>
                         Enter your email address and we will send you further instructions
                     </div>
-                    <div className={s.button_block}>
-                        <Button className={s.button} variant={'contained'} type="submit">
-                            Send Instruction</Button>
-                    </div>
+                    <Button style={{borderRadius: 30, width: 375, marginTop: 30}} type="submit" variant="contained">
+                        Send Instructions
+                    </Button>
                     <div className={s.dontHaveAccountTitle}>
                         Did you remember your password?
                     </div>
