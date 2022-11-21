@@ -1,0 +1,21 @@
+.wrapper{
+    display: flex;
+    justify-content:space-between;
+    width:350px;
+}
+.span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+
+
+    width: 36px;
+    height: 36px;
+
+    background: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    border-radius: 2px;
+}
