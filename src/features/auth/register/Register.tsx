@@ -141,8 +141,8 @@ export const Register = (() => {
                 </FormControl>
                 {formik.errors.confirmPassword && formik.touched.confirmPassword &&
                     <div className={s.error}>{formik.errors.confirmPassword}</div>}
-                <Button style={{borderRadius: 30, width: 375, marginTop: 30}} type="submit" variant="contained">
-                    Sing up
+                <Button className={s.button}  type="submit" variant="contained">
+                    Sing Up
                 </Button>
                 <p className={s.text}>Already have an account ?</p>
                 <Link to={'/login'} className={s.link}>Sign In</Link>

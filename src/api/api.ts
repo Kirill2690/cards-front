@@ -51,8 +51,8 @@ export const packsAPI = {
             }
         })
     },
-    createPack(cardsPack: CreatePacksType,) {
-        return instance.post('cards/pack', {cardsPack})
+    createPack(name: string,) {
+        return instance.post('cards/pack', {cardsPack:{name}})
     },
     updatePack(cardsPack: UpdatePackType) {
         return instance.put('cards/pack', {cardsPack})
@@ -225,8 +225,6 @@ export type PackType = {
 
 export type CreatePacksType={
     name: string
-    deckCover?: string
-    private?: boolean
 }
 
 export type UpdatePackType={

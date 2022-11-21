@@ -1,4 +1,4 @@
-import {CreatePacksType, packsAPI, PackType, ResponsePacksType, UpdatePackType} from "../../api/api";
+import {packsAPI, PackType, ResponsePacksType, UpdatePackType} from "../../api/api";
 import {AppThunk} from "../../app/store";
 import {setAppStatusAC} from "../../app/app-reducer";
 import {errorUtil} from "../../common/utils/utils-error";
@@ -7,20 +7,21 @@ const initialState = {
     cardPacks: [] as PackType[],
     page: 1,
     pageCount: 5,
+    name:'',
     cardPacksTotalCount: 0,
     minCardsCount: 0,
     maxCardsCount: 0,
     token: '',
     tokenDeathTime: 0,
-    params: {
-        page: '1',
-        pageCount: '5',
-        packName: '',
-        userID: '',
-        min: '0',
-        max: '0'
-    } as QueryParamsType,
-    exitDeletion: false
+        params: {
+            page: '1',
+            pageCount: '5',
+            packName: '',
+            userID: '',
+            min: '0',
+            max: '0'
+        } as QueryParamsType,
+        isMyPack: false
 }
 
 export const packsReducer = (state = initialState, action: PacksActionsType): InitialPacksStateType => {
@@ -41,6 +42,8 @@ export const packsReducer = (state = initialState, action: PacksActionsType): In
         case "PACKS/SET-QUERY-PARAMS": {
             return {...state, params: {...action.params}}
         }
+        case 'PACKS/IS-MY-PACK':
+            return {...state, isMyPack: action.isMyPack}
         default:
             return state
     }
@@ -49,6 +52,8 @@ export const packsReducer = (state = initialState, action: PacksActionsType): In
 //actions
 export const setPacksDataAC = (data: ResponsePacksType) => ({type: 'PACKS/SET-PACKS-DATA', data} as const)
 export const setQueryParamsAC = (params: QueryParamsType) => ({type: 'PACKS/SET-QUERY-PARAMS', params} as const)
+export const isMyPackAC = (isMyPack: boolean) => ({type: 'PACKS/IS-MY-PACK', isMyPack} as const)
+export const resetFiltersAC = () => ({ type: 'PACKS/RESET-ALL-FILTERS' } as const);
 
 //thunks
 export const setPacksTC = (): AppThunk => async (dispatch, getState) => {
@@ -88,10 +93,10 @@ export const changePackTC = (data: UpdatePackType): AppThunk => async (dispatch)
     }
 }
 
-export const addNewPackTC = (data: CreatePacksType): AppThunk => async (dispatch) => {
+export const addNewPackTC = (name: string): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC("loading"))
     try {
-        await packsAPI.createPack(data)
+        await packsAPI.createPack(name)
         dispatch(setPacksTC())
     } catch (e) {
         errorUtil(e, dispatch)
@@ -102,7 +107,9 @@ export const addNewPackTC = (data: CreatePacksType): AppThunk => async (dispatch
 
 //types
 export type InitialPacksStateType = typeof initialState
-export type PacksActionsType=ReturnType<typeof setPacksDataAC>|ReturnType<typeof setQueryParamsAC>
+export type PacksActionsType=ReturnType<typeof setPacksDataAC>
+    |ReturnType<typeof setQueryParamsAC>
+    |ReturnType<typeof isMyPackAC>
 export type QueryParamsType  = {
     page?: string
     pageCount?: string
