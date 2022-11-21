@@ -5,23 +5,21 @@ import {errorUtil} from "../../common/utils/utils-error";
 
 const initialState = {
     cardPacks: [] as PackType[],
-    page: 1,
-    pageCount: 5,
-    name:'',
     cardPacksTotalCount: 0,
     minCardsCount: 0,
-    maxCardsCount: 0,
+    maxCardsCount: 110,
     token: '',
     tokenDeathTime: 0,
-        params: {
-            page: '1',
-            pageCount: '5',
-            packName: '',
-            userID: '',
-            min: '0',
-            max: '0'
-        } as QueryParamsType,
-        isMyPack: false
+    isMyPack: false,
+    params: {
+        page: '1',
+        pageCount: '5',
+        packName: '',
+        userID: '',
+        min: '0',
+        max: '0',
+        sortPacks: ''
+    } as QueryParamsType,
 }
 
 export const packsReducer = (state = initialState, action: PacksActionsType): InitialPacksStateType => {
@@ -36,14 +34,14 @@ export const packsReducer = (state = initialState, action: PacksActionsType): In
                 maxCardsCount: action.data.maxCardsCount,
                 token: action.data.token,
                 tokenDeathTime: action.data.tokenDeathTime,
-                page: action.data.page,
-                pageCount: action.data.pageCount
             }
         case "PACKS/SET-QUERY-PARAMS": {
             return {...state, params: {...action.params}}
         }
         case 'PACKS/IS-MY-PACK':
             return {...state, isMyPack: action.isMyPack}
+        case 'PACKS/SORT-PACKS':
+            return {...state, params: {...state.params, sortPacks: action.sortPacks}}
         default:
             return state
     }
@@ -53,7 +51,8 @@ export const packsReducer = (state = initialState, action: PacksActionsType): In
 export const setPacksDataAC = (data: ResponsePacksType) => ({type: 'PACKS/SET-PACKS-DATA', data} as const)
 export const setQueryParamsAC = (params: QueryParamsType) => ({type: 'PACKS/SET-QUERY-PARAMS', params} as const)
 export const isMyPackAC = (isMyPack: boolean) => ({type: 'PACKS/IS-MY-PACK', isMyPack} as const)
-export const resetFiltersAC = () => ({ type: 'PACKS/RESET-ALL-FILTERS' } as const);
+export const resetFiltersAC = () => ({type: 'PACKS/CLEAR-FILTERS'} as const);
+export const sortPacksAC = (sortPacks: string) => ({type: 'PACKS/SORT-PACKS', sortPacks} as const)
 
 //thunks
 export const setPacksTC = (): AppThunk => async (dispatch, getState) => {
@@ -105,16 +104,23 @@ export const addNewPackTC = (name: string): AppThunk => async (dispatch) => {
     }
 }
 
+export const sortPacksTC = (sortParams: string): AppThunk => (dispatch) => {
+    dispatch(sortPacksAC(sortParams))
+}
+
 //types
 export type InitialPacksStateType = typeof initialState
-export type PacksActionsType=ReturnType<typeof setPacksDataAC>
-    |ReturnType<typeof setQueryParamsAC>
-    |ReturnType<typeof isMyPackAC>
-export type QueryParamsType  = {
+export type PacksActionsType = ReturnType<typeof setPacksDataAC>
+    | ReturnType<typeof setQueryParamsAC>
+    | ReturnType<typeof isMyPackAC>
+    | ReturnType<typeof resetFiltersAC>
+    | ReturnType<typeof sortPacksAC>
+export type QueryParamsType = {
     page?: string
     pageCount?: string
     packName?: string
     userID?: string
     min?: string
     max?: string
+    sortPacks?:string
 }

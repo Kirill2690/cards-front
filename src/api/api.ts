@@ -223,10 +223,6 @@ export type PackType = {
     __v: number;
 }
 
-export type CreatePacksType={
-    name: string
-}
-
 export type UpdatePackType={
     _id: string
     name?: string

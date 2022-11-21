@@ -4,11 +4,22 @@ import {Button, Table} from "@mui/material";
 import {Preloader} from "../../common/components/preloader/Preloader";
 import React, {useState} from "react";
 import {addNewPackTC} from "./packs-reducer";
+import {useNavigate} from "react-router-dom";
 
-    export const Packs = () => {
+export const Packs = () => {
     const dispatch = useAppDispatch()
     const status = useAppSelector(state => state.app.status)
     const [newPackName, setNewPackName] = useState('NZ')
+    const navigate = useNavigate()
+    const minCardsCount = useAppSelector(state => state.packs.minCardsCount)
+    const maxCardsCount = useAppSelector(state => state.packs.maxCardsCount)
+    const min = useAppSelector(state => state.packs.params.min)
+    const max = useAppSelector(state => state.packs.params.max)
+    const page = useAppSelector(state => state.packs.params.page)
+    const pageCount = useAppSelector(state => state.packs.params.pageCount)
+    const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
+    const isMyPack = useAppSelector(state => state.packs.isMyPack)
+    const sortPacks = useAppSelector(state => state.packs.params.sortPacks)
 
 
     const addNewPackHandler = () => {
