@@ -246,6 +246,7 @@ export type CardsParamsType = {
 export type ResponseCardsType = {
     cards: CardsType[];
     packUserId: string;
+    packId:string;
     packName: string;
     packPrivate: boolean;
     packDeckCover: string;

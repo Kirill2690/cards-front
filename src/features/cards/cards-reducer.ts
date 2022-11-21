@@ -1,10 +1,15 @@
-import {CardsType, ResponseCardsType} from "../../api/api";
+import {cardsAPI, CardsType, CreateCardsType, ResponseCardsType, UpdateCardsType} from "../../api/api";
+import {AppThunk} from "../../app/store";
+import {setAppStatusAC} from "../../app/app-reducer";
+import {errorUtil} from "../../common/utils/utils-error";
+
 
 const initialStateCards = {
     cards: [] as CardsType[],
     packUserId: '',
     packName: '',
     page: 1,
+    packId:'',
     pageCount: 5,
     cardsTotalCount: 0,
     packPrivate: false,
@@ -33,6 +38,7 @@ export const cardsReducer = (state = initialStateCards, action: ActionCardsType)
                 packName: action.data.packName,
                 page: action.data.page,
                 pageCount: action.data.pageCount,
+                packId: action.data.packId,
                 cardsTotalCount: action.data.cardsTotalCount,
                 packPrivate: action.data.packPrivate,
                 packDeckCover: action.data.packDeckCover,
@@ -59,6 +65,59 @@ export const setQueryCardsParamsAC = (params: QueryCardsParamsType) => ({
     type: 'CARDS/SET-QUERY-PARAMS',
     params
 } as const)
+
+//thunk
+
+export const setCardsTC = (): AppThunk => async (dispatch, getState) => {
+    const urlParams = getState().cards.params
+    dispatch(setAppStatusAC('loading'))
+    try {
+        const res = await cardsAPI.getCards({...urlParams})
+        dispatch(setCardsDataAC(res.data))
+    } catch (e) {
+        errorUtil(e, dispatch)
+    } finally {
+        dispatch(setAppStatusAC('idle'))
+    }
+}
+
+export const createCardsTC = (data: CreateCardsType): AppThunk => async (dispatch) => {
+    dispatch(setAppStatusAC('loading'))
+    try {
+        await cardsAPI.createCards(data)
+        if (data.cardsPack_id) {
+            dispatch(setCardsTC())
+        }
+    } catch (e) {
+        errorUtil(e, dispatch)
+    } finally {
+        dispatch(setAppStatusAC('idle'))
+    }
+}
+
+export const deleteCardsTC = (cardID: string): AppThunk => async (dispatch) => {
+    dispatch(setAppStatusAC('loading'))
+    try {
+        await cardsAPI.deleteCards(cardID)
+        dispatch(setCardsTC())
+    } catch (e) {
+        errorUtil(e, dispatch)
+    } finally {
+        dispatch(setAppStatusAC('idle'))
+    }
+}
+
+export const updateCardsTC = (card: UpdateCardsType): AppThunk => async (dispatch) => {
+    dispatch(setAppStatusAC('loading'))
+    try {
+        await cardsAPI.updateCards(card)
+        dispatch(setCardsTC())
+    } catch (e) {
+        errorUtil(e, dispatch)
+    } finally {
+        dispatch(setAppStatusAC('idle'))
+    }
+}
 
 //types
 
