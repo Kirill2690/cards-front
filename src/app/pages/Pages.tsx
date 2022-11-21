@@ -11,6 +11,7 @@ import {useAppSelector} from "../../common/hooks/hooks";
 import {CircularProgress} from "@mui/material";
 import {AppRootStateType} from "../store";
 import s from "../App.module.css";
+import {Preloader} from "../../common/components/preloader/Preloader";
 
 
 export enum Path {
@@ -18,9 +19,9 @@ export enum Path {
     Register = '/register',
     Error404 = '/error404',
     RecoveryPassword = '/recovery-password',
-    CheckEmail='/checkEmail',
+    CheckEmail = '/checkEmail',
     NewPassword = '/set-new-password',
-    Profile='/profile'
+    Profile = '/profile'
 
 }
 
@@ -36,12 +37,8 @@ export const Pages = () => {
     }, [])
 
     return (
-        <div >
-            {status === 'loading' && (
-                <div className={s.circular}>
-                    <CircularProgress color="inherit"/>
-                </div>
-            )}
+        <div>
+            {status === 'loading' && <Preloader/>}
             <Routes>
                 <Route path={'/'} element={<Navigate to={'/login'}/>}/>
                 <Route path={'/profile'} element={<Profile/>}/>

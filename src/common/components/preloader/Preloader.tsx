@@ -1,9 +1,11 @@
-import {Box, CircularProgress} from "@mui/material";
+import loader from '../../../assets/images/loading__.gif'
 
 export const Preloader = () => {
     return (
-        <Box sx={{textAlign: 'center',position: 'fixed', top: '45%',width: '100%', height: '100vh'}}>
-            <CircularProgress />
-        </Box>
+        <div style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%', zIndex: 999}}>
+            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                <img src={loader} alt={'preloader'}/>
+            </div>
+        </div>
     );
 };

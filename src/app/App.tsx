@@ -8,12 +8,13 @@ import {ErrorSnackbar} from "../common/components/errorSnackBar/ErrorSnackBar";
 import {Preloader} from "../common/components/preloader/Preloader";
 
 export const App = () => {
+
     const isInitialized = useAppSelector(state => state.app.isInitialized);
     const dispatch = useAppDispatch()
 
     useEffect(() => {
         dispatch(authMeTC());
-    }, [dispatch]);
+    }, []);
 
     if (!isInitialized) {
         return <Preloader/>
@@ -24,7 +25,6 @@ export const App = () => {
             <div className={s.app_container}>
                 <Pages/>
                 <ErrorSnackbar/>
-
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import {Button, CircularProgress, FormControl, IconButton, Input, InputAdornment} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../../../common/hooks/hooks";
-import {Navigate, NavLink, useNavigate} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import {useFormik} from "formik";
 import s from './RecoveryPassword.module.css'
 import {recoverTC} from "./recoveryPassword-reducer";
@@ -59,7 +59,6 @@ export const RecoveryPassword = () => {
                             className={s.input}
                             color={'primary'}
                             endAdornment={
-
                         <InputAdornment position="end">
                         <IconButton  onClick={onClickShowEmail}>
                             {showEmail ? <VisibilityOff/> : <Visibility/>}
@@ -67,7 +66,6 @@ export const RecoveryPassword = () => {
                         </InputAdornment>
                         }
                             />
-
                         <div className={s.error}>
                             {formik.touched.email && formik.errors.email && formik.errors.email}
                         </div>
