@@ -12,6 +12,7 @@ import {CircularProgress} from "@mui/material";
 import {AppRootStateType} from "../store";
 import s from "../App.module.css";
 import {Preloader} from "../../common/components/preloader/Preloader";
+import {Packs} from "../../features/packs/Packs";
 
 
 export enum Path {
@@ -21,11 +22,12 @@ export enum Path {
     RecoveryPassword = '/recovery-password',
     CheckEmail = '/checkEmail',
     NewPassword = '/set-new-password',
-    Profile = '/profile'
+    Profile = '/profile',
+    Packs='/packs'
 
 }
 
-export const Pages = () => {
+export const RoutesPages = () => {
     const navigate = useNavigate()
     const isLogged = useAppSelector((state: AppRootStateType) => state.login)
     const status = useAppSelector(state => state.app.status)
@@ -47,6 +49,7 @@ export const Pages = () => {
                 <Route path={'/recovery-password'} element={<RecoveryPassword/>}/>
                 <Route path={'/checkEmail'} element={<CheckEmail/>}/>
                 <Route path={'/set-new-password/:token'} element={<NewPassword/>}/>
+                <Route path={'/packs'} element={<Packs/>}/>
                 <Route path={'/error404'} element={<Error404/>}/>
                 <Route path={'*'} element={<Navigate to={'/error404'}/>}/>
             </Routes>

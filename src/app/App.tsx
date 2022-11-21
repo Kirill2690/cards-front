@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import s from './App.module.css'
 import {Header} from "../features/header/Header";
-import {Pages} from "./pages/Pages";
+import {RoutesPages} from "./pages/Routes";
 import {useAppDispatch, useAppSelector} from "../common/hooks/hooks";
 import {authMeTC} from "./app-reducer";
 import {ErrorSnackbar} from "../common/components/errorSnackBar/ErrorSnackBar";
@@ -23,7 +23,7 @@ export const App = () => {
         <div className={s.app_wrapper}>
             <Header/>
             <div className={s.app_container}>
-                <Pages/>
+                <RoutesPages/>
                 <ErrorSnackbar/>
             </div>
         </div>
