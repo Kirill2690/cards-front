@@ -4,13 +4,13 @@ import {setAppStatusAC} from "../../../app/app-reducer";
 import {AxiosError} from "axios";
 import {errorUtil} from "../../../common/utils/utils-error";
 
-const initialState: InitialStateType = {
+const initialState = {
     isRegistered: false
 }
 
 export const registerReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-        case 'SIGN-UP':
+        case 'REG/SIGN-UP':
             return {...state, isRegistered: action.isRegistered}
         default:
             return state
@@ -35,11 +35,8 @@ export const registerTC = (data: RegisterDataType): AppThunk => {
 }
 
 // actions
-export const registerAC = (isRegistered: boolean) => ({type: 'SIGN-UP', isRegistered} as const)
+export const registerAC = (isRegistered: boolean) => ({type: 'REG/SIGN-UP', isRegistered} as const)
 
 // types
 type ActionsType = ReturnType<typeof registerAC>
-
-type InitialStateType = {
-    isRegistered: boolean
-}
+type InitialStateType = typeof initialState

@@ -8,6 +8,7 @@ import {logoutTC} from "../auth/profile/profile-reducer";
 
 
 export const Header = () => {
+
     const dispatch = useAppDispatch()
     const profile = useAppSelector(state => state.profile);
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn);
@@ -16,7 +17,6 @@ export const Header = () => {
 
     const logoutHandler = () => {
         dispatch(logoutTC())
-
     }
 
     return (

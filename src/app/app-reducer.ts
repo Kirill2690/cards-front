@@ -3,13 +3,11 @@ import {AppThunk} from "./store";
 import {authLoginAC} from "../features/auth/login/login-reducer";
 import {setProfileAC} from "../features/auth/profile/profile-reducer";
 
-
 const initialState = {
     status: 'idle' as RequestStatusType,
     isInitialized: false,
     error: null as string | null,
 }
-
 
 export const appReducer = (state = initialState, action: AppActionType): InitialStateType => {
     switch (action.type) {
@@ -32,7 +30,6 @@ export const setAppStatusAC = (status: RequestStatusType) => ({type: 'APP/SET-ST
 export const setAppErrorAC = (error: null | string) => ({type: 'APP/SET-ERROR', error} as const)
 export const setInitializedAC = (isInitialized: boolean) => ({type: 'APP/SET-INITIALIZED', isInitialized} as const)
 
-
 //thunk
 export const authMeTC = (): AppThunk => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
@@ -48,14 +45,10 @@ export const authMeTC = (): AppThunk => (dispatch) => {
         })
 }
 
-
-
 //types
-
 export type AppActionType =
     | ReturnType<typeof setAppStatusAC>
     | ReturnType<typeof setInitializedAC>
     | ReturnType<typeof setAppErrorAC>
-
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 type InitialStateType = typeof initialState

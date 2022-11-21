@@ -6,9 +6,8 @@ import {registerReducer} from "../features/auth/register/register-reducer";
 import {loginReducer} from "../features/auth/login/login-reducer";
 import {recoverPasswordReducer} from "../features/auth/password/recoveryPassword/recoveryPassword-reducer";
 import {newPasswordReducer} from "../features/auth/password/newPassword/newPassword-reducer";
-import {useAppSelector} from "../common/hooks/hooks";
-
-
+import {packsReducer} from "../features/packs/packs-reducer";
+import {cardsReducer} from "../features/cards/cards-reducer";
 
 const rootReducer = combineReducers({
     app: appReducer,
@@ -16,20 +15,17 @@ const rootReducer = combineReducers({
     register: registerReducer,
     profile: profileReducer,
     recoverPassword: recoverPasswordReducer,
-    newPassword: newPasswordReducer
+    newPassword: newPasswordReducer,
+    packs:packsReducer,
+    cards:cardsReducer
 })
 
-
-
+//store
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
 
-// типизация state
+//types
 export type AppRootStateType = ReturnType<typeof rootReducer>
-
-//типизация санки если она возвращает другую санку
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, AnyAction>
-
-// типизация dispatch
 export type AppDispatch = ThunkDispatch<AppRootStateType, unknown, AnyAction>
 
 

@@ -11,9 +11,9 @@ const initialState = {
 
 export const recoverPasswordReducer=(state: InitialStateType = initialState, action: ActionsType): InitialStateType =>{
     switch (action.type) {
-        case 'FORGOT-PASSWORD-SUCCESS':
+        case 'REC/FORGOT-PASSWORD-SUCCESS':
             return {...state, forgotPasswordSuccess:action.forgotPasswordSuccess}
-        case 'SET-DATA-EMAIL':
+        case 'REC/SET-DATA-EMAIL':
             return {
                 ...state,
                 forgetEmail: action.email
@@ -23,9 +23,11 @@ export const recoverPasswordReducer=(state: InitialStateType = initialState, act
     }
 };
 
-export const setForgotPasswordSuccessAC = (forgotPasswordSuccess: boolean) => ({type: 'FORGOT-PASSWORD-SUCCESS', forgotPasswordSuccess} as const)
-export const setDataForgetPasswordAC = (email: string) => ({type: 'SET-DATA-EMAIL', email} as const)
+//actions
+export const setForgotPasswordSuccessAC = (forgotPasswordSuccess: boolean) => ({type: 'REC/FORGOT-PASSWORD-SUCCESS', forgotPasswordSuccess} as const)
+export const setDataForgetPasswordAC = (email: string) => ({type: 'REC/SET-DATA-EMAIL', email} as const)
 
+//thunks
 export const recoverTC = (data: ForgotDataType): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     try {
@@ -39,6 +41,6 @@ export const recoverTC = (data: ForgotDataType): AppThunk => async (dispatch) =>
     }
 }
 
-
+//types
 type InitialStateType=typeof initialState
 type ActionsType=ReturnType<typeof setForgotPasswordSuccessAC>|ReturnType<typeof setDataForgetPasswordAC>

@@ -10,6 +10,7 @@ export const instanceHeroku = axios.create({
     withCredentials: true
 })
 
+//authAPI
 
 export const authAPI = {
     login(data: LoginDataType) {
@@ -35,6 +36,55 @@ export const authAPI = {
     },
 }
 
+//packsAPI
+
+export const packsAPI = {
+    getPacks(data: PacksParamsType) {
+        return instance.get<ResponsePacksType>(`cards/pack`, {
+            params: {
+                page: data.page,
+                pageCount: data.pageCount,
+                packName: data.packName,
+                user_id: data.userID,
+                min: data.min,
+                max: data.max
+            }
+        })
+    },
+    createPack(cardsPack: CreatePacksType,) {
+        return instance.post('cards/pack', {cardsPack})
+    },
+    updatePack(cardsPack: UpdatePackType) {
+        return instance.put('cards/pack', {cardsPack})
+    },
+    deletePack(packID: string) {
+        return instance.delete(`cards/pack?id=${packID}`)
+    },
+}
+
+//cardsAPI
+
+export const cardsAPI={
+    getCards(data: CardsParamsType) {
+        return instance.get<ResponseCardsType>(`cards/card`, {
+            params: {
+                page: data.page,
+                pageCount: data.pageCount,
+                cardQuestion: data.cardQuestion,
+                cardsPack_id: data.cardsPack_id
+            }
+        })
+    },
+    createCards(card: CreateCardsType) {
+        return instance.post('cards/card', {card})
+    },
+    updateCards(card: UpdateCardsType) {
+        return instance.put('cards/card', {card})
+    },
+    deleteCards(cardID: string) {
+        return instance.delete(`cards/card?id=${cardID}`)
+    },
+}
 
 
 //type
@@ -43,6 +93,7 @@ export type LoginDataType = {
     password: string
     rememberMe: boolean
 }
+
 export type LoginResponseType = {
     _id: string
     email: string
@@ -92,11 +143,11 @@ export type RegisterDataType = {
 export type ChangeUserNameDataType = {
     name?: string
 }
+
 export type SetNewPasswordType = {
     password: string
     resetPasswordToken: string | undefined
 }
-
 
 export type ResponseNewPasswordType={
     info: string
@@ -115,6 +166,7 @@ export type ForgotDataResponseType = {
     info: string
     error: string
 }
+
 export type UserType = {
     avatar?: string
     created?: string
@@ -130,3 +182,117 @@ export type UserType = {
     __v?: number
     _id?: string
 }
+
+
+//types packAPI
+export type PacksParamsType = {
+    page?: string,
+    pageCount?: string,
+    packName?: string
+    userID?: string
+    min?: string
+    max?: string
+}
+
+export type ResponsePacksType = {
+    cardPacks: PackType[];
+    page: number;
+    pageCount: number;
+    cardPacksTotalCount: number;
+    minCardsCount: number;
+    maxCardsCount: number;
+    token: string;
+    tokenDeathTime: number;
+}
+
+export type PackType = {
+    _id: string;
+    user_id: string;
+    user_name: string;
+    private: boolean;
+    name: string;
+    path: string;
+    grade: number;
+    shots: number;
+    cardsCount: number;
+    type: string;
+    rating: number;
+    created: string;
+    updated: string;
+    more_id: string;
+    __v: number;
+}
+
+export type CreatePacksType={
+    name: string
+    deckCover?: string
+    private?: boolean
+}
+
+export type UpdatePackType={
+    _id: string
+    name?: string
+}
+
+//type cardsAPI
+
+export type CardsParamsType = {
+    page?: string,
+    pageCount?: string,
+    cardQuestion?: string
+    cardsPack_id?: string
+}
+
+export type ResponseCardsType = {
+    cards: CardsType[];
+    packUserId: string;
+    packId:string;
+    packName: string;
+    packPrivate: boolean;
+    packDeckCover: string;
+    packCreated: string;
+    packUpdated: string;
+    page: number;
+    pageCount: number;
+    cardsTotalCount: number;
+    minGrade: number;
+    maxGrade: number;
+    token: string;
+    tokenDeathTime: number;
+}
+
+export type CardsType = {
+    _id: string;
+    cardsPack_id: string;
+    user_id: string;
+    answer: string;
+    question: string;
+    grade: number;
+    shots: number;
+    comments: string;
+    type: string;
+    rating: number;
+    more_id: string;
+    created: string;
+    updated: string;
+    __v: number;
+}
+
+export type CreateCardsType = {
+    cardsPack_id: string | undefined
+    question?: string
+    answer?: string
+    grade?: number
+    shots?: number
+    answerImg?: string
+    questionImg?: string
+    questionVideo?: string
+    answerVideo?: string
+}
+
+export type UpdateCardsType = {
+    _id?: string
+    question?: string
+    comments?: string
+}
+
