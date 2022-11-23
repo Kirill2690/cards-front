@@ -7,7 +7,6 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {Button, Checkbox, FormControlLabel, IconButton, TextField} from '@mui/material';
-import {Header} from "../../header/Header";
 import {Navigate, useNavigate} from "react-router-dom";
 import {useFormik} from "formik";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
@@ -26,8 +25,11 @@ type FormikErrorType = {
 export const Login = () => {
 
     const isLogged = useAppSelector(state => state.login.isLoggedIn)
+
     const dispatch = useAppDispatch()
+
     const navigate = useNavigate()
+
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -135,3 +137,4 @@ export const Login = () => {
 };
 
 
+//type

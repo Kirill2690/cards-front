@@ -1,21 +1,34 @@
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import s from './Packs.module.css'
-import {Button, Table} from "@mui/material";
-import {Preloader} from "../../common/components/preloader/Preloader";
-import React, {useState} from "react";
+import {Button} from "@mui/material";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {PacksList} from "../PacksList";
-import {getPacksTC} from "./packs-reducer";
+import {getPacksTC, setQueryParamsAC} from "./packs-reducer";
+import {Search} from "../../common/components/search/Search";
+import {NewSlider} from "../../common/components/slider/NewSlider";
+
 
 export const Packs = () => {
+
+    const min = useAppSelector(state => state.packs.minCardsCount)
+    const max = useAppSelector(state => state.packs.maxCardsCount)
+
+    const packName = useAppSelector(state => state.packs.params.packName)
+
+    const handleChangeSearch = (text:string) => {
+        dispatch(setQueryParamsAC({packName:text}))
+    }
+
+    useEffect(()=>{dispatch(getPacksTC())},[min,max,packName])
+
+
     const dispatch = useAppDispatch()
     const status = useAppSelector(state => state.app.status)
     const [newPackName, setNewPackName] = useState('NZ')
     const navigate = useNavigate()
     const minCardsCount = useAppSelector(state => state.packs.minCardsCount)
     const maxCardsCount = useAppSelector(state => state.packs.maxCardsCount)
-    const min = useAppSelector(state => state.packs.params.min)
-    const max = useAppSelector(state => state.packs.params.max)
     const page = useAppSelector(state => state.packs.params.page)
     const pageCount = useAppSelector(state => state.packs.params.pageCount)
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
@@ -39,7 +52,16 @@ export const Packs = () => {
                 </Button>
 
             </div>
+<div>
+    <div className={s.search_components}>
+        <Search handleChangeSearch={handleChangeSearch}/>
+        //two buttons
+        <div className={s.rangeSlider}>
+            <NewSlider/>
+        </div>
 
+    </div>
+</div>
               <PacksList/>
 
         </div>

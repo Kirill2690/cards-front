@@ -9,7 +9,8 @@ import {authLoginAC} from "../login/login-reducer";
 const initialState = {
         avatar: '',
         email: '',
-        name: ''
+        name: '',
+        _id: ''
 }
 
 type InitialStateType = typeof initialState

@@ -27,7 +27,6 @@ export const PacksList = () => {
             <Table sx={{minWidth: 650}} aria-label="Packs table">
                 <TableHead>
                     <TableRow>
-
                         <TableCell>Name</TableCell>
                         <TableCell align="right">Cards</TableCell>
                         <TableCell align="right">Last updated</TableCell>
