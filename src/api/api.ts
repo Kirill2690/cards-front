@@ -39,15 +39,16 @@ export const authAPI = {
 //packsAPI
 
 export const packsAPI = {
-    getPacks(data: PacksParamsType) {
-        return instance.get<ResponsePacksType>(`cards/pack`, {
-            params: {
-                page: data.page,
-                pageCount: data.pageCount,
-                packName: data.packName,
-                user_id: data.userID,
-                min: data.min,
-                max: data.max
+
+    getPacks(data:PacksParamsType){
+        return instance.get<ResponsePacksType>(`cards/pack`,{
+            params:{
+                page:data.page,
+                pageCount:data.pageCount,
+                user_id:data.userID,
+                packName:data.packName,
+                min:data.min,
+                max:data.max
             }
         })
     },
@@ -88,6 +89,8 @@ export const cardsAPI={
 
 
 //type
+
+
 export type LoginDataType = {
     email: string
     password: string
@@ -193,6 +196,14 @@ export type PacksParamsType = {
     min?: string
     max?: string
 }
+export type PackResponseType={
+    page:number,
+    pageCount:number,
+    packName:string,
+    user_id:string,
+    min:number,
+    max:number
+}
 
 export type ResponsePacksType = {
     cardPacks: PackType[];
@@ -201,8 +212,8 @@ export type ResponsePacksType = {
     cardPacksTotalCount: number;
     minCardsCount: number;
     maxCardsCount: number;
-    token: string;
-    tokenDeathTime: number;
+    token?: string;
+    tokenDeathTime?: number;
 }
 
 export type PackType = {

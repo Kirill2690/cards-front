@@ -3,8 +3,9 @@ import s from './Packs.module.css'
 import {Button, Table} from "@mui/material";
 import {Preloader} from "../../common/components/preloader/Preloader";
 import React, {useState} from "react";
-import {addNewPackTC} from "./packs-reducer";
 import {useNavigate} from "react-router-dom";
+import {PacksList} from "../PacksList";
+import {getPacksTC} from "./packs-reducer";
 
 export const Packs = () => {
     const dispatch = useAppDispatch()
@@ -18,12 +19,12 @@ export const Packs = () => {
     const page = useAppSelector(state => state.packs.params.page)
     const pageCount = useAppSelector(state => state.packs.params.pageCount)
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
-    const isMyPack = useAppSelector(state => state.packs.isMyPack)
-    const sortPacks = useAppSelector(state => state.packs.params.sortPacks)
-
+        // const isMyPack = useAppSelector(state => state.packs.isMyPack)
+   // const sortPacks = useAppSelector(state => state.packs.params.sortPacks)
+    console.log(status)
 
     const addNewPackHandler = () => {
-        dispatch(addNewPackTC(newPackName))
+        /*dispatch(getPacksTC())*/
     }
 
     return (
@@ -36,11 +37,11 @@ export const Packs = () => {
                 >
                     Add new pack
                 </Button>
+
             </div>
-            {status === 'loading'
-                ? <Preloader/>
-                : <Table/>
-            }
+
+              <PacksList/>
+
         </div>
 
 
