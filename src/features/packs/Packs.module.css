@@ -1,92 +1,78 @@
-.packs_wrapper {
+/*.wrapper {
+    width: 90%;
+    margin: 0 auto;
+}
+.packListHeader {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    background: #F9F9FA;
-    font-family: Montserrat, sans-serif;
-    margin-top: 20px;
-}
-
-.header {
-    display: flex;
     justify-content: space-between;
-    width: 700px;
 }
-
-.title {
-    height: 27px;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 27px;
-    color: #000;
-
-}
-
-.settings {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 1008px;
-    padding: 20px;
-}
-
 .search {
-    text-align: start;
-}
-
-.search_components {
-    width: 463px;
-    box-shadow: 0 2px 10px rgba(109, 109, 109, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-
-.buttonMyAll {
-    width: 96px;
-    height: 36px;
-    box-shadow: 0 2px 10px rgba(109, 109, 109, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-
-.slider_container {
-    width: 250px;
-}
-
-.rangeSlider {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: end;
+    margin-bottom: 24px;
 }
 
-.slider {
-    margin: 0 15px;
-}
-
-.minMaxValue {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 36px;
+.button{
+    border-radius: 30px !important;
+    width: 175px;
     height: 36px;
-    padding: 0 10px;
-    background: #FFFFFF;
-    border: 1px solid #D9D9D9;
-    border-radius: 2px;
-    box-shadow: 0 2px 10px rgba(109, 109, 109, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    background-color: #366EFF !important;
+    margin-top: 45px !important;
+    margin-bottom: 31px !important;
+    text-transform: none !important;
+    font-size: 16px !important;
+    font-weight: 500;
+}*/
+
+
+.tableHead {
+    background: #EFEFEF;
 }
 
-.filterOff {
+.tablePackName {
+    cursor: pointer;
+}
+
+.itemActions {
     display: flex;
-    align-self: flex-end;
-    width: 40px;
-    height: 36px;
-    background: #FFFFFF;
-    border: 1px solid #E8E8E8;
-    border-radius: 2px;
-    box-shadow: 0 2px 10px rgba(109, 109, 109, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    justify-content: space-around;
 }
 
+.itemActions button {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+}
 
+.itemActions button[disabled] > .actionsIcon {
+    cursor: not-allowed;
+}
 
-.table {
-    width: 1008px;
+.actionsIcon {
+    padding: 5px;
+    width: 16px;
+    height: 16px;
+}
+
+.actionsIcon:hover {
+    border-radius: 50%;
+    cursor: pointer;
+    background: #666666;
+    opacity: 0.3;
+}
+
+.filterHeader {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: end;
+    margin-bottom: 24px;
+}
+
+.text{
+
 }

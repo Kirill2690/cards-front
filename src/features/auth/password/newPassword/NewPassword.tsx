@@ -64,7 +64,7 @@ export const NewPassword = () => {
                 <div className={s.text}>
                     Create new password and we will send you further instructions to email
                 </div>
-                <Button style={{borderRadius: 30, width: 375, marginTop: 30}} type="submit" variant="contained">
+                <Button className={s.button} type="submit" variant="contained">
                     Create new password
                 </Button>
             </form>

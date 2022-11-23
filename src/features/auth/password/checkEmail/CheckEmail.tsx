@@ -17,7 +17,7 @@ export const CheckEmail = () => {
                     <img src={email_logo} alt={'Email img'}/>
                 </div>
                 We've sent an Email with instructions to <b>{email}</b>
-                <Button onClick={()=>navigate('/login')} style={{borderRadius: 30, width: 375, marginTop: 30}} type="submit" variant="contained">
+                <Button onClick={()=>navigate('/login')} className={s.button} type="submit" variant="contained">
                     Back to login
                 </Button>
                 </div>

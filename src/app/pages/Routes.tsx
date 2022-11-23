@@ -13,6 +13,7 @@ import {AppRootStateType} from "../store";
 import s from "../App.module.css";
 import {Preloader} from "../../common/components/preloader/Preloader";
 import {Packs} from "../../features/packs/Packs";
+import {NewPack} from "../../features/packs/NewPack";
 
 
 export enum Path {
@@ -23,7 +24,8 @@ export enum Path {
     CheckEmail = '/checkEmail',
     NewPassword = '/set-new-password',
     Profile = '/profile',
-    Packs='/packs'
+    Packs='/packs',
+    NewPack='/new-pack'
 
 }
 
@@ -50,6 +52,7 @@ export const RoutesPages = () => {
                 <Route path={'/checkEmail'} element={<CheckEmail/>}/>
                 <Route path={'/set-new-password/:token'} element={<NewPassword/>}/>
                 <Route path={'/packs'} element={<Packs/>}/>
+                <Route path={'/new-pack'} element={<NewPack/>}/>
                 <Route path={'/error404'} element={<Error404/>}/>
                 <Route path={'*'} element={<Navigate to={'/error404'}/>}/>
             </Routes>

@@ -73,7 +73,7 @@ export const RecoveryPassword = () => {
                     <div className={s.dontHaveAccountTitle}>
                         Enter your email address and we will send you further instructions
                     </div>
-                    <Button style={{borderRadius: 30, width: 375, marginTop: 30}} type="submit" variant="contained">
+                    <Button className={s.button} type="submit" variant="contained">
                         Send Instructions
                     </Button>
                     <div className={s.dontHaveAccountTitle}>

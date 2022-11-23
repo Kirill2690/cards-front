@@ -14,10 +14,9 @@
 }
 
 .title {
-    padding-top: 27px;
-    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
     font-weight: 600;
-    font-size: 22px;
+    user-select: none;
 }
 
 .photo {
