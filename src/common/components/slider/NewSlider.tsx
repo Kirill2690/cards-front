@@ -13,7 +13,7 @@ export const NewSlider = () => {
     const maxCards = useAppSelector(state => state.packs.maxCardsCount)
 
     const dispatch = useAppDispatch()
-
+//
     const [value, setValue] = React.useState<number[]>([minCards, maxCards]);
 
     const handleChange = (event: Event, newValue: number | number[], activeThumb: number,) => {

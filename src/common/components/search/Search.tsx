@@ -10,7 +10,7 @@ export const Search = (props: SearchPropsType) => {
 
     const debouncedText = useDebounce(text);
     props.handleChangeSearch(debouncedText)
-
+    //
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setText (event.target.value);
     };
