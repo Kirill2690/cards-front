@@ -3,15 +3,16 @@ import s from './Profile.module.css'
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {changeUserNameTC, logoutTC} from "./profile-reducer";
 import {Button} from "@mui/material";
-import {Navigate} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import {SuperEditableSpan} from "../../../common/components/superEditableSpan/SuperEditableSpan";
 
-export const Profile = React.memo(() => {
+export const Profile =() => {
     const name = useAppSelector(state => state.profile.name)
     const email = useAppSelector(state => state.profile.email)
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn);
-    const [value, setValue] = useState(name)
+    const [value, setValue] = useState('')
     const dispatch = useAppDispatch();
+    const status = useAppSelector(state => state.app.status)
 
     useEffect(() => {
         if (name) {
@@ -29,11 +30,12 @@ export const Profile = React.memo(() => {
     const logoutHandler = () => {
         dispatch(logoutTC())
     }
-    if (!isLoggedIn) {
+/*    if (!isLoggedIn) {
         return <Navigate to={'/login'}/>;
-    }
+    }*/
     return (
         <div className={s.wrapper_profile}>
+            <NavLink to={'/packs' }>🠔 Back to Packs List</NavLink>
             <div className={s.profile_Block}>
                 <div className={s.title}>Personal Information</div>
                 <div className={s.photo}>
@@ -58,4 +60,4 @@ export const Profile = React.memo(() => {
             </div>
         </div>
     );
-});
+}
