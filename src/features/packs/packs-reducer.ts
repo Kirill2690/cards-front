@@ -1,4 +1,4 @@
-import {CreatePacksType, packsAPI, PackType, ResponsePacksType} from "../../api/api";
+import { packsAPI, PackType, ResponsePacksType, UpdatePackType} from "../../api/api";
 import {AppThunk} from "../../app/store";
 import {setAppStatusAC} from "../../app/app-reducer";
 import {errorUtil} from "../../common/utils/utils-error";
@@ -94,7 +94,7 @@ export const addPackTC =
             }
         }
 
-/*export const changePackTC = (data: UpdatePackType): AppThunk => async (dispatch) => {
+export const changePackTC = (data: UpdatePackType): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC("loading"))
     try {
         await packsAPI.updatePack(data)
@@ -104,7 +104,7 @@ export const addPackTC =
     } finally {
         dispatch(setAppStatusAC("succeeded"))
     }
-}*/
+}
 
 export const deletePackTC = (data: string): AppThunk => async (dispatch) => {
     dispatch(setAppStatusAC("loading"))

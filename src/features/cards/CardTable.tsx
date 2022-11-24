@@ -3,6 +3,7 @@ import {useAppSelector} from "../../common/hooks/hooks";
 import s from './Cards.module.css';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import {Card} from "./Card";
 
 export const CardsTable = () => {
 
@@ -16,9 +17,7 @@ export const CardsTable = () => {
     const status = useAppSelector((state) => state.app.status)
 
 
-    const formatDate = (date: Date | string | number) => {
-        return new Date(date).toLocaleDateString('ru-RU') + ' ' + new Date(date).toLocaleTimeString()
-    }
+
 
     return (
         <>
@@ -33,42 +32,14 @@ export const CardsTable = () => {
                             <TableCell align="center">Actions</TableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody>
-                        {cards.length ? status !== 'loading' && cards?.map((card) => (
-                            <TableRow
-                                key={card._id}
-                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                            >
-                                <TableCell component="th" scope="row">
-                                    {card.question}
-                                </TableCell>
-                                <TableCell align="center">{card.answer}</TableCell>
-                                <TableCell align="center"><Rating name="read-only" value={card.grade} readOnly/>
-                                </TableCell>
-                                <TableCell align="center">{formatDate(card.updated)}</TableCell>
-                                <TableCell className={s.buttonBlock}>
-                                    <Button
-                                        onClick={() => console.log(card)}
-                                        disabled={userId !== card.user_id}
-                                        color="error"
-                                        size="small"
-                                        startIcon={<DeleteOutlineIcon/>}>
-                                        Delete
-                                    </Button>
-                                    <Button
-                                        onClick={() => console.log(card)}
-                                        disabled={userId !== card.user_id}
-                                        color="secondary" size="small"
-                                        startIcon={<EditIcon/>}>
-                                        Edit
-                                    </Button>
-                                </TableCell>
-                            </TableRow>
+                 {/*   <TableBody>
+                        {cards && cards.map((card) => (
+                            <Card  />
                         ))
                             : status !== 'loading' && <TableRow>
                             <TableCell>{'NO CARDS FOUND'}</TableCell>
                         </TableRow>}
-                    </TableBody>
+                    </TableBody>*/}
                 </Table>
             </TableContainer>
         </>

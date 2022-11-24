@@ -1,29 +1,43 @@
-import React, {useEffect} from "react";
-import {Paper, TableContainer, Table, TableHead, TableRow, TableCell, TableBody,} from "@mui/material";
+import React, {useEffect, useState} from "react";
+import {Paper, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TablePagination,} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../common/hooks/hooks";
 import {getPacksTC, setParamsSortPack} from "./packs/packs-reducer";
 import s from './packs/Packs.module.css'
+import {Pack} from "./packs/Pack";
 
 
 export const PacksList = () => {
 
     const dispatch = useAppDispatch()
-    const packs= useAppSelector(state=>state.packs.cardPacks);
-    const cardPacksTotalCount = useAppSelector(state=>state.packs.cardPacksTotalCount);
-    const pageCount=useAppSelector(state=>state.packs.pageCount)
-    const page = useAppSelector(state=>state.packs.page)
+
+    const packs = useAppSelector(state => state.packs.cardPacks);
+    const cardPacksTotalCount = useAppSelector(state => state.packs.cardPacksTotalCount);
+    const pageCount = useAppSelector(state => state.packs.pageCount)
+    const page = useAppSelector(state => state.packs.page)
     const sort = useAppSelector(state => state.packs.params.sortPacks)
+
+    const [currentPage, setCurrentPage] = useState(page)
+    const [rowsPerPage,setRowsPerPage]=useState(pageCount)
+
+    useEffect(() => {
+        dispatch(getPacksTC());
+    }, [])
+
     const sortUpdate = (sortParams: string) => {
         return sort === `1${sortParams}` ? dispatch(setParamsSortPack(`0${sortParams}`)) : dispatch(setParamsSortPack(`1${sortParams}`));
     }
 
-    useEffect(()=>{
-        dispatch(getPacksTC());
-    },[])
+    /*  const formatDate = (date: Date | string | number) => {
+          return new Date(date).toLocaleDateString('ru-RU') + ' ' + new Date(date).toLocaleTimeString()
+      }*/
 
-    const formatDate = (date: Date | string | number) => {
-        return new Date(date).toLocaleDateString('ru-RU') + ' ' + new Date(date).toLocaleTimeString()
+    const handleChangePage = (e: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+        setCurrentPage(newPage)
     }
+    const handleChangeRowsPerPage = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setRowsPerPage(+e.target.value)
+    }
+
     return (
         <TableContainer component={Paper}>
             <Table sx={{minWidth: 600}} aria-label="Packs table">
@@ -39,25 +53,26 @@ export const PacksList = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    { packs.map((p) => (
-                        <TableRow
-                            key={p._id}
-
-                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                        >
-                            <TableCell component="th" scope="row">
-                                {p.name}
-                            </TableCell>
-                            <TableCell align="left">{p.cardsCount}</TableCell>
-                            <TableCell align="right">{formatDate(p.updated)}</TableCell>
-                            <TableCell align="right">{p.user_name}</TableCell>
-                            <TableCell align="right"></TableCell>
-                        </TableRow>
-                    ))}
+                    {packs && packs.map((p) => (
+                        <Pack key={p._id}
+                              packId={p._id}
+                              userId={p.user_id}
+                              user_name={p.user_name}
+                              name={p.name}
+                              updated={p.updated}
+                              cardsCount={p.cardsCount}
+                        />)
+                    )}
                 </TableBody>
             </Table>
-            {/* <TablePagination
-
-            />*/}
+            <TablePagination
+                rowsPerPageOptions={[5, 10, 25]}
+                component="div"
+                count={cardPacksTotalCount}
+                rowsPerPage={rowsPerPage}
+                page={currentPage}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+            />
         </TableContainer>)
 }
