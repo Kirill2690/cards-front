@@ -47,7 +47,7 @@ export const changeUserNameTC = (name:string): AppThunk => (dispatch: AppDispatc
             errorUtil(error, dispatch)
         })
         .finally(() => {
-            dispatch(setAppStatusAC('idle'))
+            dispatch(setAppStatusAC('succeeded'))
         })
 }
 export const logoutTC = (): AppThunk => async dispatch => {
@@ -56,10 +56,12 @@ export const logoutTC = (): AppThunk => async dispatch => {
         await authAPI.logout()
         dispatch(authLoginAC(false))
         dispatch(setProfileAC(null))
-        dispatch(setAppStatusAC('succeeded'))
     } catch(e) {
         errorUtil(e, dispatch)
     }
+    finally {
+    dispatch(setAppStatusAC("succeeded"))
+}
 }
 
 

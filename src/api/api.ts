@@ -52,8 +52,8 @@ export const packsAPI = {
             }
         })
     },
-    createPack(name: string,) {
-        return instance.post('cards/pack', {cardsPack:{name}})
+    createPack(name: string,deckCover?:string, isPrivate?:boolean) {
+        return instance.post('cards/pack', {cardsPack: {name, deckCover, private: isPrivate}})
     },
     updatePack(cardsPack: UpdatePackType) {
         return instance.put('cards/pack', {cardsPack})
@@ -66,24 +66,17 @@ export const packsAPI = {
 //cardsAPI
 
 export const cardsAPI={
-    getCards(data: CardsParamsType) {
-        return instance.get<ResponseCardsType>(`cards/card`, {
-            params: {
-                page: data.page,
-                pageCount: data.pageCount,
-                cardQuestion: data.cardQuestion,
-                cardsPack_id: data.cardsPack_id
-            }
-        })
+    getCards(cardsPack_id: string, params?: RequestGetCardsType) {
+        return instance.get<RequestGetCardsType, AxiosResponse<ResponseCardsType>>(`/cards/card/?cardsPack_id=${cardsPack_id}`, {params})
     },
-    createCards(card: CreateCardsType) {
-        return instance.post('cards/card', {card})
+    deleteCard(id: string) {
+        return instance.delete(`/cards/card/?id=${id}`)
     },
-    updateCards(card: UpdateCardsType) {
-        return instance.put('cards/card', {card})
+    addCard(card: NewCardType) {
+        return instance.post(`/cards/card`, {card})
     },
-    deleteCards(cardID: string) {
-        return instance.delete(`cards/card?id=${cardID}`)
+    updateCard(card: UpdateCardsType) {
+        return instance.put(`/cards/card`, {card})
     },
 }
 
@@ -196,14 +189,6 @@ export type PacksParamsType = {
     min?: string
     max?: string
 }
-export type PackResponseType={
-    page:number,
-    pageCount:number,
-    packName:string,
-    user_id:string,
-    min:number,
-    max:number
-}
 
 export type ResponsePacksType = {
     cardPacks: PackType[];
@@ -241,46 +226,35 @@ export type UpdatePackType={
 
 //type cardsAPI
 
-export type CardsParamsType = {
-    page?: string,
-    pageCount?: string,
-    cardQuestion?: string
-    cardsPack_id?: string
-}
 
 export type ResponseCardsType = {
-    cards: CardsType[];
-    packUserId: string;
-    packId:string;
-    packName: string;
-    packPrivate: boolean;
-    packDeckCover: string;
-    packCreated: string;
-    packUpdated: string;
-    page: number;
-    pageCount: number;
-    cardsTotalCount: number;
-    minGrade: number;
-    maxGrade: number;
-    token: string;
-    tokenDeathTime: number;
+    cards: CardType[],
+    packUserId: string
+    page: number
+    pageCount: number
+    cardsTotalCount: number
+    minGrade: number
+    maxGrade: number
+    token: string
+    tokenDeathTime: number
 }
 
-export type CardsType = {
-    _id: string;
-    cardsPack_id: string;
-    user_id: string;
-    answer: string;
-    question: string;
-    grade: number;
-    shots: number;
-    comments: string;
-    type: string;
-    rating: number;
-    more_id: string;
-    created: string;
-    updated: string;
-    __v: number;
+
+export type CardType = {
+    _id: string
+    cardsPack_id: string
+    user_id?: string
+    answer: string
+    question: string
+    grade: number
+    shots: number
+    comments?: string
+    type: string
+    rating: number
+    more_id: string
+    created: string
+    updated: string
+    __v?: number
 }
 
 export type CreateCardsType = {
@@ -296,8 +270,34 @@ export type CreateCardsType = {
 }
 
 export type UpdateCardsType = {
-    _id?: string
+    _id: string
     question?: string
-    comments?: string
+    answer?: string
 }
+
+
+export type CreatePacksType = {
+    name: string
+    deckCover?: string
+    private?: boolean
+}
+export type NewCardType = {
+    cardsPack_id: string
+    question?: string
+    answer?: string
+}
+
+export type RequestGetCardsType = {
+    cardAnswer?: string
+    cardQuestion?: string
+    cardsPack_id?: string
+    min?: number
+    max?: number
+    sortCards?: string
+    page?: number
+    pageCount?: number
+}
+
+
+
 

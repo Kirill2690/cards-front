@@ -14,7 +14,8 @@ export const App = () => {
 
     useEffect(() => {
         dispatch(authMeTC());
-    }, []);
+    }, [dispatch]);
+
 
     if (!isInitialized) {
         return <Preloader/>

@@ -37,7 +37,7 @@ export const recoverTC = (data: ForgotDataType): AppThunk => async (dispatch) =>
     } catch (e) {
         errorUtil(e, dispatch)
     } finally {
-        dispatch(setAppStatusAC('idle'))
+        dispatch(setAppStatusAC('succeeded'))
     }
 }
 
