@@ -14,6 +14,7 @@ import s from "../App.module.css";
 import {Preloader} from "../../common/components/preloader/Preloader";
 import {Packs} from "../../features/packs/Packs";
 import {NewPack} from "../../features/packs/NewPack";
+import {Cards} from "../../features/cards/Cards";
 
 
 export enum Path {
@@ -34,11 +35,11 @@ export const RoutesPages = () => {
     const isLogged = useAppSelector((state: AppRootStateType) => state.login)
     const status = useAppSelector(state => state.app.status)
 
-    useEffect(() => {
+   /* useEffect(() => {
         if (!isLogged) {
             navigate('/login')
         }
-    }, [])
+    }, [])*/
 
     return (
         <div>
@@ -52,7 +53,8 @@ export const RoutesPages = () => {
                 <Route path={'/checkEmail'} element={<CheckEmail/>}/>
                 <Route path={'/set-new-password/:token'} element={<NewPassword/>}/>
                 <Route path={'/packs'} element={<Packs/>}/>
-                <Route path={'/new-pack'} element={<NewPack/>}/>
+                <Route path={'/cards/:packId/:packName'} element={<Cards/>}/>
+                {/*<Route path={'/new-pack'} element={<NewPack/>}/>*/}
                 <Route path={'/error404'} element={<Error404/>}/>
                 <Route path={'*'} element={<Navigate to={'/error404'}/>}/>
             </Routes>

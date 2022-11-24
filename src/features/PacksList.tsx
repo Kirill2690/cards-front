@@ -1,7 +1,8 @@
 import React, {useEffect} from "react";
 import {Paper, TableContainer, Table, TableHead, TableRow, TableCell, TableBody,} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../common/hooks/hooks";
-import {getPacksTC} from "./packs/packs-reducer";
+import {getPacksTC, setParamsSortPack} from "./packs/packs-reducer";
+import s from './packs/Packs.module.css'
 
 
 export const PacksList = () => {
@@ -11,25 +12,28 @@ export const PacksList = () => {
     const cardPacksTotalCount = useAppSelector(state=>state.packs.cardPacksTotalCount);
     const pageCount=useAppSelector(state=>state.packs.pageCount)
     const page = useAppSelector(state=>state.packs.page)
-    // const isMyPacks = useAppSelector(state=>state.packs.isMyPacks)
-    // const search=useAppSelector(state=>state.packs.search)
-    // const minMaxCardsCount = useAppSelector(state=>state.packs.minMaxCardsCount)
+    const sort = useAppSelector(state => state.packs.params.sortPacks)
+    const sortUpdate = (sortParams: string) => {
+        return sort === `1${sortParams}` ? dispatch(setParamsSortPack(`0${sortParams}`)) : dispatch(setParamsSortPack(`1${sortParams}`));
+    }
 
     useEffect(()=>{
-
         dispatch(getPacksTC());
-
     },[])
 
-
+    const formatDate = (date: Date | string | number) => {
+        return new Date(date).toLocaleDateString('ru-RU') + ' ' + new Date(date).toLocaleTimeString()
+    }
     return (
         <TableContainer component={Paper}>
-            <Table sx={{minWidth: 650}} aria-label="Packs table">
+            <Table sx={{minWidth: 600}} aria-label="Packs table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Name</TableCell>
+                        <TableCell onClick={() => sortUpdate('name')}
+                                   className={sort === '0name' ? s.sortUp : s.sortDown}>Name</TableCell>
                         <TableCell align="right">Cards</TableCell>
-                        <TableCell align="right">Last updated</TableCell>
+                        <TableCell align="right" onClick={() => sortUpdate('updated')}
+                                   className={sort === '0updated' ? s.sortUp : s.sortDown}>Last updated</TableCell>
                         <TableCell align="right">Created</TableCell>
                         <TableCell align="right">Actions</TableCell>
                     </TableRow>
@@ -45,7 +49,7 @@ export const PacksList = () => {
                                 {p.name}
                             </TableCell>
                             <TableCell align="left">{p.cardsCount}</TableCell>
-                            <TableCell align="right">{p.updated}</TableCell>
+                            <TableCell align="right">{formatDate(p.updated)}</TableCell>
                             <TableCell align="right">{p.user_name}</TableCell>
                             <TableCell align="right"></TableCell>
                         </TableRow>
@@ -53,13 +57,7 @@ export const PacksList = () => {
                 </TableBody>
             </Table>
             {/* <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
+
             />*/}
         </TableContainer>)
 }

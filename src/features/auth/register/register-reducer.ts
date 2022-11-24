@@ -29,7 +29,7 @@ export const registerTC = (data: RegisterDataType): AppThunk => {
                 errorUtil(error, dispatch)
             })
             .finally(() => {
-                dispatch(setAppStatusAC('idle'))
+                dispatch(setAppStatusAC('succeeded'))
             })
     }
 }

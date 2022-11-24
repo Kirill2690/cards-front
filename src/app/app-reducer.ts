@@ -32,16 +32,14 @@ export const setInitializedAC = (isInitialized: boolean) => ({type: 'APP/SET-INI
 
 //thunk
 export const authMeTC = (): AppThunk => (dispatch) => {
-    dispatch(setAppStatusAC('loading'))
     authAPI.authMe()
         .then((res) => {
             dispatch(authLoginAC(true));
-            dispatch(setAppStatusAC('succeeded'));
             dispatch(setProfileAC(res.data));
+            dispatch(setInitializedAC(true))
         })
         .finally(() => {
             dispatch(setInitializedAC(true))
-            dispatch(setAppStatusAC('succeeded'))
         })
 }
 
