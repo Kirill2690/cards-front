@@ -70,6 +70,7 @@ export const Cards=()=>{
         <div>
             <div className={s.tableWrapper}>
                 <div className={s.container}>
+                    isMyPacks  ? <></>
                 {/*    <SearchAppBar radioValue={searchCardValue}
                                   onChangeRadio={clearValue}
                                   disabled={packUserId !== userId}

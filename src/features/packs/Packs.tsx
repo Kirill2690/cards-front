@@ -25,15 +25,23 @@ export const Packs = () => {
     const maxRangeURL = searchParams.get('max') ? searchParams.get('max') + '' : ''
 
 
-    const [packName, setPackName] = useState<string>(packNameURL ? packNameURL : '')
-
+    const packName = useAppSelector(state => state.packs.params.packName)
+    const [searchText, setSearchText] = React.useState<string>("");
     const handleChangeSearch = (text: string) => {
         dispatch(setQueryParamsAC({packName: text}))
     }
+
+
+
+   // const [packName, setPackName] = useState<string>(packNameURL ? packNameURL : '')
+
+    // const handleChangeSearch = (text: string) => {
+    //     dispatch(setQueryParamsAC({packName: text}))
+    // }
     const setResetFilterHandler = () => {
         setParamsSearchState({page: '1', pageCount: '5', userID: '', min: '', max: '',sortPacks:''})
         setSearchParams({page: '1', pageCount: '5'})
-        setPackName('')
+        setSearchText('')
     }
 
 
@@ -97,9 +105,9 @@ export const Packs = () => {
                 </Button>
             </div>
             <div className={s.packs_tools}>
-                <Search handleChangeSearch={handleChangeSearch}/>
-
-                <NewSlider/>
+               {/* <Search handleChangeSearch={handleChangeSearch}/>*/}
+                <Search handleChangeSearch={handleChangeSearch} searchText={searchText} setSearchText={setSearchText}/>
+             {/*   <NewSlider/>*/}
                 <Button onClick={setResetFilterHandler}>
                     <FilterListOffIcon/>
                 </Button>
