@@ -1,98 +1,103 @@
-import {
-    cardsAPI,
-    CardType,
-    CreateCardsType,
-    NewCardType,
-    ResponseCardsType,
-    UpdateCardsType
-} from "../../api/api";
-import {AppThunk} from "../../app/store";
 import {setAppStatusAC} from "../../app/app-reducer";
 import {errorUtil} from "../../common/utils/utils-error";
-import {AxiosError} from "axios";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
+import {cardsAPI, CreateCardsType, ResponseCardsType, UpdateCardsType} from "../../api/api";
+import {AppThunk} from "../../app/store";
 
 
 const initialState = {
-    cards: [] as CardType[],
-    card: {} as CardType,
+    cards: [] as CardsType[],
     packUserId: '',
+    packName: '',
+    page: 1,
+    pageCount: 5,
+    cardsTotalCount: 0,
+    packPrivate: false,
+    packDeckCover: '',
+    packCreated: '',
+    packUpdated: '',
+    minGrade: 0,
+    maxGrade: 0,
+    token: '',
+    tokenDeathTime: 0,
     params: {
         cardsPack_id: '',
-        page: 1,
-        pageCount: 10,
-        cardsTotalCount: 0,
-        cardQuestion: '',
-        cardAnswer: '',
-    },
-    minGrade: 0,
-    maxGrade: 6,
+        page: '1',
+        pageCount: '5',
+        cardQuestion: ''
+    } as QueryParamsType
+}
+
+export type QueryParamsType = {
+    cardsPack_id?: string,
+    page?: string,
+    pageCount?: string,
+    cardQuestion?: string
+}
+
+export type CardsType = {
+    _id: string;
+    cardsPack_id: string;
+    user_id: string;
+    answer: string;
+    question: string;
+    grade: number;
+    shots: number;
+    comments: string;
+    type: string;
+    rating: number;
+    more_id: string;
+    created: string;
+    updated: string;
+    __v: number;
 }
 
 
-export const cardsReducer = (state = initialState, action: ActionCardsType): InitialCardsType => {
+export const cardsReducer= (state = initialState, action: CardsActionType): InitialStateType => {
     switch (action.type) {
-        case 'CARDS/GET-CARDS':
-            return {...state, cards: action.cards}
-        case 'CARDS/SET-PAGE':
-            return {...state, params: {...state.params, page: action.page}}
-        case 'CARDS/SET-PAGE-COUNT':
-            return {...state, params: {...state.params, pageCount: action.pageCount}}
-        case 'CARDS/SET-CARDS-TOTAL-COUNT':
-            return {...state, params: {...state.params, cardsTotalCount: action.cardsTotalCount}}
-        case 'CARDS/SEARCH-QUESTION':
+        case 'CARDS/SET-CARDS-DATA':
             return {
                 ...state,
-                params: {...state.params, cardQuestion: action.cardQuestion}
+                cards: action.data.cards,
+                packUserId: action.data.packUserId,
+                packName: action.data.packName,
+                page: action.data.page,
+                pageCount: action.data.pageCount,
+                cardsTotalCount: action.data.cardsTotalCount,
+                packPrivate: action.data.packPrivate,
+                packDeckCover: action.data.packDeckCover,
+                packCreated: action.data.packCreated,
+                packUpdated: action.data.packUpdated,
+                minGrade: action.data.minGrade,
+                maxGrade: action.data.maxGrade,
+                token: action.data.token,
+                tokenDeathTime: action.data.tokenDeathTime
             }
-        case 'CARDS/SET-PACK-USER-ID':
-            return {...state, packUserId: action.packUserId}
-        case 'CARDS/SEARCH-ANSWER':
-            return {...state, params: {...state.params, cardAnswer: action.cardAnswer}}
+        case "CARDS/SET-URL-PARAMS": {
+            return {...state, params: {...action.params}}
+        }
         default:
             return state
-
     }
 }
 
-//actions
-export const getCardsAC = (cards: CardType[]) => ({type: 'CARDS/GET-CARDS', cards,} as const)
-export const setPackUserIdAC = (packUserId: string) => ({type: 'CARDS/SET-PACK-USER-ID', packUserId,} as const)
-export const setCardsPageAC = (page: number) => ({type: 'CARDS/SET-PAGE', page,} as const)
-export const setCardsPageCountAC = (pageCount: number) => ({type: 'CARDS/SET-PAGE-COUNT', pageCount,} as const)
-export const setCardsTotalCountAC = (cardsTotalCount: number) => ({
-    type: 'CARDS/SET-CARDS-TOTAL-COUNT',
-    cardsTotalCount,
-} as const)
-export const searchQuestionAC = (cardQuestion: string) => ({
-    type: 'CARDS/SEARCH-QUESTION',
-    cardQuestion,
-} as const)
-export const searchAnswerAC = (cardAnswer: string) => ({
-    type: 'CARDS/SEARCH-ANSWER',
-    cardAnswer,
-} as const)
+
+//action creators
+export const setCardsDataAC = (data: ResponseCardsType) => ({type: 'CARDS/SET-CARDS-DATA', data} as const)
+
+export const setQueryCardsParamsAC = (params: QueryParamsType) => ({type: 'CARDS/SET-URL-PARAMS', params} as const)
 
 
-export const getCardsTC = (cardsPack_id: string): AppThunk => {
-    return (dispatch, getState) => {
-        const {params} = getState().cards
-        dispatch(setAppStatusAC('loading'))
-        cardsAPI.getCards(cardsPack_id, params)
-            .then((res) => {
-                dispatch(getCardsAC(res.data.cards))
-                dispatch(setPackUserIdAC(res.data.packUserId))
-                dispatch(setCardsPageAC(res.data.page))
-                dispatch(setCardsPageCountAC(res.data.pageCount))
-                dispatch(setCardsTotalCountAC(res.data.cardsTotalCount))
-            })
-            .catch((error: AxiosError<{ error: string }>) => {
-                errorUtil(error, dispatch)
-            })
-            .finally(() => {
-                dispatch(setAppStatusAC('succeeded'))
-            })
+//thunks
+export const getCardsTC = (): AppThunk => async (dispatch, getState) => {
+    const urlParams = getState().cards.params
+    dispatch(setAppStatusAC('loading'))
+    try {
+        const res = await cardsAPI.getCards({...urlParams})
+        dispatch(setCardsDataAC(res.data))
+    } catch (e) {
+        errorUtil(e, dispatch)
+    } finally {
+        dispatch(setAppStatusAC('idle'))
     }
 }
 
@@ -101,55 +106,43 @@ export const addCardTC = (data: CreateCardsType): AppThunk => async (dispatch) =
     try {
         await cardsAPI.addCard(data)
         if (data.cardsPack_id) {
-            dispatch(getCardsTC(data.cardsPack_id))
+            dispatch(getCardsTC())
         }
-    } catch {
-        errorUtil(error, dispatch)
+    } catch (e) {
+        errorUtil(e, dispatch)
     } finally {
-        dispatch(setAppStatusAC('succeeded'))
+        dispatch(setAppStatusAC('idle'))
     }
 }
 
-export const deleteCardTC = (cardId: string, packsId: string): AppThunk => {
-    return (dispatch) => {
-        dispatch(setAppStatusAC('loading'))
-        cardsAPI.deleteCard(cardId)
-            .then((res) => {
-                dispatch(getCardsTC(packsId))
-            })
-            .catch((error: AxiosError<{ error: string }>) => {
-                errorUtil(error, dispatch)
-            })
-            .finally(() => {
-                dispatch(setAppStatusAC('succeeded'))
-            })
+export const deleteCardsTC = (cardID: string): AppThunk => async (dispatch) => {
+    dispatch(setAppStatusAC('loading'))
+    try {
+        const res = await cardsAPI.deleteCard(cardID)
+        dispatch(getCardsTC())
+    } catch (e) {
+        errorUtil(e, dispatch)
+    } finally {
+        dispatch(setAppStatusAC('idle'))
     }
 }
 
-export const updateCardTC = (data: UpdateCardsType, packId: string): AppThunk => {
-    return (dispatch) => {
-        dispatch(setAppStatusAC('loading'))
-        cardsAPI.updateCard(data)
-            .then(() => {
-                dispatch(getCardsTC(packId))
-            })
-            .catch((error: AxiosError<{ error: string }>) => {
-                errorUtil(error, dispatch)
-            })
-            .finally(() => {
-                dispatch(setAppStatusAC('succeeded'))
-            })
+export const updateCardsTC = (card: UpdateCardsType): AppThunk => async (dispatch) => {
+    dispatch(setAppStatusAC('loading'))
+    try {
+        const res = await cardsAPI.updateCard(card)
+        dispatch(getCardsTC())
+    } catch (e) {
+        errorUtil(e, dispatch)
+    } finally {
+        dispatch(setAppStatusAC('idle'))
     }
 }
-
 
 //types
 
-type InitialCardsType = typeof initialState
-export type ActionCardsType = ReturnType<typeof getCardsAC>
-    | ReturnType<typeof setPackUserIdAC>
-    | ReturnType<typeof setCardsPageAC>
-    | ReturnType<typeof setCardsPageCountAC>
-    | ReturnType<typeof setCardsTotalCountAC>
-    | ReturnType<typeof searchQuestionAC>
-    | ReturnType<typeof searchAnswerAC>
+export type InitialStateType = typeof initialState
+
+export type CardsActionType =
+    | ReturnType<typeof setCardsDataAC>
+    | ReturnType<typeof setQueryCardsParamsAC>

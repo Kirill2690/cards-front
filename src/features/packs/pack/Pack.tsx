@@ -3,9 +3,10 @@ import {TableCell, TableRow} from "@mui/material";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import {changePackTC, deletePackTC} from "./packs-reducer";
-import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
+import {changePackTC, deletePackTC} from "../packs-reducer";
+import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {NavLink} from "react-router-dom";
+import s from '../packs/Packs.module.css'
 
 type PackPropsType = {
     userId: string
@@ -16,19 +17,24 @@ type PackPropsType = {
     user_name: string
 }
 
-export const Pack = (props: PackPropsType) => {
+export const Pack = React.memo(({userId,
+                                    packId,
+                                    name,
+                                    cardsCount,
+                                    updated,
+                                    user_name}: PackPropsType) => {
 
     const dispatch = useAppDispatch()
-    const userId = useAppSelector(state => state.profile._id)
+    const profile_Id = useAppSelector(state => state.profile?._id)
 
-    const isMyPacks = props.userId === userId
+    const isMyPacks = userId === profile_Id
 
     const onDeletePackHandler = () => {
-        dispatch(deletePackTC(props.packId))
+        dispatch(deletePackTC(packId))
     }
 
     const onChangePackHandler = () => {
-        const updatePackData = {_id:props.packId, name:'New PackName'}
+        const updatePackData = {_id: packId, name: 'New PackName'}
         dispatch(changePackTC(updatePackData))
     }
 
@@ -42,18 +48,17 @@ export const Pack = (props: PackPropsType) => {
 
     return (
         <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
-            <TableCell component="th" scope="row">
-               <NavLink to={`/cards/${props.packId}/${props.name}`}>{props.name}</NavLink>
-            </TableCell>
-            <TableCell align="left">{props.cardsCount}</TableCell>
-            <TableCell align="right">{formatDate(props.updated)}</TableCell>
-            <TableCell align="right">{props.user_name}</TableCell>
+            <NavLink
+                to={`/cards?cardsPack_id=${packId}&page=1&pageCount=5`}
+            >{name}</NavLink>
+            <TableCell align="left">{cardsCount}</TableCell>
+            <TableCell align="right">{formatDate(updated)}</TableCell>
+            <TableCell align="right">{user_name}</TableCell>
             <TableCell align="right">
-                <SchoolOutlinedIcon onClick={onLearnClickHandler} />
-
+                <SchoolOutlinedIcon onClick={onLearnClickHandler}/>
                 {isMyPacks && <EditIcon onClick={onChangePackHandler}/>}
                 {isMyPacks && <DeleteOutlineIcon onClick={onDeletePackHandler}/>}
             </TableCell>
         </TableRow>
     )
-}
+})

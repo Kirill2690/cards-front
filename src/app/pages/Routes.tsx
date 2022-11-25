@@ -8,13 +8,10 @@ import {RecoveryPassword} from "../../features/auth/password/recoveryPassword/Re
 import {CheckEmail} from "../../features/auth/password/checkEmail/CheckEmail";
 import {Profile} from "../../features/auth/profile/Profile";
 import {useAppSelector} from "../../common/hooks/hooks";
-import {CircularProgress} from "@mui/material";
 import {AppRootStateType} from "../store";
-import s from "../App.module.css";
 import {Preloader} from "../../common/components/preloader/Preloader";
-import {Packs} from "../../features/packs/Packs";
-import {NewPack} from "../../features/packs/NewPack";
-import {Cards} from "../../features/cards/Cards";
+import {Packs} from "../../features/packs/packs/Packs";
+import {TableCards} from "../../features/cards/cardsTable/TableCards";
 
 
 export enum Path {
@@ -26,7 +23,8 @@ export enum Path {
     NewPassword = '/set-new-password',
     Profile = '/profile',
     Packs='/packs',
-    NewPack='/new-pack'
+ /*   NewPack='/new-pack',*/
+    TableCards='/cards'
 
 }
 
@@ -35,11 +33,11 @@ export const RoutesPages = () => {
     const isLogged = useAppSelector((state: AppRootStateType) => state.login)
     const status = useAppSelector(state => state.app.status)
 
-   /* useEffect(() => {
+    useEffect(() => {
         if (!isLogged) {
             navigate('/login')
         }
-    }, [])*/
+    }, [])
 
     return (
         <div>
@@ -53,7 +51,7 @@ export const RoutesPages = () => {
                 <Route path={'/checkEmail'} element={<CheckEmail/>}/>
                 <Route path={'/set-new-password/:token'} element={<NewPassword/>}/>
                 <Route path={'/packs'} element={<Packs/>}/>
-                <Route path={'/cards/:packId/:packName'} element={<Cards/>}/>
+                <Route path={'/cards'} element={<TableCards/>}/>
                 {/*<Route path={'/new-pack'} element={<NewPack/>}/>*/}
                 <Route path={'/error404'} element={<Error404/>}/>
                 <Route path={'*'} element={<Navigate to={'/error404'}/>}/>

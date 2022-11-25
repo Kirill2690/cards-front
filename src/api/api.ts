@@ -43,12 +43,12 @@ export const packsAPI = {
     getPacks(data:PacksParamsType){
         return instance.get<ResponsePacksType>(`cards/pack`,{
             params:{
-                page:data.page,
-                pageCount:data.pageCount,
-                user_id:data.userID,
-                packName:data.packName,
-                min:data.min,
-                max:data.max
+                page: data.page,
+                pageCount: data.pageCount,
+                packName: data.packName,
+                user_id: data.userID,
+                min: data.min,
+                max: data.max
             }
         })
     },
@@ -66,9 +66,16 @@ export const packsAPI = {
 //cardsAPI
 
 export const cardsAPI={
-    getCards(cardsPack_id: string, params?: RequestGetCardsType) {
-        return instance.get<RequestGetCardsType, AxiosResponse<ResponseCardsType>>(`/cards/card/?cardsPack_id=${cardsPack_id}`, {params})
-    },
+    getCards(data: CardsParamsType) {
+    return instance.get<ResponseCardsType>(`cards/card`, {
+        params: {
+            page: data.page,
+            pageCount: data.pageCount,
+            cardQuestion: data.cardQuestion,
+            cardsPack_id: data.cardsPack_id
+        }
+    })
+},
     deleteCard(id: string) {
         return instance.delete(`/cards/card/?id=${id}`)
     },
@@ -197,8 +204,8 @@ export type ResponsePacksType = {
     cardPacksTotalCount: number;
     minCardsCount: number;
     maxCardsCount: number;
-    token?: string;
-    tokenDeathTime?: number;
+    token: string;
+    tokenDeathTime: number;
 }
 
 export type PackType = {
@@ -226,33 +233,38 @@ export type UpdatePackType={
 
 //type cardsAPI
 export type ResponseCardsType = {
-    cards: CardType[],
-    packUserId: string
-    page: number
-    pageCount: number
-    cardsTotalCount: number
-    minGrade: number
-    maxGrade: number
-    token: string
-    tokenDeathTime: number
+    cards: CardType[];
+    packUserId: string;
+    packName: string;
+    packPrivate: boolean;
+    packDeckCover: string;
+    packCreated: string;
+    packUpdated: string;
+    page: number;
+    pageCount: number;
+    cardsTotalCount: number;
+    minGrade: number;
+    maxGrade: number;
+    token: string;
+    tokenDeathTime: number;
 }
 
 
 export type CardType = {
-    _id: string
-    cardsPack_id: string
-    user_id?: string
-    answer: string
-    question: string
-    grade: number
-    shots: number
-    comments?: string
-    type: string
-    rating: number
-    more_id: string
-    created: string
-    updated: string
-    __v?: number
+    _id: string;
+    cardsPack_id: string;
+    user_id: string;
+    answer: string;
+    question: string;
+    grade: number;
+    shots: number;
+    comments: string;
+    type: string;
+    rating: number;
+    more_id: string;
+    created: string;
+    updated: string;
+    __v: number;
 }
 
 export type CreateCardsType = {
@@ -294,6 +306,12 @@ export type RequestGetCardsType = {
     sortCards?: string
     page?: number
     pageCount?: number
+}
+export type CardsParamsType = {
+    page?: string,
+    pageCount?: string,
+    cardQuestion?: string
+    cardsPack_id?: string
 }
 
 
