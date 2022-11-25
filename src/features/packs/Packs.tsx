@@ -1,7 +1,7 @@
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 import s from './Packs.module.css'
 import {Button} from "@mui/material";
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import FilterListOffIcon from '@mui/icons-material/FilterListOff';
 import {PacksList} from "../PacksList";
 import {addPackTC, getPacksTC, QueryParamsType, setQueryParamsAC} from "./packs-reducer";
@@ -9,12 +9,14 @@ import {Search} from "../../common/components/search/Search";
 import {NewSlider} from "../../common/components/slider/NewSlider";
 import {useSearchParams} from "react-router-dom";
 import {filterQueryParams} from "../../common/utils/filterQueryParams";
+import {ButtonGroup} from "../../common/components/buttonGroup/ButtonGroup";
+
+export type ButtonValuesType = "all" | "my" ;
 
 
-export const Packs = () => {
+export const Packs = React.memo(() => {
 
-    const min = useAppSelector(state => state.packs.minCardsCount)
-    const max = useAppSelector(state => state.packs.maxCardsCount)
+    const dispatch = useAppDispatch()
 
     const [searchParams, setSearchParams] = useSearchParams()
     const pageURL = searchParams.get('page') ? searchParams.get('page') + '' : '1'
@@ -25,37 +27,55 @@ export const Packs = () => {
     const maxRangeURL = searchParams.get('max') ? searchParams.get('max') + '' : ''
 
 
+    //Search
     const packName = useAppSelector(state => state.packs.params.packName)
+
     const [searchText, setSearchText] = React.useState<string>("");
-    const handleChangeSearch = (text: string) => {
+
+    const handleChangeSearch = useCallback((text: string) => {
         dispatch(setQueryParamsAC({packName: text}))
-    }
+    },[dispatch])
 
+    //Slider
+    const min = useAppSelector(state => state.packs.minCardsCount)
+    const max = useAppSelector(state => state.packs.maxCardsCount)
 
+    const minParams = useAppSelector(state => state.packs.params.min)
+    const maxParams = useAppSelector(state => state.packs.params.max)
 
-   // const [packName, setPackName] = useState<string>(packNameURL ? packNameURL : '')
+    const [value, setValue] = React.useState<number[]>([min, max]);
 
-    // const handleChangeSearch = (text: string) => {
-    //     dispatch(setQueryParamsAC({packName: text}))
-    // }
+    const handleChangeSlider = useCallback((newValue: number[]) => {
+        setValue(newValue)
+        dispatch(setQueryParamsAC({min:newValue[0].toString(),max:newValue[1].toString()}))
+    },[dispatch])
+
+    //ButtonGroup
+    const userId = useAppSelector(state => state.profile._id)
+    const userIDParams = useAppSelector(state => state.packs.params.userID)
+
+    const [buttonValue, setButtonValue] = React.useState<ButtonValuesType>("all");
+
+    const handleButtonClick = useCallback((value:ButtonValuesType) => {
+        setButtonValue(value)
+        value==="my" ? dispatch(setQueryParamsAC({userID: userId}))
+            : dispatch(setQueryParamsAC({userID: ""}))
+    },[dispatch])
+
     const setResetFilterHandler = () => {
         setParamsSearchState({page: '1', pageCount: '5', userID: '', min: '', max: '',sortPacks:''})
         setSearchParams({page: '1', pageCount: '5'})
         setSearchText('')
+        handleButtonClick("all")
+        handleChangeSlider([min,max])
     }
-
 
     useEffect(() => {
         dispatch(getPacksTC())
-    }, [min, max, packName])
+    }, [packName, minParams, maxParams, userIDParams])
 
 
-    const dispatch = useAppDispatch()
     const status = useAppSelector(state => state.app.status)
-
-// const isMyPack = useAppSelector(state => state.packs.isMyPack)
-// const sortPacks = useAppSelector(state => state.packs.params.sortPacks)
-    console.log(status)
 
     const [paramsSearchState, setParamsSearchState] = useState<QueryParamsType>({
         page: '1',
@@ -80,7 +100,7 @@ export const Packs = () => {
         min: minRangeURL,
         max: maxRangeURL
     })
-
+    console.log(status)
     useEffect(() => {
             dispatch(setQueryParamsAC({...urlParamsFilter}))
             dispatch(getPacksTC())
@@ -88,9 +108,9 @@ export const Packs = () => {
     )
     const [newName,setNewName]=useState<string>('My new pack')
 
-    const addNewPackHandler = () => {
+    const addNewPackHandler = useCallback(() => {
         dispatch(addPackTC(newName))
-    }
+    },[dispatch])
 
     return (
 
@@ -105,9 +125,9 @@ export const Packs = () => {
                 </Button>
             </div>
             <div className={s.packs_tools}>
-               {/* <Search handleChangeSearch={handleChangeSearch}/>*/}
                 <Search handleChangeSearch={handleChangeSearch} searchText={searchText} setSearchText={setSearchText}/>
-             {/*   <NewSlider/>*/}
+                <ButtonGroup buttonValue={buttonValue} changeButton={handleButtonClick}/>
+                <NewSlider value={value} setSliderValue={setValue} handleChangeSlider={handleChangeSlider}/>
                 <Button onClick={setResetFilterHandler}>
                     <FilterListOffIcon/>
                 </Button>
@@ -117,4 +137,4 @@ export const Packs = () => {
         </div>
     )
 
-}
+})
