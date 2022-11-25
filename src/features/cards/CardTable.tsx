@@ -7,16 +7,9 @@ import {Card} from "./Card";
 
 export const CardsTable = () => {
 
-    const userId = useAppSelector(state => state.profile._id)
+    //const userId = useAppSelector(state => state.profile._id)
     const cards = useAppSelector(state => state.cards.cards)
-
-    /*const [deleteCardData, setDeleteCardData] = useState<CardType | null>(null);
-    const [updateCardData, setUpdateCardData] = useState<CardType | null>(null);
-    const [isOpenModalCardDelete, setIsOpenModalCardDelete] = useState(false)
-    const [isOpenModalCardUpdate, setIsOpenModalCardUpdate] = useState(false)*/
     const status = useAppSelector((state) => state.app.status)
-
-
 
 
     return (
@@ -32,14 +25,23 @@ export const CardsTable = () => {
                             <TableCell align="center">Actions</TableCell>
                         </TableRow>
                     </TableHead>
-                 {/*   <TableBody>
+                    <TableBody>
                         {cards && cards.map((card) => (
-                            <Card  />
-                        ))
-                            : status !== 'loading' && <TableRow>
-                            <TableCell>{'NO CARDS FOUND'}</TableCell>
-                        </TableRow>}
-                    </TableBody>*/}
+                            <Card
+                                key={card._id}
+                                cardId={card._id}
+                                userId={card.user_id}
+                                question={card.question}
+                                answer={card.answer}
+                                updated={card.updated}
+                                grade={card.grade}
+
+                            />
+                        ))}
+                        : {status !== 'loading' && <TableRow>
+                        <TableCell>{'NO CARDS FOUND'}</TableCell>
+                    </TableRow>}
+                    </TableBody>
                 </Table>
             </TableContainer>
         </>

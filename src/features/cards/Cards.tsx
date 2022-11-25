@@ -1,16 +1,22 @@
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
-import {useNavigate, useParams} from "react-router-dom";
+import {NavLink, useNavigate, useParams} from "react-router-dom";
 import {ChangeEvent, useEffect} from "react";
-import {getCardsTC, searchAnswerAC, searchQuestionAC, setCardsPageAC, setCardsPageCountAC} from "./cards-reducer";
+import {
+    addCardTC,
+    getCardsTC,
+    searchAnswerAC,
+    searchQuestionAC,
+    setCardsPageAC,
+    setCardsPageCountAC
+} from "./cards-reducer";
 import {CardsTable} from "./CardTable";
 import React from "react";
 import {useDebounce} from "../../common/hooks/debounce";
-import {TablePagination} from "@mui/material";
+import {Button, TablePagination} from "@mui/material";
 import s from './Cards.module.css';
 
 
-
-export const Cards=()=>{
+export const Cards = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const userId = useAppSelector(state => state.profile._id)
@@ -20,10 +26,15 @@ export const Cards=()=>{
     const cardQuestion = useAppSelector(state => state.cards.params.cardQuestion)
     const cardAnswer = useAppSelector(state => state.cards.params.cardAnswer)
     const packUserId = useAppSelector(state => state.cards.packUserId)
-
+    const card = useAppSelector(state => state.cards.cards)
+    const pack = useAppSelector(state => state.packs.cardPacks)
+   /* const params = useParams()
+    const packID = params.packId
+*/
     const {packId, packName} = useParams<'packId' | 'packName'>();
 
     const [searchCardValue, setSearchCardValue] = React.useState('Question');
+
     const handleChangeSearchCardValue = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         if (searchCardValue === 'Question') {
             dispatch(searchQuestionAC(e.currentTarget.value))
@@ -39,6 +50,19 @@ export const Cards=()=>{
     }
 
     const debouncedValue = useDebounce((searchCardValue === 'Question') ? cardQuestion : cardAnswer, 1000)
+
+    const addNewCardHandler = () => {
+        const newCard = {
+            cardsPack_id: packId,
+            question: 'This should be a question',
+            answer: 'This should be the answer',
+            grade: 0
+        }
+       packId && dispatch(addCardTC(newCard))
+    }
+    const learnPackHandler = () => {
+        alert('Learn Pack!')
+    }
 
     const handleChangePage = (
         event: React.MouseEvent<HTMLButtonElement> | null,
@@ -65,13 +89,19 @@ export const Cards=()=>{
         dispatch(searchAnswerAC(''))
         navigate('/packs')
     }
-
+    const isMyPacks = userId === packUserId
     return (
         <div>
             <div className={s.tableWrapper}>
                 <div className={s.container}>
-                    isMyPacks  ? <></>
-                {/*    <SearchAppBar radioValue={searchCardValue}
+                    <Button><NavLink to={'/packs' }>🠔 Back to Packs List</NavLink></Button>
+                    <div>
+                        {isMyPacks
+                            ? <Button variant='contained' onClick={addNewCardHandler}>Add new cart</Button>
+                            : <Button variant='contained' onClick={learnPackHandler}>Learn to pack</Button>
+                        }
+                    </div>
+                    {/*    <SearchAppBar radioValue={searchCardValue}
                                   onChangeRadio={clearValue}
                                   disabled={packUserId !== userId}
                                   title={'Add new card'}

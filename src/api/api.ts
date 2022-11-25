@@ -72,7 +72,7 @@ export const cardsAPI={
     deleteCard(id: string) {
         return instance.delete(`/cards/card/?id=${id}`)
     },
-    addCard(card: NewCardType) {
+    addCard(card: CreateCardsType) {
         return instance.post(`/cards/card`, {card})
     },
     updateCard(card: UpdateCardsType) {
@@ -225,8 +225,6 @@ export type UpdatePackType={
 }
 
 //type cardsAPI
-
-
 export type ResponseCardsType = {
     cards: CardType[],
     packUserId: string
@@ -282,7 +280,7 @@ export type CreatePacksType = {
     private?: boolean
 }
 export type NewCardType = {
-    cardsPack_id: string
+    cardsPack_id: string | undefined
     question?: string
     answer?: string
 }

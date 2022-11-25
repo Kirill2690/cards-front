@@ -3,9 +3,10 @@ import {Button, Rating, TableCell, TableRow} from "@mui/material";
 import s from "./Cards.module.css";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
+import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
 
 type CardPropsType = {
-    userId: string
+    userId: string | undefined
     cardId: string
     question: string
     answer: string
@@ -16,7 +17,12 @@ type CardPropsType = {
 
 export const Card = (props: CardPropsType) => {
 
-    //const isMyPacks = props.userId === userId
+    const dispatch = useAppDispatch()
+    const userId = useAppSelector(state => state.profile._id)
+
+    const isMyPacks = props.userId === userId
+
+
 
     const formatDate = (date: Date | string | number) => {
         return new Date(date).toLocaleDateString('ru-RU') + ' ' + new Date(date).toLocaleTimeString()
@@ -34,9 +40,9 @@ export const Card = (props: CardPropsType) => {
             </TableCell>
             <TableCell align="center">{formatDate(props.updated)}</TableCell>
             <TableCell className={s.buttonBlock}>
-         {/*   {isMyPacks && <DeleteOutlineIcon/>}
+            {isMyPacks && <DeleteOutlineIcon/>}
 
-                   {isMyPacks && <EditIcon/>}*/}
+                   {isMyPacks && <EditIcon/>}
 
             </TableCell>
         </TableRow>
