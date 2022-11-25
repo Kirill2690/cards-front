@@ -45,10 +45,10 @@ export const Packs = React.memo(() => {
 
     const [value, setValue] = React.useState<number[]>([min, max]);
 
-    const handleChangeSlider = useCallback((newValue: number[]) => {
+    const handleChangeSlider = (newValue: number[]) => {
         setValue(newValue)
         dispatch(setQueryParamsAC({min:newValue[0].toString(),max:newValue[1].toString()}))
-    },[dispatch])
+    }
 
     //ButtonGroup
     const userId = useAppSelector(state => state.profile._id)
@@ -56,11 +56,11 @@ export const Packs = React.memo(() => {
 
     const [buttonValue, setButtonValue] = React.useState<ButtonValuesType>("all");
 
-    const handleButtonClick = useCallback((value:ButtonValuesType) => {
+    const handleButtonClick =(value:ButtonValuesType) => {
         setButtonValue(value)
         value==="my" ? dispatch(setQueryParamsAC({userID: userId}))
             : dispatch(setQueryParamsAC({userID: ""}))
-    },[dispatch])
+    }
 
     const setResetFilterHandler = () => {
         setParamsSearchState({page: '1', pageCount: '5', userID: '', min: '', max: '',sortPacks:''})
