@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/cards-front/static/css/main.58c31509.css",
-    "main.js": "/cards-front/static/js/main.8672a824.js",
+    "main.css": "/cards-front/static/css/main.9ad70e2a.css",
+    "main.js": "/cards-front/static/js/main.4ffc5192.js",
     "static/js/787.1998cdf9.chunk.js": "/cards-front/static/js/787.1998cdf9.chunk.js",
     "static/media/loading__.gif": "/cards-front/static/media/loading__.290755ddac86d28c83ff.gif",
     "static/media/logo_learn.jpeg": "/cards-front/static/media/logo_learn.d0b4a47957073addf167.jpeg",
@@ -9,12 +9,12 @@
     "static/media/email_icon.png": "/cards-front/static/media/email_icon.ab9bd8b2d6958129328b.png",
     "index.html": "/cards-front/index.html",
     "static/media/edit-pencil-write-editor-format-text-svgrepo-com.svg": "/cards-front/static/media/edit-pencil-write-editor-format-text-svgrepo-com.112ca409605ed841d3ddff7f52dc8c85.svg",
-    "main.58c31509.css.map": "/cards-front/static/css/main.58c31509.css.map",
-    "main.8672a824.js.map": "/cards-front/static/js/main.8672a824.js.map",
+    "main.9ad70e2a.css.map": "/cards-front/static/css/main.9ad70e2a.css.map",
+    "main.4ffc5192.js.map": "/cards-front/static/js/main.4ffc5192.js.map",
     "787.1998cdf9.chunk.js.map": "/cards-front/static/js/787.1998cdf9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.58c31509.css",
-    "static/js/main.8672a824.js"
+    "static/css/main.9ad70e2a.css",
+    "static/js/main.4ffc5192.js"
   ]
 }
