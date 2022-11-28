@@ -22,10 +22,12 @@ export const loginReducer = (state: StateType = initialState, action: ActionType
             return state
     }
 }
-
+//action
 export const authLoginAC = (isLoggedIn: boolean) => {
     return {type: "IS_LOGGED_IN", isLoggedIn} as const
 }
+
+//thunk
 export const loginTC = (values: LoginDataType) => {
     return (dispatch: AppDispatch) => {
         dispatch(setAppStatusAC('loading'))
@@ -33,11 +35,11 @@ export const loginTC = (values: LoginDataType) => {
             dispatch(setProfileAC(response.data))
             dispatch(authLoginAC(true))
         })
-                .catch((error) => {
-                    errorUtil(error, dispatch)
+                .catch((e) => {
+                    errorUtil(e, dispatch)
                 })
                 .finally(() => {
-                    dispatch(setAppStatusAC('succeeded'))
+                    dispatch(setAppStatusAC('idle'))
                 })
         }
     }

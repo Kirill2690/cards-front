@@ -1,4 +1,4 @@
-import { packsAPI, PackType, ResponsePacksType, UpdatePackType} from "../../api/api";
+import {packsAPI, PackType, ResponsePacksType, UpdatePackType} from "../../api/api";
 import {AppThunk} from "../../app/store";
 import {setAppStatusAC} from "../../app/app-reducer";
 import {errorUtil} from "../../common/utils/utils-error";
@@ -11,7 +11,7 @@ const initialState = {
     cardPacksTotalCount: 0,
     minCardsCount: 0,
     maxCardsCount: 0,
-    token: "",
+    token: '',
     tokenDeathTime: 0,
     params: {
         page: '1',
@@ -20,11 +20,10 @@ const initialState = {
         userID: '',
         min: '0',
         max: '0',
-        sortPacks: '',
+        sortPacks: ''
     } as QueryParamsType,
-
 }
-export type InitialStatePacksType = typeof initialState
+
 
 export const packsReducer = (state: InitialStatePacksType = initialState, action: PacksActionsType): InitialStatePacksType => {
     switch (action.type) {
@@ -32,8 +31,7 @@ export const packsReducer = (state: InitialStatePacksType = initialState, action
         case 'PACKS/SET-PACKS-DATA':
             return {
                 ...
-                    state,
-                cardPacks: action.data.cardPacks,
+                    state,cardPacks:[...action.data.cardPacks],
                 cardPacksTotalCount: action.data.cardPacksTotalCount,
                 minCardsCount: action.data.minCardsCount,
                 maxCardsCount: action.data.maxCardsCount,
@@ -44,7 +42,7 @@ export const packsReducer = (state: InitialStatePacksType = initialState, action
             }
 
         case "PACKS/SET-QUERY-PARAMS":
-            return {...state, params: {...action.params}}
+            return {...state, params:{...state.params,...action.params} }
         case 'PACKS/SORT-PACKS':
             return {...state, params: {...state.params, sortPacks: action.sortPacks}}
         default:
@@ -56,25 +54,24 @@ export const setParamsSortPack = (sortParams: string): AppThunk => dispatch => {
     dispatch(sortPackAC(sortParams));
     dispatch(getPacksTC());
 }
-//ActionCreator
+
+// actions
 export const getPacksAC = (data: ResponsePacksType) => ({type: 'PACKS/SET-PACKS-DATA', data} as const)
 export const setQueryParamsAC = (params: QueryParamsType) => ({type: 'PACKS/SET-QUERY-PARAMS', params} as const)
 export const sortPackAC = (sortPacks: string) => ({type: 'PACKS/SORT-PACKS', sortPacks,} as const)
 
-//types
-export type PacksActionsType = ReturnType<typeof getPacksAC> | ReturnType<typeof setQueryParamsAC>|ReturnType<typeof sortPackAC>
 
 //thunks
 export const getPacksTC = (): AppThunk => async (dispatch, getState) => {
     const queryParams = getState().packs.params;
     dispatch(setAppStatusAC('loading'));
     try {
-        const result = await packsAPI.getPacks(queryParams)
+        const result = await packsAPI.getPacks({...queryParams})
         dispatch(getPacksAC(result.data));
     } catch (e) {
         errorUtil(e, dispatch)
     } finally {
-        dispatch(setAppStatusAC('succeeded'))
+        dispatch(setAppStatusAC('idle'))
     }
 }
 
@@ -83,14 +80,12 @@ export const addPackTC =
         async dispatch => {
             dispatch(setAppStatusAC('loading'))
             try {
-                const res = await packsAPI.createPack(packName, deckCover, isPrivate)
-                if (res) {
-                    dispatch(getPacksTC())
-                }
+                await packsAPI.createPack(packName, deckCover, isPrivate)
+                dispatch(getPacksTC())
             } catch (e) {
                 errorUtil(e, dispatch)
             } finally {
-                dispatch(setAppStatusAC('succeeded'))
+                dispatch(setAppStatusAC('idle'))
             }
         }
 
@@ -102,7 +97,7 @@ export const changePackTC = (data: UpdatePackType): AppThunk => async (dispatch)
     } catch (e) {
         errorUtil(e, dispatch)
     } finally {
-        dispatch(setAppStatusAC("succeeded"))
+        dispatch(setAppStatusAC("idle"))
     }
 }
 
@@ -114,7 +109,7 @@ export const deletePackTC = (data: string): AppThunk => async (dispatch) => {
     } catch (e) {
         errorUtil(e, dispatch)
     } finally {
-        dispatch(setAppStatusAC("succeeded"))
+        dispatch(setAppStatusAC("idle"))
     }
 }
 
@@ -130,5 +125,10 @@ export type QueryParamsType = {
     sortPacks?: string,
 }
 
+export type PacksActionsType = ReturnType<typeof getPacksAC>
+    | ReturnType<typeof setQueryParamsAC>
+    | ReturnType<typeof sortPackAC>
 
+
+export type InitialStatePacksType = typeof initialState
 

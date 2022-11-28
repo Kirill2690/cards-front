@@ -8,11 +8,9 @@ type NewSearchPropsType = {
     searchText: string
     setSearchText: (value: string) => void
 }
-
-export const Search = React.memo((props: NewSearchPropsType) => {
+export const Search = (props: NewSearchPropsType) => {
 
     const debouncedText = useDebounce(props.searchText);
-
     useEffect(() => {
         props.handleChangeSearch(debouncedText)
     }, [debouncedText])
@@ -20,22 +18,18 @@ export const Search = React.memo((props: NewSearchPropsType) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         props.setSearchText(event.target.value);
     };
-
     return (
         <div>
             <FormControl sx={{m: 1, height: 36}} variant="outlined" size="small">
-                <InputLabel htmlFor="search"> Provide your text</InputLabel>
+                <InputLabel htmlFor="search"> Provide
+                    your text </InputLabel>
                 <OutlinedInput id="search" type='text'
                                value={props.searchText}
                                onChange={handleChange}
-                               endAdornment={
-                                   <InputAdornment position="end">
-                                       <SearchIcon/>
-                                   </InputAdornment>
-                               }
-                               label="Provide your text"
-                />
+                               endAdornment={<InputAdornment position="end">
+                                   <SearchIcon/></InputAdornment>}
+                               label="Provide your text"/>
             </FormControl>
         </div>)
-})
+}
 

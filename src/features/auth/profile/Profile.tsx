@@ -12,7 +12,7 @@ export const Profile =() => {
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn);
     const [value, setValue] = useState('')
     const dispatch = useAppDispatch();
-    const status = useAppSelector(state => state.app.status)
+
 
     useEffect(() => {
         if (name) {
@@ -30,9 +30,9 @@ export const Profile =() => {
     const logoutHandler = () => {
         dispatch(logoutTC())
     }
-/*    if (!isLoggedIn) {
+    if (!isLoggedIn) {
         return <Navigate to={'/login'}/>;
-    }*/
+    }
     return (
         <div className={s.wrapper_profile}>
             <NavLink to={'/packs' }>🠔 Back to Packs List</NavLink>

@@ -31,6 +31,15 @@
     padding-right: 35px !important;
 
 }
+.maneColumn {
+    user-select: none;
+    text-decoration: none;
+    color: black;
+}
+
+.maneColumn:hover {
+    color: #525252;
+}
 
 .sortDown {
     cursor: pointer;
@@ -38,8 +47,25 @@
     background-position: 100% center;
     padding-right: 35px !important;
 }
-/*
-.pagination {
+
+.nav:hover {
+    color: #525252;
+}
+
+.paginatorBlock {
     display: flex;
     justify-content: center;
-}*/
+    align-items: center;
+}
+
+.button{
+    border-radius: 30px !important;
+    width: 125px;
+    height: 32px;
+    background-color: #366EFF !important;
+    margin-top: 45px !important;
+    margin-bottom: 31px !important;
+    text-transform: none !important;
+    font-size: 14px !important;
+    font-weight: 500;
+}

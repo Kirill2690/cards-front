@@ -1,4 +1,4 @@
-import s from "./Packs.module.css";
+import s from "../packs/Packs.module.css";
 import React from "react";
 import {Button} from "@mui/material";
 
