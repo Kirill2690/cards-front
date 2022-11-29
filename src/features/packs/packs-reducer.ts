@@ -1,7 +1,9 @@
-import {packsAPI, PackType, ResponsePacksType, UpdatePackType} from "../../api/api";
-import {AppThunk} from "../../app/store";
+import {authAPI, LoginDataType, packsAPI, PackType, ResponsePacksType, UpdatePackType} from "../../api/api";
+import {AppDispatch, AppThunk} from "../../app/store";
 import {setAppStatusAC} from "../../app/app-reducer";
 import {errorUtil} from "../../common/utils/utils-error";
+import {setProfileAC} from "../auth/profile/profile-reducer";
+import {authLoginAC} from "../auth/login/login-reducer";
 
 
 const initialState = {
@@ -16,11 +18,6 @@ const initialState = {
     params: {
         page: '1',
         pageCount: '5',
-        packName: '',
-        userID: '',
-        min: '0',
-        max: '0',
-        sortPacks: ''
     } as QueryParamsType,
 }
 
@@ -30,8 +27,7 @@ export const packsReducer = (state: InitialStatePacksType = initialState, action
 
         case 'PACKS/SET-PACKS-DATA':
             return {
-                ...
-                    state,cardPacks:[...action.data.cardPacks],
+                ...state, cardPacks: [...action.data.cardPacks],
                 cardPacksTotalCount: action.data.cardPacksTotalCount,
                 minCardsCount: action.data.minCardsCount,
                 maxCardsCount: action.data.maxCardsCount,
@@ -42,7 +38,7 @@ export const packsReducer = (state: InitialStatePacksType = initialState, action
             }
 
         case "PACKS/SET-QUERY-PARAMS":
-            return {...state, params:{...state.params,...action.params} }
+            return {...state, params: {...state.params, ...action.params}}
         case 'PACKS/SORT-PACKS':
             return {...state, params: {...state.params, sortPacks: action.sortPacks}}
         default:
@@ -70,10 +66,12 @@ export const getPacksTC = (): AppThunk => async (dispatch, getState) => {
         dispatch(getPacksAC(result.data));
     } catch (e) {
         errorUtil(e, dispatch)
-    } finally {
-        dispatch(setAppStatusAC('idle'))
     }
+     finally {
+         dispatch(setAppStatusAC('succeeded'))
+     }
 }
+
 
 export const addPackTC =
     (packName: string, deckCover?: string, isPrivate?: boolean): AppThunk =>

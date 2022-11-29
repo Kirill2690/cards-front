@@ -3,6 +3,11 @@ import Slider from '@mui/material/Slider';
 import s from './NewSlider.module.css'
 import {useAppSelector} from "../../hooks/hooks";
 
+type NewSliderPropsType = {
+    sliderValue: number[]
+    setSliderValue: (valueSlider: number[]) => void
+    handleChangeSlider: (newValue: number[]) => void
+}
 
 export const NewSlider = React.memo((props: NewSliderPropsType) => {
 
@@ -23,23 +28,18 @@ export const NewSlider = React.memo((props: NewSliderPropsType) => {
 
     return (
         <div className={s.wrapper}>
-            <div className={s.minMaxBox}>{props.value[0]}</div>
+            <div className={s.minMaxBox}>{props.sliderValue[0]}</div>
             <div className={s.slider}><Slider size={'small'}
                                               min={minCards}
                                               max={maxCards}
                                               getAriaLabel={() => 'Minimum distance'}
-                                              value={props.value}
+                                              value={props.sliderValue}
                                               onChangeCommitted={handleChangeCommitted}
                                               onChange={handleChange}
                                               valueLabelDisplay="auto" disableSwap={dis}
 
             /></div>
-            <div className={s.minMaxBox}>{props.value[1]}</div>
+            <div className={s.minMaxBox}>{props.sliderValue[1]}</div>
         </div>);
 })
 
-type NewSliderPropsType = {
-    value: number[]
-    setSliderValue: (valueSlider: number[]) => void
-    handleChangeSlider: (newValue: number[]) => void
-}

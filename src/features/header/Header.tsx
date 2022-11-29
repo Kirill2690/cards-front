@@ -17,6 +17,7 @@ export const Header = () => {
 
     const logoutHandler = () => {
         dispatch(logoutTC())
+        navigate('/login')
     }
 
     return (

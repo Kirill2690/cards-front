@@ -1,11 +1,12 @@
 import React from 'react';
-import {TableCell, TableRow} from "@mui/material";
+import TableCell from "@mui/material/TableCell";
+import TableRow from "@mui/material/TableRow";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import {changePackTC, deletePackTC} from "../packs-reducer";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import s from '../packs/Packs.module.css'
 
 type PackPropsType = {
@@ -23,6 +24,7 @@ export const Pack = React.memo(({userId,
                                     cardsCount,
                                     updated,
                                     user_name}: PackPropsType) => {
+    const navigate = useNavigate()
 
     const dispatch = useAppDispatch()
     const profile_Id = useAppSelector(state => state.profile?._id)
@@ -47,10 +49,11 @@ export const Pack = React.memo(({userId,
     }
 
     return (
-        <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
-            <NavLink
-                to={`/cards?cardsPack_id=${packId}&page=1&pageCount=5`}
-            >{name}</NavLink>
+        <>
+        <TableRow key={packId} sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+            <TableCell align="left">
+                <NavLink to={`/cards?cardsPack_id=${packId}&page=1&pageCount=5`}>{name}</NavLink>
+                </TableCell>
             <TableCell align="left">{cardsCount}</TableCell>
             <TableCell align="right">{formatDate(updated)}</TableCell>
             <TableCell align="right">{user_name}</TableCell>
@@ -60,5 +63,6 @@ export const Pack = React.memo(({userId,
                 {isMyPacks && <DeleteOutlineIcon onClick={onDeletePackHandler}/>}
             </TableCell>
         </TableRow>
+        </>
     )
 })

@@ -8,33 +8,44 @@ import {addPackTC, getPacksTC, QueryParamsType, setQueryParamsAC} from "../packs
 import {useSearchParams} from "react-router-dom";
 import {filterQueryParams} from "../../../common/utils/filterQueryParams";
 import {Pagination} from "../pagination/Paginator";
-import {useDebounce} from "../../../common/hooks/debounce";
 import {SearchInput} from "../searchInput/SearchInput";
 import {NewSlider} from "../../../common/components/slider/NewSlider";
 import {ButtonGroup} from "../ButtonGroup/ButtonGroup";
 
 export type ButtonValuesType = "all" | "my" ;
-export const Packs = () => {
 
-
+export const Packs = React.memo(() => {
 
     const dispatch = useAppDispatch()
+
     const userId = useAppSelector(state => state.profile._id)
     const userIDParams = useAppSelector(state => state.packs.params.userID)
     const min = useAppSelector(state => state.packs.minCardsCount)
     const max = useAppSelector(state => state.packs.maxCardsCount)
-
     const minParams = useAppSelector(state => state.packs.params.min)
     const maxParams = useAppSelector(state => state.packs.params.max)
-
-    const [value, setValue] = React.useState<number[]>([min, max]);
-    const [searchText, setSearchText] = React.useState<string>("");
+    const packName = useAppSelector(state => state.packs.params.packName)
     const [newName,setNewName]=useState<string>('My new pack')
-
+    const [searchText, setSearchText] = React.useState<string|undefined>(undefined)
+    const [buttonValue, setButtonValue] = React.useState<ButtonValuesType>("all")
+    const [sliderValue, setSliderValue] = React.useState<number[]>([min, max])
+    //Search
+    const handleChangeSearch = (text: string|undefined) => {
+        dispatch(setQueryParamsAC({packName: text}))
+    }
+    //Button
+    const handleButtonClick =(value:ButtonValuesType) => {
+        setButtonValue(value)
+        value==="my" ? dispatch(setQueryParamsAC({userID: userId}))
+            : dispatch(setQueryParamsAC({userID: undefined}))
+    }
+    //Slider
     const handleChangeSlider = (newValue: number[]) => {
-        setValue(newValue)
+        setSliderValue(newValue)
         dispatch(setQueryParamsAC({min:newValue[0].toString(),max:newValue[1].toString()}))
     }
+    //
+
 
     const [paramsSearchState, setParamsSearchState] = useState<QueryParamsType>({
         page: '1',
@@ -54,35 +65,10 @@ export const Packs = () => {
     const minRangeURL = searchParams.get('min') ? searchParams.get('min') + '' : ''
     const maxRangeURL = searchParams.get('max') ? searchParams.get('max') + '' : ''
 
-    const [packName, setPackName] = useState<string>(packNameURL ? packNameURL : '')
-
- /*   const handleChangeSearch = (text: string) => {
-        dispatch(setQueryParamsAC({packName: text}))
-    }
-*/
-    const [buttonValue, setButtonValue] = React.useState<ButtonValuesType>("all");
-
-    const handleButtonClick =(value:ButtonValuesType) => {
-        setButtonValue(value)
-        value==="my" ? dispatch(setQueryParamsAC({userID: userId}))
-            : dispatch(setQueryParamsAC({userID: ""}))
-    }
-    const searchValueTextHandler = (valueSearch: string) => {
-        setPackName(valueSearch)
-        setSearchParams({...filterQueryParams({...paramsSearchState, packName: valueSearch, userID: userIDURL})})
-    }
-
-
     const addNewPackHandler = () => {
         dispatch(addPackTC(newName))
     }
 
-    /*const setResetFilterHandler = () => {
-        /!*setParamsSearchState({page: '1', pageCount: '5', userID: '', min: '', max: '',sortPacks:''})
-        setSearchParams({page: '1', pageCount: '5'})
-        setSearchText('')*!/
-
-    }*/
     const setResetFilterHandler = () => {
         setParamsSearchState({page: '1', pageCount: '5', userID: '', min: '', max: '',sortPacks:''})
         setSearchParams({page: '1', pageCount: '5'})
@@ -91,9 +77,6 @@ export const Packs = () => {
         handleChangeSlider([min,max])
     }
 
-    useEffect(() => {
-        dispatch(getPacksTC())
-    }, [packName, minParams, maxParams, userIDParams])
 
     const urlParamsFilter = filterQueryParams({
         page: pageURL,
@@ -111,7 +94,6 @@ export const Packs = () => {
                 ...paramsSearchState,
                 page: valuePage + '',
                 userID: userIDURL,
-                packName
             })
         })
     }
@@ -125,20 +107,14 @@ export const Packs = () => {
                 min: '',
                 max: '',
                 userID: userIDURL,
-                packName
             })
         })
     }
 
-    const debouncedValue = useDebounce<string>(packName, 500)
-
-
-
     useEffect(() => {
-            dispatch(setQueryParamsAC({...urlParamsFilter}))
-            dispatch(getPacksTC())
-        }, [paramsSearchState,debouncedValue]
-    )
+        dispatch(setQueryParamsAC({...urlParamsFilter}))
+        dispatch(getPacksTC())
+    }, [packName, minParams, maxParams, userIDParams, paramsSearchState])
 
     return (
         <div className={s.packs_wrapper}>
@@ -152,9 +128,9 @@ export const Packs = () => {
                 </Button>
             </div>
             <div className={s.packs_tools}>
-                <SearchInput searchValueText={searchValueTextHandler} valueSearch={packName}/>
+                <SearchInput handleChangeSearch={handleChangeSearch} searchText={searchText} setSearchText={setSearchText}/>
                 <ButtonGroup buttonValue={buttonValue} changeButton={handleButtonClick}/>
-                <NewSlider value={value} setSliderValue={setValue} handleChangeSlider={handleChangeSlider}/>
+                <NewSlider sliderValue={sliderValue} setSliderValue={setSliderValue} handleChangeSlider={handleChangeSlider}/>
                 <Button onClick={setResetFilterHandler}>
                     <FilterListOffIcon/>
                 </Button>
@@ -163,4 +139,4 @@ export const Packs = () => {
             <Pagination callBackPage={pageHandler} callBackPageCount={pageCountHandler}/>
         </div>
     )
-}
+})

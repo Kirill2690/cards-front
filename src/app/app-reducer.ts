@@ -36,7 +36,7 @@ export const authMeTC = (): AppThunk => (dispatch) => {
         .then((res) => {
             dispatch(authLoginAC(true));
             dispatch(setProfileAC(res.data));
-            dispatch(setInitializedAC(true))
+            dispatch(setAppStatusAC('succeeded'))
         })
         .finally(() => {
             dispatch(setInitializedAC(true))
