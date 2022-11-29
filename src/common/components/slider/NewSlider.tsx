@@ -14,7 +14,7 @@ export const NewSlider = React.memo((props: NewSliderPropsType) => {
     const minCards = useAppSelector(state => state.packs.minCardsCount)
     const maxCards = useAppSelector(state => state.packs.maxCardsCount)
 
-
+//
     const handleChange = (event: Event, newValue: number | number[]) => {
         props.setSliderValue(newValue as number[]);
     };

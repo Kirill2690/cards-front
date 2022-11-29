@@ -26,7 +26,7 @@ export const loginReducer = (state: StateType = initialState, action: ActionType
 export const authLoginAC = (isLoggedIn: boolean) => {
     return {type: "IS_LOGGED_IN", isLoggedIn} as const
 }
-
+//
 //thunk
 export const loginTC = (values: LoginDataType) => {
     return (dispatch: AppDispatch) => {

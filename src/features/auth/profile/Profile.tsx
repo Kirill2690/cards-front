@@ -13,7 +13,7 @@ export const Profile =() => {
     const [value, setValue] = useState('')
     const dispatch = useAppDispatch();
 
-
+//
     useEffect(() => {
         if (name) {
             setValue(name)

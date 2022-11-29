@@ -29,7 +29,7 @@ export const updateUserNameAC = (newText: string) => ({type: 'CHANGE-USER-NAME',
 export const setProfileAC = (user: UserType | null) => ({type: 'SET-NEW-PROFILE', user} as const);
 
 
-
+//
 //thunks
 export const changeUserNameTC = (name: string): AppThunk => (dispatch: AppDispatch) => {
     authAPI.changeUserName(name)

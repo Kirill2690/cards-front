@@ -49,6 +49,7 @@ export const Pack = React.memo(({userId,
     }
 
     return (
+
         <>
         <TableRow key={packId} sx={{'&:last-child td, &:last-child th': {border: 0}}}>
             <TableCell align="left">

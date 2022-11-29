@@ -8,7 +8,7 @@ const initialState = {
     isInitialized: false,
     error: null as string | null,
 }
-
+//
 export const appReducer = (state = initialState, action: AppActionType): InitialStateType => {
     switch (action.type) {
         case 'APP/SET-STATUS': {
