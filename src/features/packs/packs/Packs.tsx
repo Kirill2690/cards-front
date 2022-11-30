@@ -9,6 +9,8 @@ import {Pagination} from "../pagination/Paginator";
 import {SearchInput} from "../searchInput/SearchInput";
 import {NewSlider} from "../../../common/components/slider/NewSlider";
 import {ButtonGroup} from "../ButtonGroup/ButtonGroup";
+import {BasicModal} from "../../../common/components/modals/basicModal/BasicModal";
+import {AddNewPackModal} from "../../../common/components/modals/packs/AddNewPackModal";
 
 export type ButtonValuesType = "all" | "my";
 
@@ -57,7 +59,7 @@ export const Packs = React.memo(() => {
     }
     //addNewPack
     const addNewPackHandler = () => {
-        dispatch(addPackTC(newName))
+        setOpenAddPackModal(true)
     }
     //Reset
     const setResetFilterHandler = () => {
@@ -73,10 +75,20 @@ export const Packs = React.memo(() => {
         dispatch(setQueryParamsAC({pageCount: valuePageCount.toString()}))
     }
 
+    const handleAddNewPackModal = () => {
+        setOpenAddPackModal(false)
+    }
+
     return (
         <div className={s.packs_wrapper}>
             <div className={s.packs_header}>
                 <h2>Packs List</h2>
+                <div>
+                    <BasicModal title={"Add new pack"} openModal={openAddPackModal}
+                                closeHandler={handleAddNewPackModal}>
+                        <AddNewPackModal closeModal={handleAddNewPackModal}></AddNewPackModal>
+                    </BasicModal>
+                </div>
                 <Button variant={'contained'}
                         className={s.button}
                         onClick={addNewPackHandler}
