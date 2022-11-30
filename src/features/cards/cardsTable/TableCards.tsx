@@ -1,13 +1,15 @@
 import {Navigate, useNavigate, useSearchParams} from "react-router-dom"
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks"
 import React, {ChangeEvent, useEffect, useState} from "react";
-import {addCardTC, getCardsTC, QueryParamsType, setQueryCardsParamsAC} from "../cards-reducer";
+import { getCardsTC, QueryParamsType, setQueryCardsParamsAC} from "../cards-reducer";
 import {useDebounce} from "../../../common/hooks/debounce";
 import {filterQueryParams} from "../../../common/utils/filterQueryParams";
 import {Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import {CardsPagination} from "../PaginatorFromCards/PaginatorCards";
 import s from "./TableCards.module.css"
 import {Card} from "../card/Card";
+import {BasicModal} from "../../../common/components/modals/basicModal/BasicModal";
+import {AddNewCardModal} from "../../../common/components/modals/cards/AddNewCardModal";
 
 export const TableCards = () => {
 
@@ -34,7 +36,7 @@ export const TableCards = () => {
         cardsPack_id: cardsPack_idURL
     })
     const [cardQuestion, setCardQuestion] = useState<string>(cardQuestionURL ? cardQuestionURL : '')
-
+    const [openCardModal, setOpenCardModal] = useState(false)
 
     const debouncedValue = useDebounce<string>(cardQuestion, 500)
 
@@ -89,16 +91,14 @@ export const TableCards = () => {
     const backToCardsBlockHandler = () => {
         navigate(-1)
     }
+
     const addNewCardHandler = () => {
-        const newCard = {
-            cardsPack_id: cardsPack_idURL,
-            question: 'This should be a question',
-            answer: 'This should be the answer',
-            grade: 0
-        }
-        cardsPack_idURL && dispatch(addCardTC(newCard))
+        setOpenCardModal(true)
     }
 
+    const handleCardModalClose = () => {
+        setOpenCardModal(false)
+    }
 
 
     const isPackAuthor = userCardID === userID
@@ -109,6 +109,11 @@ export const TableCards = () => {
 
     return (
         <>
+            <BasicModal title={"Add new card"} openModal={openCardModal}
+                        closeHandler={handleCardModalClose}>
+                <AddNewCardModal id={cardsPack_idURL} closeModal={handleCardModalClose}  />
+            </BasicModal>
+
             <div className={s.backToCardsBlock}>
                 <div
                     onClick={backToCardsBlockHandler}
@@ -132,13 +137,13 @@ export const TableCards = () => {
                         <div className={s.cardsMenu}>
                             <div className={s.pointer}></div>
                             <div className={s.menu}>
-                                <div  className={s.menuEl}>
+                                <div className={s.menuEl}>
                                     <span className={s.elTitle}>Edit</span>
                                 </div>
-                                <div  className={s.menuEl}>
+                                <div className={s.menuEl}>
                                     <span className={s.elTitle}>Delete</span>
                                 </div>
-                                <div  className={s.menuEl}>
+                                <div className={s.menuEl}>
                                     <span className={s.elTitle}>Learn</span>
                                 </div>
                             </div>
@@ -150,7 +155,9 @@ export const TableCards = () => {
                         ?
                         <Button variant='contained' onClick={addNewCardHandler}>Add new cart</Button>
                         :
-                        <Button onClick={()=>{alert("Learn to pack")}}>Learn to pack</Button>
+                        <Button onClick={() => {
+                            alert("Learn to pack")
+                        }}>Learn to pack</Button>
                     }
                 </div>
             </div>
@@ -177,6 +184,7 @@ export const TableCards = () => {
                             <Card
                                 key={el._id}
                                 card={el}
+
                             />
                         ))}
                     </TableBody>
