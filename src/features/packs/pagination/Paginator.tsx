@@ -6,7 +6,7 @@ type PaginationPropsType = {
     callBackPage: (valuePage: number) => void
     callBackPageCount: (valuePageCount: number) => void
 }
-
+//
 export const Pagination = ({callBackPage,callBackPageCount}: PaginationPropsType) => {
 
     const cardPacksTotalCount = useAppSelector(state => state.packs.cardPacksTotalCount)
