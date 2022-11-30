@@ -14,7 +14,6 @@ export const NewSlider = React.memo((props: NewSliderPropsType) => {
     const minCards = useAppSelector(state => state.packs.minCardsCount)
     const maxCards = useAppSelector(state => state.packs.maxCardsCount)
 
-//
     const handleChange = (event: Event, newValue: number | number[]) => {
         props.setSliderValue(newValue as number[]);
     };
@@ -36,7 +35,7 @@ export const NewSlider = React.memo((props: NewSliderPropsType) => {
                                               value={props.sliderValue}
                                               onChangeCommitted={handleChangeCommitted}
                                               onChange={handleChange}
-                                              valueLabelDisplay="auto" disableSwap={dis}
+                                              valueLabelDisplay="auto" disabled={dis}
 
             /></div>
             <div className={s.minMaxBox}>{props.sliderValue[1]}</div>
