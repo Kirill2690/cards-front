@@ -1,0 +1,101 @@
+.learnContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 30px auto 0;
+    width: 413px;
+    position: relative;
+}
+
+.title {
+    width: 127px;
+    height: 27px;
+    top: 99px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    color: #000000;
+}
+
+.question {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.error {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.learn {
+    background: #FFFFFF;
+    box-shadow: 1px 1px 10px rgba(187, 187, 187, 0.35);
+    border-radius: 10px;
+    width: 100%;
+    padding: 30px;
+}
+
+.error span {
+    font-size: 18px;
+    color: red;
+}
+
+.numberShots {
+    color: #757575;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.arrowText {
+    color: black;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button{
+    border-radius: 30px !important;
+    width: 373px;
+    height: 32px;
+    background-color: #366EFF !important;
+    margin-top: 45px !important;
+    margin-bottom: 31px !important;
+    text-transform: none !important;
+    font-size: 14px !important;
+    font-weight: 500;
+    color: white;
+}
+
+.rateBox {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.rateBox p {
+    font-size: 17px;
+}
+
+.inputRadio {
+    margin-top: 10px;
+}
+
+.inputRadio {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.inputRadio span {
+    margin-left: 5px;
+    font-size: 17px;
+}

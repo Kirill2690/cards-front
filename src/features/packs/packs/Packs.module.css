@@ -7,11 +7,22 @@
     align-items: center;
     justify-content: space-between;
 }
+.title{
+    width: 127px;
+    height: 27px;
+    top: 99px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    color: #000000;
+}
 .packs_tools {
     display: flex;
     justify-content: space-between;
     align-items: end;
-    margin-bottom: 24px;
+    margin-bottom: 10px;
 }
 
 .number {
@@ -69,3 +80,5 @@
     font-size: 14px !important;
     font-weight: 500;
 }
+
+

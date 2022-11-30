@@ -32,7 +32,9 @@ export const Packs = React.memo(() => {
     const [searchText, setSearchText] = useState<string | undefined>(undefined)
     const [buttonValue, setButtonValue] = useState<ButtonValuesType>(userIDParams?"my":"all")
     const [sliderValue, setSliderValue] = useState<number[]>([min, max])
-    console.log([min, max])
+    const [openAddPackModal, setOpenAddPackModal] = useState<boolean>(false)
+
+
 
     useEffect(() => {
         setSliderValue([min, max])

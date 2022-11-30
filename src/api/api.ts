@@ -85,11 +85,16 @@ export const cardsAPI={
     updateCard(card: UpdateCardsType) {
         return instance.put(`/cards/card`, {card})
     },
+    updateLearnCards(data: LearnCardType) {
+        return instance.put<ResponseLearnCardType>('cards/grade', data)
+    },
 }
 
 
-//type
 
+//types
+
+//types authAPI
 
 export type LoginDataType = {
     email: string
@@ -112,19 +117,19 @@ export type LoginResponseType = {
 }
 
 export type ResponseType = {
-    _id: string;
-    email: string;
-    rememberMe: boolean;
-    isAdmin: boolean;
-    name: string;
-    verified: boolean;// подтвердил ли почту
-    publicCardPacksCount: number;// количество колод
-    created: string;
-    updated: string;
-    __v: number;
-    token: string;
-    tokenDeathTime: number;
-    avatar: string;
+    _id: string
+    email: string
+    rememberMe: boolean
+    isAdmin: boolean
+    name: string
+    verified: boolean
+    publicCardPacksCount: number
+    created: string
+    updated: string
+    __v: number
+    token: string
+    tokenDeathTime: number
+    avatar: string
 }
 
 export type ResponseUpdatesUserType = {
@@ -188,9 +193,10 @@ export type UserType = {
 
 
 //types packAPI
+
 export type PacksParamsType = {
-    page?: string,
-    pageCount?: string,
+    page?: string
+    pageCount?: string
     packName?: string
     userID?: string
     min?: string
@@ -198,32 +204,32 @@ export type PacksParamsType = {
 }
 
 export type ResponsePacksType = {
-    cardPacks: PackType[];
-    page: number;
-    pageCount: number;
-    cardPacksTotalCount: number;
-    minCardsCount: number;
-    maxCardsCount: number;
-    token: string;
-    tokenDeathTime: number;
+    cardPacks: PackType[]
+    page: number
+    pageCount: number
+    cardPacksTotalCount: number
+    minCardsCount: number
+    maxCardsCount: number
+    token: string
+    tokenDeathTime: number
 }
 
 export type PackType = {
-    _id: string;
-    user_id: string;
-    user_name: string;
-    private: boolean;
-    name: string;
-    path: string;
-    grade: number;
-    shots: number;
-    cardsCount: number;
-    type: string;
-    rating: number;
-    created: string;
-    updated: string;
-    more_id: string;
-    __v: number;
+    _id: string
+    user_id: string
+    user_name: string
+    private: boolean
+    name: string
+    path: string
+    grade: number
+    shots: number
+    cardsCount: number
+    type: string
+    rating: number
+    created: string
+    updated: string
+    more_id: string
+    __v: number
 }
 
 export type UpdatePackType={
@@ -232,39 +238,40 @@ export type UpdatePackType={
 }
 
 //type cardsAPI
+
 export type ResponseCardsType = {
-    cards: CardType[];
-    packUserId: string;
-    packName: string;
-    packPrivate: boolean;
-    packDeckCover: string;
-    packCreated: string;
-    packUpdated: string;
-    page: number;
-    pageCount: number;
-    cardsTotalCount: number;
-    minGrade: number;
-    maxGrade: number;
-    token: string;
-    tokenDeathTime: number;
+    cards: CardType[]
+    packUserId: string
+    packName: string
+    packPrivate: boolean
+    packDeckCover: string
+    packCreated: string
+    packUpdated: string
+    page: number
+    pageCount: number
+    cardsTotalCount: number
+    minGrade: number
+    maxGrade: number
+    token: string
+    tokenDeathTime: number
 }
 
 
 export type CardType = {
-    _id: string;
-    cardsPack_id: string;
-    user_id: string;
-    answer: string;
-    question: string;
-    grade: number;
-    shots: number;
-    comments: string;
-    type: string;
-    rating: number;
-    more_id: string;
-    created: string;
-    updated: string;
-    __v: number;
+    _id: string
+    cardsPack_id: string
+    user_id: string
+    answer: string
+    question: string
+    grade: number
+    shots: number
+    comments: string
+    type: string
+    rating: number
+    more_id: string
+    created: string
+    updated: string
+    __v: number
 }
 
 export type CreateCardsType = {
@@ -314,6 +321,30 @@ export type CardsParamsType = {
     cardsPack_id?: string
 }
 
+//learn_card
+
+export type UpdatedGradeCartType = {
+    _id: string
+    cardsPack_id: string
+    card_id: string
+    user_id: string
+    grade: number
+    shots: number
+    more_id: string
+    created: string
+    updated: string
+    __v: number
+}
+export type LearnCardType = {
+    grade: number
+    card_id: string
+}
+
+export type ResponseLearnCardType={
+    updatedGrade: UpdatedGradeCartType
+    token: string
+    tokenDeathTime: number
+}
 
 
 
