@@ -29,6 +29,9 @@ export const Packs = React.memo(() => {
     const [searchText, setSearchText] = React.useState<string|undefined>(undefined)
     const [buttonValue, setButtonValue] = React.useState<ButtonValuesType>("all")
     const [sliderValue, setSliderValue] = React.useState<number[]>([min, max])
+    const [openModal, setOpenModal] = useState(false);
+
+
     //Search
     const handleChangeSearch = (text: string|undefined) => {
         dispatch(setQueryParamsAC({packName: text}))
@@ -111,18 +114,23 @@ export const Packs = React.memo(() => {
         })
     }
 
+
+    const openHandler = () => setOpenModal(true);
+    const closeHandler = () => setOpenModal(false);
+
     useEffect(() => {
         dispatch(setQueryParamsAC({...urlParamsFilter}))
         dispatch(getPacksTC())
     }, [packName, minParams, maxParams, userIDParams, paramsSearchState])
 
     return (
+        <>
         <div className={s.packs_wrapper}>
             <div className={s.packs_header}>
-                <h2>Packs List</h2>
+                <div className={s.title}>Packs List</div>
                 <Button variant={'contained'}
                         className={s.button}
-                        onClick={addNewPackHandler}
+                        onClick={openHandler}
                 >
                     Add new pack
                 </Button>
@@ -138,5 +146,7 @@ export const Packs = React.memo(() => {
             <PacksList/>
             <Pagination callBackPage={pageHandler} callBackPageCount={pageCountHandler}/>
         </div>
+            {/*<AddPackModal/>*/}
+        </>
     )
 })

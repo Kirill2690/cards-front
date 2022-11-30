@@ -3,22 +3,19 @@ import s from './Profile.module.css'
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {changeUserNameTC, logoutTC} from "./profile-reducer";
 import {Button} from "@mui/material";
-import {Navigate, NavLink} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {SuperEditableSpan} from "../../../common/components/superEditableSpan/SuperEditableSpan";
+import {BackToPackList} from "../../../common/components/backToPackList/BackToPacksList";
+import LogoutIcon from '@mui/icons-material/Logout';
 
-export const Profile =() => {
+export const Profile = () => {
+
     const name = useAppSelector(state => state.profile.name)
     const email = useAppSelector(state => state.profile.email)
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn);
     const [value, setValue] = useState('')
     const dispatch = useAppDispatch();
 
-//
-    useEffect(() => {
-        if (name) {
-            setValue(name)
-        }
-    }, [name])
 
     const changeUserNameProfile = (value: string) => {
         dispatch(changeUserNameTC(value))
@@ -30,12 +27,22 @@ export const Profile =() => {
     const logoutHandler = () => {
         dispatch(logoutTC())
     }
+
+    useEffect(() => {
+        if (name) {
+            setValue(name)
+        }
+    }, [name])
+
     if (!isLoggedIn) {
         return <Navigate to={'/login'}/>;
     }
+
     return (
         <div className={s.wrapper_profile}>
-            <NavLink to={'/packs' }>🠔 Back to Packs List</NavLink>
+            <div className={s.back}>
+                <BackToPackList/>
+            </div>
             <div className={s.profile_Block}>
                 <div className={s.title}>Personal Information</div>
                 <div className={s.photo}>
@@ -49,15 +56,15 @@ export const Profile =() => {
                 />
 
                 <div className={s.email}>{email}</div>
-                <div className={s.button_block}>
-                    <Button variant={'contained'}
-                            className={s.button}
-                            onClick={logoutHandler}
-                    >
-                        Log out
-                    </Button>
-                </div>
+                <Button variant={'contained'}
+                        className={s.button}
+                        onClick={logoutHandler}
+                >
+                    <LogoutIcon className={s.logOut}/>
+                    Log out
+                </Button>
             </div>
         </div>
+
     );
 }

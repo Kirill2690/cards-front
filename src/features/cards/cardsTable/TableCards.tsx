@@ -8,13 +8,17 @@ import {Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, T
 import {CardsPagination} from "../PaginatorFromCards/PaginatorCards";
 import s from "./TableCards.module.css"
 import {Card} from "../card/Card";
+import {BackToPackList} from "../../../common/components/backToPackList/BackToPacksList";
+import {PackMenu} from "../../../common/components/menu/PackMenu";
 
 export const TableCards = () => {
 
-    const navigate = useNavigate()
+    const navigate=useNavigate()
     const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
     const cards = useAppSelector(state => state.cards.cards)
+    const packId=useAppSelector(state => state.cards.packUserId)
+    const packs=useAppSelector(state => state.packs)
 
     const [searchParams, setSearchParams] = useSearchParams()
     const cardsPack_idURL = searchParams.get('cardsPack_id') ? searchParams.get('cardsPack_id') + '' : '1'
@@ -86,9 +90,7 @@ export const TableCards = () => {
             })
         })
     }
-    const backToCardsBlockHandler = () => {
-        navigate(-1)
-    }
+
     const addNewCardHandler = () => {
         const newCard = {
             cardsPack_id: cardsPack_idURL,
@@ -99,6 +101,9 @@ export const TableCards = () => {
         cardsPack_idURL && dispatch(addCardTC(newCard))
     }
 
+    const learnCards = () => {
+        navigate(`/learn/${pack ? pack._id : cardsPack_idURL}`)
+    }
 
 
     const isPackAuthor = userCardID === userID
@@ -109,14 +114,7 @@ export const TableCards = () => {
 
     return (
         <>
-            <div className={s.backToCardsBlock}>
-                <div
-                    onClick={backToCardsBlockHandler}
-                    className={s.goToPacksTitle}
-                >
-                    <span className={s.arrowText}> Back to packs list</span>
-                </div>
-            </div>
+            <BackToPackList/>
             <div className={s.infoBox}>
                 <div className={s.titleMenu}>
                     <h2 className={s.title}>
@@ -124,6 +122,7 @@ export const TableCards = () => {
                         {isPackAuthor ?
                             <div
                                 className={s.iconMenu}>
+                               {/* <PackMenu packData={packs} packId={} isMyPack={isPackAuthor}/>*/}
                             </div>
                             : <div></div>
                         }
@@ -148,9 +147,9 @@ export const TableCards = () => {
                 <div>
                     {isPackAuthor
                         ?
-                        <Button variant='contained' onClick={addNewCardHandler}>Add new cart</Button>
+                        <Button className={s.button} variant='contained' onClick={addNewCardHandler}>Add new cart</Button>
                         :
-                        <Button onClick={()=>{alert("Learn to pack")}}>Learn to pack</Button>
+                        <Button className={s.button} variant='contained' onClick={learnCards}>Learn to pack</Button>
                     }
                 </div>
             </div>
