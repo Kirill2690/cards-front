@@ -36,7 +36,7 @@
 }
 
 .sortUp {
-    cursor: pointer;
+    cursor: n-resize;
     background-repeat: no-repeat;
     background-position: 100% center;
     padding-right: 35px !important;
@@ -53,7 +53,7 @@
 }
 
 .sortDown {
-    cursor: pointer;
+    cursor: s-resize;
     background-repeat: no-repeat;
     background-position: 100% center;
     padding-right: 35px !important;

@@ -27,17 +27,12 @@ export const Packs = React.memo(() => {
     const packName = useAppSelector(state => state.packs.params.packName)
     const page = useAppSelector(state => state.packs.params.page)
     const pageCount = useAppSelector(state => state.packs.params.pageCount)
+    const sortPacks = useAppSelector(state => state.packs.params.sortPacks)
 
-
-    const [newName, setNewName] = useState<string>('My new pack')
     const [searchText, setSearchText] = useState<string | undefined>(undefined)
-    const [buttonValue, setButtonValue] = useState<ButtonValuesType>(userIDParams?"my":"all")
+    const [buttonValue, setButtonValue] = useState<ButtonValuesType>(userIDParams ? "my" : "all")
     const [sliderValue, setSliderValue] = useState<number[]>([min, max])
     const [openModal, setOpenModal] = useState(false);
-    const openHandler = () => setOpenModal(true);
-    const closeHandler = () => setOpenModal(false);
-
-
 
     useEffect(() => {
         setSliderValue([min, max])
@@ -45,40 +40,39 @@ export const Packs = React.memo(() => {
 
     useEffect(() => {
         dispatch(getPacksTC())
-    }, [packName, minParams, maxParams, userIDParams, page, pageCount])
+    }, [packName, minParams, maxParams, userIDParams, page, pageCount, sortPacks])
 
-    //Search
     const handleChangeSearch = (text: string | undefined) => {
         dispatch(setQueryParamsAC({packName: text}))
     }
-    //Button
+
     const handleButtonClick = (value: ButtonValuesType) => {
         setButtonValue(value)
         value === "my" ? dispatch(setQueryParamsAC({userID: userId}))
             : dispatch(setQueryParamsAC({userID: undefined}))
     }
-    //Slider
+
     const handleChangeSlider = (newValue: number[]) => {
         setSliderValue(newValue)
         dispatch(setQueryParamsAC({min: newValue[0].toString(), max: newValue[1].toString()}))
     }
 
-    //Reset
+    const openHandler = () => setOpenModal(true);
+    const closeHandler = () => setOpenModal(false);
+
     const setResetFilterHandler = () => {
         setSearchText(undefined)
         handleButtonClick("all")
         handleChangeSlider([min, max])
+        dispatch(setQueryParamsAC({sortPacks: undefined}))
     }
-    //Pagination
+
     const pageHandler = (valuePage: number) => {
         dispatch(setQueryParamsAC({page: valuePage.toString()}))
     }
     const pageCountHandler = (valuePageCount: number) => {
         dispatch(setQueryParamsAC({pageCount: valuePageCount.toString()}))
     }
-
-
-
 
     return (
         <div className={s.packs_wrapper}>
@@ -103,7 +97,7 @@ export const Packs = React.memo(() => {
             </div>
             <PacksList/>
             <Pagination callBackPage={pageHandler} callBackPageCount={pageCountHandler}/>
-            <AddNewPackModal  title={"Add new pack"} openModal={openModal}  closeModal={closeHandler}></AddNewPackModal>
-    </div>
+            <AddNewPackModal title={"Add new pack"} openModal={openModal} closeModal={closeHandler}></AddNewPackModal>
+        </div>
     )
 })
