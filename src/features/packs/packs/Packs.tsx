@@ -42,8 +42,8 @@ export const Packs = React.memo(() => {
         dispatch(getPacksTC())
     }, [packName, minParams, maxParams, userIDParams, page, pageCount, sortPacks])
 
-    const handleChangeSearch = (text: string | undefined) => {
-        dispatch(setQueryParamsAC({packName: text}))
+    const handlerChangeSearch = (text: string) => {
+        dispatch(setQueryParamsAC(text.length? {packName: text}:{packName: undefined}))
     }
 
     const handleButtonClick = (value: ButtonValuesType) => {
@@ -86,7 +86,7 @@ export const Packs = React.memo(() => {
                 </Button>
             </div>
             <div className={s.packs_tools}>
-                <SearchInput handleChangeSearch={handleChangeSearch} searchText={searchText}
+                <SearchInput handleChangeSearch={handlerChangeSearch} searchText={searchText}
                              setSearchText={setSearchText}/>
                 <ButtonGroup buttonValue={buttonValue} changeButton={handleButtonClick}/>
                 <NewSlider sliderValue={sliderValue} setSliderValue={setSliderValue}

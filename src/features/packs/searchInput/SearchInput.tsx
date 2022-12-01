@@ -7,7 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import {useDebounce} from "../../../common/hooks/debounce";
 
 type SearchInputPropsType = {
-    handleChangeSearch: (value: string|undefined) => void
+    handleChangeSearch: (value: string) => void
     searchText: string
     setSearchText: (value: string) => void
     //
