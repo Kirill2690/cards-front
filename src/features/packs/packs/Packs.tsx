@@ -79,6 +79,7 @@ export const Packs = React.memo(() => {
 
 
 
+
     return (
         <div className={s.packs_wrapper}>
             <div className={s.packs_header}>
