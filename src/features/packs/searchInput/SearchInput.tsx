@@ -13,7 +13,7 @@ type SearchInputPropsType = {
     //
 }
 
-export const SearchInput = React.memo((props:SearchInputPropsType) => {
+export const SearchInput = React.memo((props: SearchInputPropsType) => {
 
     const debouncedText = useDebounce(props.searchText);
 
@@ -21,17 +21,17 @@ export const SearchInput = React.memo((props:SearchInputPropsType) => {
         props.handleChangeSearch(debouncedText)
     }, [debouncedText])
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         props.setSearchText(event.target.value);
     };
 
     return (
-        <div>
+        <div style={{marginBottom: -5}}>
             <FormControl sx={{m: 1, height: 36}} variant="outlined" size="small">
                 <InputLabel htmlFor="search"> Provide your text</InputLabel>
                 <OutlinedInput id="search" type='text'
                                value={props.searchText}
-                               onChange={handleChange}
+                               onChange={handlerChange}
                                endAdornment={
                                    <InputAdornment position="end">
                                        <SearchIcon/>
@@ -42,4 +42,5 @@ export const SearchInput = React.memo((props:SearchInputPropsType) => {
             </FormControl>
         </div>)
 })
+
 
