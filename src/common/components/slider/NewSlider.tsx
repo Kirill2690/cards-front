@@ -22,6 +22,7 @@ export const NewSlider = React.memo((props: NewSliderPropsType) => {
             return;
         }
         props.handleChangeSlider(newValue)
+
     }
     const dis = minCards === maxCards
 

@@ -1,11 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Paper, TableContainer, Table, TableHead, TableRow, TableCell, TableBody} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
-import {setParamsSortPack} from "../packs-reducer";
 import s from '../packs/Packs.module.css'
 import {Pack} from "../pack/Pack";
-
-
+import {setQueryParamsAC} from "../packs-reducer";
 
 export const PacksList = () => {
 
@@ -15,7 +13,9 @@ export const PacksList = () => {
     const sort = useAppSelector(state => state.packs.params.sortPacks)
 
     const sortUpdate = (sortParams: string) => {
-        return sort === `1${sortParams}` ? dispatch(setParamsSortPack(`0${sortParams}`)) : dispatch(setParamsSortPack(`1${sortParams}`));
+        sort === `1${sortParams}` ? dispatch(setQueryParamsAC({sortPacks:`0${sortParams}`}))
+            : dispatch(setQueryParamsAC({sortPacks:`1${sortParams}`}));
+        //
     }
 
     return (
@@ -23,11 +23,12 @@ export const PacksList = () => {
             <Table sx={{minWidth: 600}} aria-label="Packs table">
                 <TableHead>
                     <TableRow>
-                        <TableCell onClick={() => sortUpdate('packName')}
-                                   className={sort === '0packName' ? s.sortUp : s.sortDown}>Name</TableCell>
-                        <TableCell align="right">Cards</TableCell>
+                        <TableCell onClick={() => sortUpdate('name')}
+                                   className={sort === '1name' ? s.sortUp : s.sortDown}>Name</TableCell>
+                        <TableCell align="right" onClick={() => sortUpdate('cardsCount')}
+                                   className={sort === '1cardsCount' ? s.sortUp : s.sortDown}>Cards</TableCell>
                         <TableCell align="right" onClick={() => sortUpdate('updated')}
-                                   className={sort === '0updated' ? s.sortUp : s.sortDown}>Last updated</TableCell>
+                                   className={sort === '1updated' ? s.sortUp : s.sortDown}>Last updated</TableCell>
                         <TableCell align="right">Created</TableCell>
                         <TableCell align="right">Actions</TableCell>
                     </TableRow>

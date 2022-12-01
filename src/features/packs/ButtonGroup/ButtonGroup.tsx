@@ -29,7 +29,6 @@ export const ButtonGroup = React.memo((props:ButtonGroupPropsType) => {
                     variant={props.buttonValue === "all" ? 'contained' : 'outlined'}
                     onClick={handlerClickAll}
             >All</Button>
-
         </div>
     );
 })

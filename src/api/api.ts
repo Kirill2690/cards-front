@@ -197,6 +197,7 @@ export type PacksParamsType = {
     min?: string
     max?: string
     sortPacks?:string
+    //
 }
 
 export type ResponsePacksType = {

@@ -79,6 +79,7 @@ export const Packs = React.memo(() => {
         setOpenAddPackModal(false)
     }
 
+
     return (
         <div className={s.packs_wrapper}>
             <div className={s.packs_header}>
