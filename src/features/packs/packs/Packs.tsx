@@ -29,7 +29,7 @@ export const Packs = React.memo(() => {
     const pageCount = useAppSelector(state => state.packs.params.pageCount)
     const sortPacks = useAppSelector(state => state.packs.params.sortPacks)
 
-    const [searchText, setSearchText] = useState<string | undefined>(undefined)
+    const [searchText, setSearchText] = useState<string>('')
     const [buttonValue, setButtonValue] = useState<ButtonValuesType>(userIDParams ? "my" : "all")
     const [sliderValue, setSliderValue] = useState<number[]>([min, max])
     const [openModal, setOpenModal] = useState(false);
@@ -61,7 +61,7 @@ export const Packs = React.memo(() => {
     const closeHandler = () => setOpenModal(false);
 
     const setResetFilterHandler = () => {
-        setSearchText(undefined)
+        setSearchText('')
         handleButtonClick("all")
         handleChangeSlider([min, max])
         dispatch(setQueryParamsAC({sortPacks: undefined}))

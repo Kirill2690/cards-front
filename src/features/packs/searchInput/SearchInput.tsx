@@ -8,7 +8,7 @@ import {useDebounce} from "../../../common/hooks/debounce";
 
 type SearchInputPropsType = {
     handleChangeSearch: (value: string|undefined) => void
-    searchText: string|undefined
+    searchText: string
     setSearchText: (value: string) => void
     //
 }
