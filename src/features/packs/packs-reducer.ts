@@ -130,8 +130,9 @@ export type QueryParamsType = {
     min?: string
     max?: string,
     sortPacks?: string,
+
 }
-//
+
 export type PacksActionsType = ReturnType<typeof getPacksAC>
     | ReturnType<typeof setQueryParamsAC>
     | ReturnType<typeof sortPackAC>

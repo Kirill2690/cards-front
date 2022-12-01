@@ -2,14 +2,12 @@
     display: inline-block;
     position: relative;
     width: 35%;
+    margin-bottom: 4px!important;
 }
-
 .title {
     position: absolute;
     bottom: 30px;
-
 }
-
 .input {
     width: 100%;
     height: 30px;

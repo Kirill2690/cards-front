@@ -10,7 +10,7 @@ type SearchInputPropsType = {
     handleChangeSearch: (value: string|undefined) => void
     searchText: string|undefined
     setSearchText: (value: string) => void
-
+    //
 }
 
 export const SearchInput = React.memo((props:SearchInputPropsType) => {
