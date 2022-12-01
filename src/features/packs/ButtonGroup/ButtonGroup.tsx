@@ -11,10 +11,10 @@ type ButtonGroupPropsType = {
 
 export const ButtonGroup = React.memo((props:ButtonGroupPropsType) => {
 
-    const handleClickMy = useCallback(()=>{
+    const handlerClickMy = useCallback(()=>{
         props.changeButton("my")
     },[props.changeButton])
-    const handleClickAll =useCallback(()=>{
+    const handlerClickAll =useCallback(()=>{
         props.changeButton("all")
     },[props.changeButton])
 
@@ -23,11 +23,11 @@ export const ButtonGroup = React.memo((props:ButtonGroupPropsType) => {
             <Button
                 className={s.button}
                 variant={props.buttonValue === "my" ? 'contained' : 'outlined'}
-                onClick={handleClickMy}
+                onClick={handlerClickMy}
             >My</Button>
             <Button className={s.button}
                     variant={props.buttonValue === "all" ? 'contained' : 'outlined'}
-                    onClick={handleClickAll}
+                    onClick={handlerClickAll}
             >All</Button>
 
         </div>

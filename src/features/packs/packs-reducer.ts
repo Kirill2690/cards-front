@@ -39,23 +39,15 @@ export const packsReducer = (state: InitialStatePacksType = initialState, action
 
         case "PACKS/SET-QUERY-PARAMS":
             return {...state, params: {...state.params, ...action.params}}
-        case 'PACKS/SORT-PACKS':
-            return {...state, params: {...state.params, sortPacks: action.sortPacks}}
         default:
             return state;
     }
 }
 
-export const setParamsSortPack = (sortParams: string): AppThunk => dispatch => {
-    dispatch(sortPackAC(sortParams));
-    dispatch(getPacksTC());
-}
 
 // actions
 export const getPacksAC = (data: ResponsePacksType) => ({type: 'PACKS/SET-PACKS-DATA', data} as const)
 export const setQueryParamsAC = (params: QueryParamsType) => ({type: 'PACKS/SET-QUERY-PARAMS', params} as const)
-export const sortPackAC = (sortPacks: string) => ({type: 'PACKS/SORT-PACKS', sortPacks,} as const)
-
 
 //thunks
 export const getPacksTC = (): AppThunk => async (dispatch, getState) => {
@@ -63,15 +55,16 @@ export const getPacksTC = (): AppThunk => async (dispatch, getState) => {
     dispatch(setAppStatusAC('loading'));
     try {
         const result = await packsAPI.getPacks({...queryParams})
+        if (result.data.cardPacks.length === 0 && queryParams.packName) {
+            throw new Error("The cards with the entered name were not found. Change the query parameters")
+        }
         dispatch(getPacksAC(result.data));
     } catch (e) {
         errorUtil(e, dispatch)
+    } finally {
+        dispatch(setAppStatusAC('succeeded'))
     }
-     finally {
-         dispatch(setAppStatusAC('succeeded'))
-     }
 }
-
 
 export const addPackTC =
     (packName: string, deckCover?: string, isPrivate?: boolean): AppThunk =>
@@ -111,7 +104,6 @@ export const deletePackTC = (data: string): AppThunk => async (dispatch) => {
     }
 }
 
-
 //types
 export type QueryParamsType = {
     page?: string
@@ -125,8 +117,6 @@ export type QueryParamsType = {
 
 export type PacksActionsType = ReturnType<typeof getPacksAC>
     | ReturnType<typeof setQueryParamsAC>
-    | ReturnType<typeof sortPackAC>
-
 
 export type InitialStatePacksType = typeof initialState
 

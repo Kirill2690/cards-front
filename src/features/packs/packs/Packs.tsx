@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import React, {useEffect, useState} from "react";
 import FilterListOffIcon from '@mui/icons-material/FilterListOff';
 import {PacksList} from "../packList/PacksList";
-import {addPackTC, getPacksTC, setQueryParamsAC} from "../packs-reducer";
+import {getPacksTC, setQueryParamsAC} from "../packs-reducer";
 import {Pagination} from "../pagination/Paginator";
 import {SearchInput} from "../searchInput/SearchInput";
 import {NewSlider} from "../../../common/components/slider/NewSlider";
@@ -27,12 +27,12 @@ export const Packs = React.memo(() => {
     const packName = useAppSelector(state => state.packs.params.packName)
     const page = useAppSelector(state => state.packs.params.page)
     const pageCount = useAppSelector(state => state.packs.params.pageCount)
+    const sortPacks = useAppSelector(state => state.packs.params.sortPacks)
 
-    const [newName, setNewName] = useState<string>('My new pack')
-    const [searchText, setSearchText] = useState<string | undefined>(undefined)
+    const [searchText, setSearchText] = useState<string>('')
     const [buttonValue, setButtonValue] = useState<ButtonValuesType>(userIDParams?"my":"all")
     const [sliderValue, setSliderValue] = useState<number[]>([min, max])
-    console.log([min, max])
+    const [openAddPackModal, setOpenAddPackModal] = useState<boolean>(false)
 
     useEffect(() => {
         setSliderValue([min, max])
@@ -40,34 +40,34 @@ export const Packs = React.memo(() => {
 
     useEffect(() => {
         dispatch(getPacksTC())
-    }, [packName, minParams, maxParams, userIDParams, page, pageCount])
+    }, [packName, minParams, maxParams, userIDParams, page, pageCount,sortPacks])
 
-    //Search
-    const handleChangeSearch = (text: string | undefined) => {
-        dispatch(setQueryParamsAC({packName: text}))
+    const handlerChangeSearch = (text: string) => {
+        dispatch(setQueryParamsAC(text.length? {packName: text}:{packName: undefined}))
     }
-    //Button
-    const handleButtonClick = (value: ButtonValuesType) => {
+
+    const handlerButtonClick = (value: ButtonValuesType) => {
         setButtonValue(value)
         value === "my" ? dispatch(setQueryParamsAC({userID: userId}))
             : dispatch(setQueryParamsAC({userID: undefined}))
     }
-    //Slider
-    const handleChangeSlider = (newValue: number[]) => {
+
+    const handlerChangeSlider = (newValue: number[]) => {
         setSliderValue(newValue)
         dispatch(setQueryParamsAC({min: newValue[0].toString(), max: newValue[1].toString()}))
     }
-    //addNewPack
+
     const addNewPackHandler = () => {
         setOpenAddPackModal(true)
     }
-    //Reset
+
     const setResetFilterHandler = () => {
-        setSearchText(undefined)
-        handleButtonClick("all")
-        handleChangeSlider([min, max])
+        setSearchText('')
+        handlerButtonClick("all")
+        handlerChangeSlider([min, max])
+        dispatch(setQueryParamsAC({sortPacks:undefined}))
     }
-    //Pagination
+
     const pageHandler = (valuePage: number) => {
         dispatch(setQueryParamsAC({page: valuePage.toString()}))
     }
@@ -75,7 +75,7 @@ export const Packs = React.memo(() => {
         dispatch(setQueryParamsAC({pageCount: valuePageCount.toString()}))
     }
 
-    const handleAddNewPackModal = () => {
+    const handlerAddNewPackModal = () => {
         setOpenAddPackModal(false)
     }
 
@@ -85,8 +85,8 @@ export const Packs = React.memo(() => {
                 <h2>Packs List</h2>
                 <div>
                     <BasicModal title={"Add new pack"} openModal={openAddPackModal}
-                                closeHandler={handleAddNewPackModal}>
-                        <AddNewPackModal closeModal={handleAddNewPackModal}></AddNewPackModal>
+                                closeHandler={handlerAddNewPackModal}>
+                        <AddNewPackModal closeModal={handlerAddNewPackModal}></AddNewPackModal>
                     </BasicModal>
                 </div>
                 <Button variant={'contained'}
@@ -97,11 +97,11 @@ export const Packs = React.memo(() => {
                 </Button>
             </div>
             <div className={s.packs_tools}>
-                <SearchInput handleChangeSearch={handleChangeSearch} searchText={searchText}
+                <SearchInput handleChangeSearch={handlerChangeSearch} searchText={searchText}
                              setSearchText={setSearchText}/>
-                <ButtonGroup buttonValue={buttonValue} changeButton={handleButtonClick}/>
+                <ButtonGroup buttonValue={buttonValue} changeButton={handlerButtonClick}/>
                 <NewSlider sliderValue={sliderValue} setSliderValue={setSliderValue}
-                           handleChangeSlider={handleChangeSlider}/>
+                           handleChangeSlider={handlerChangeSlider}/>
                 <Button onClick={setResetFilterHandler}>
                     <FilterListOffIcon/>
                 </Button>
