@@ -21,6 +21,7 @@ export const NewSlider = React.memo((props: NewSliderPropsType) => {
         if (!Array.isArray(newValue)) {
             return;
         }
+
         props.handleChangeSlider(newValue)
 
     }

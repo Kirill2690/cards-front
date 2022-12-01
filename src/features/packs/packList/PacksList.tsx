@@ -15,7 +15,6 @@ export const PacksList = () => {
     const sortUpdate = (sortParams: string) => {
         sort === `1${sortParams}` ? dispatch(setQueryParamsAC({sortPacks:`0${sortParams}`}))
             : dispatch(setQueryParamsAC({sortPacks:`1${sortParams}`}));
-        //
     }
 
     return (
@@ -48,4 +47,5 @@ export const PacksList = () => {
             </Table>
         </TableContainer>
     )
+
 }

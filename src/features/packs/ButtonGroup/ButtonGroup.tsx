@@ -30,6 +30,7 @@ export const ButtonGroup = React.memo((props:ButtonGroupPropsType) => {
                     onClick={handlerClickAll}
             >All</Button>
         </div>
+
     );
 })
 
