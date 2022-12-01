@@ -73,7 +73,7 @@ export const Learn = () => {
                     {cards.cards.length > 0 ?
                         <div>
                             <span className={s.question}>Question: </span> {card.question}
-                            <p className={s.numberShots}>Number of answers per question: </p>{card.shots}
+                            <p className={s.numberShots}>Number of answers per question: {card.shots} </p>
                         </div>
                         :
                         <div className={s.error}>
@@ -102,6 +102,7 @@ export const Learn = () => {
                                             <div
                                                 className={s.inputRadio}
                                                 onClick={onClickHandler}
+                                                /*onChange={setValue}*/
                                             >
                                                 <input
                                                     type={'radio'}

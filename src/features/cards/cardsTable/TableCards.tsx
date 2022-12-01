@@ -1,21 +1,24 @@
 import {Navigate, useNavigate, useSearchParams} from "react-router-dom"
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks"
 import React, {ChangeEvent, useEffect, useState} from "react";
-import { getCardsTC, QueryParamsType, setQueryCardsParamsAC} from "../cards-reducer";
+import {addCardTC, getCardsTC, QueryParamsType, setQueryCardsParamsAC} from "../cards-reducer";
 import {useDebounce} from "../../../common/hooks/debounce";
 import {filterQueryParams} from "../../../common/utils/filterQueryParams";
 import {Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import {CardsPagination} from "../PaginatorFromCards/PaginatorCards";
 import s from "./TableCards.module.css"
 import {Card} from "../card/Card";
-import {BasicModal} from "../../../common/components/modals/basicModal/BasicModal";
-import {AddNewCardModal} from "../../../common/components/modals/cards/AddNewCardModal";
+import {AddNewCardModal} from "../../../common/components/modals/cards/addNewCardModal/AddNewCardModal";
+import {BackToPackList} from "../../../common/components/backToPackList/BackToPacksList";
+import {PackMenu} from "../../../common/components/menu/PackMenu";
+
 
 export const TableCards = () => {
 
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
+    const packs= useAppSelector(state => state.packs);
     const cards = useAppSelector(state => state.cards.cards)
 
     const [searchParams, setSearchParams] = useSearchParams()
@@ -28,6 +31,10 @@ export const TableCards = () => {
     const userCardID = useAppSelector(state => state.cards.packUserId)
     const pack = useAppSelector(state => state.packs.cardPacks.find(el => el._id === cardsPack_idURL))
     const packName = useAppSelector(state => state.cards.packName)
+
+
+
+
 
     const [visibilityValue, setVisibilityValue] = useState<boolean>(false)
     const [paramsSearchState, setParamsSearchState] = useState<QueryParamsType>({
@@ -88,9 +95,6 @@ export const TableCards = () => {
             })
         })
     }
-    const backToCardsBlockHandler = () => {
-        navigate(-1)
-    }
 
     const addNewCardHandler = () => {
         setOpenCardModal(true)
@@ -98,6 +102,10 @@ export const TableCards = () => {
 
     const handleCardModalClose = () => {
         setOpenCardModal(false)
+    }
+
+    const learnCards = () => {
+        navigate(`/learn/${pack ? pack._id : cardsPack_idURL}`)
     }
 
 
@@ -108,20 +116,9 @@ export const TableCards = () => {
     }
 
     return (
-        <>
-            <BasicModal title={"Add new card"} openModal={openCardModal}
-                        closeHandler={handleCardModalClose}>
-                <AddNewCardModal id={cardsPack_idURL} closeModal={handleCardModalClose}  />
-            </BasicModal>
-
-            <div className={s.backToCardsBlock}>
-                <div
-                    onClick={backToCardsBlockHandler}
-                    className={s.goToPacksTitle}
-                >
-                    <span className={s.arrowText}> Back to packs list</span>
-                </div>
-            </div>
+        <div>
+                <AddNewCardModal title={"Add new card"} openModal={openCardModal} id={cardsPack_idURL} closeModal={handleCardModalClose} />
+            <BackToPackList/>
             <div className={s.infoBox}>
                 <div className={s.titleMenu}>
                     <h2 className={s.title}>
@@ -129,6 +126,7 @@ export const TableCards = () => {
                         {isPackAuthor ?
                             <div
                                 className={s.iconMenu}>
+
                             </div>
                             : <div></div>
                         }
@@ -137,13 +135,13 @@ export const TableCards = () => {
                         <div className={s.cardsMenu}>
                             <div className={s.pointer}></div>
                             <div className={s.menu}>
-                                <div className={s.menuEl}>
+                                <div  className={s.menuEl}>
                                     <span className={s.elTitle}>Edit</span>
                                 </div>
-                                <div className={s.menuEl}>
+                                <div  className={s.menuEl}>
                                     <span className={s.elTitle}>Delete</span>
                                 </div>
-                                <div className={s.menuEl}>
+                                <div  className={s.menuEl}>
                                     <span className={s.elTitle}>Learn</span>
                                 </div>
                             </div>
@@ -153,11 +151,9 @@ export const TableCards = () => {
                 <div>
                     {isPackAuthor
                         ?
-                        <Button variant='contained' onClick={addNewCardHandler}>Add new cart</Button>
+                        <Button className={s.button} variant='contained' onClick={addNewCardHandler}>Add new cart</Button>
                         :
-                        <Button onClick={() => {
-                            alert("Learn to pack")
-                        }}>Learn to pack</Button>
+                        <Button className={s.button} variant='contained' onClick={learnCards}>Learn to pack</Button>
                     }
                 </div>
             </div>
@@ -171,7 +167,7 @@ export const TableCards = () => {
             </div>
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
-                    <TableHead>
+                    <TableHead sx={{backgroundColor:'gray'}}>
                         <TableRow>
                             <TableCell className={s.header}>Question</TableCell>
                             <TableCell className={s.header}>Answer</TableCell>
@@ -184,7 +180,6 @@ export const TableCards = () => {
                             <Card
                                 key={el._id}
                                 card={el}
-
                             />
                         ))}
                     </TableBody>
@@ -194,6 +189,6 @@ export const TableCards = () => {
                 callBackPage={pageHandler}
                 callBackPageCount={pageCountHandler}
             />
-        </>
+        </div>
     );
 }

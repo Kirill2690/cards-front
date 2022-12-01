@@ -3,6 +3,8 @@
     align-items: center;
     height: 60px;
     cursor: default;
+    left: 168px;
+    top: 84px;
 }
 
 a {
@@ -13,16 +15,18 @@ a {
     font-size: 14px;
     line-height: 24px;
     color: #000000;
+
 }
 
 span {
     margin: 0 10px;
+
 }
 
 .icon{
     position: absolute;
     width: 14px;
     height: 9px;
-    left: 90px !important;
-    top: 95px;
+    left: 89px;
+
 }

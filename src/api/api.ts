@@ -48,8 +48,7 @@ export const packsAPI = {
                 packName: data.packName,
                 user_id: data.userID,
                 min: data.min,
-                max: data.max,
-                sortPacks:data.sortPacks
+                max: data.max
             }
         })
     },
@@ -202,7 +201,6 @@ export type PacksParamsType = {
     userID?: string
     min?: string
     max?: string
-    sortPacks?:string
 }
 
 export type ResponsePacksType = {
@@ -238,6 +236,12 @@ export type UpdatePackType={
     _id: string
     name?: string
 }
+export type CreatePackType = {
+    name: string
+    deckCover?: string
+    private?: boolean
+}
+
 
 //type cardsAPI
 

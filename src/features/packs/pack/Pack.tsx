@@ -4,12 +4,12 @@ import TableRow from "@mui/material/TableRow";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import {changePackTC} from "../packs-reducer";
-import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
+import {useAppSelector} from "../../../common/hooks/hooks";
 import {NavLink, useNavigate} from "react-router-dom";
-import {BasicModal} from "../../../common/components/modals/basicModal/BasicModal";
-import {DeletePackModal} from "../../../common/components/modals/packs/DeletePackModal";
-import {EditPackModal} from "../../../common/components/modals/packs/EditPackModal";
+import {DeletePackModal} from "../../../common/components/modals/packs/deletaPackModal/DeletePackModal";
+import {EditPackModal} from "../../../common/components/modals/packs/editPackModal/EditPackModal";
+
+
 
 type PackPropsType = {
     userId: string
@@ -18,11 +18,13 @@ type PackPropsType = {
     cardsCount: number
     updated: string
     user_name: string
+    cardPack_id:string
 }
 
 export const Pack = React.memo(({
                                     userId,
                                     packId,
+                                    cardPack_id,
                                     name,
                                     cardsCount,
                                     updated,
@@ -30,14 +32,16 @@ export const Pack = React.memo(({
                                 }: PackPropsType) => {
     const navigate = useNavigate()
 
-    const dispatch = useAppDispatch()
+
     const profile_Id = useAppSelector(state => state.profile?._id)
     const [openDeletePack, setOpenDeletePack] = useState(false);
     const [openEditModal, setOpenEditModal] = useState(false);
 
     const isMyPacks = userId === profile_Id
+
     const handleEditModalClose = () => {
         setOpenEditModal(false)
+
     };
 
     const handlerDeletePackClose = () => {
@@ -46,7 +50,7 @@ export const Pack = React.memo(({
 
     const onDeletePackHandler = () => {
         setOpenDeletePack(true)
-        /*  dispatch(deletePackTC(packId))*/
+
     }
 
     const onChangePackHandler = () => {
@@ -54,7 +58,7 @@ export const Pack = React.memo(({
     }
 
     const onLearnClickHandler = () => {
-        alert('Learn Cards!')
+        navigate(`/learn/${cardPack_id}`)
     }
 
     const formatDate = (date: Date | string | number) => {
@@ -64,13 +68,7 @@ export const Pack = React.memo(({
     return (
 
         <>
-            <TableRow key={packId} sx={{'&:last-child td, &:last-child th': {border: 0}}}>
-                <BasicModal title='Delete pack' openModal={openDeletePack} closeHandler={handlerDeletePackClose}>
-                    <DeletePackModal packId={packId} closeModal={handlerDeletePackClose} packName={name}/>
-                </BasicModal>
-                <BasicModal title='Edit pack' openModal={openEditModal} closeHandler={handleEditModalClose}>
-                    <EditPackModal packId={packId} closeModal={handleEditModalClose} packName={name}/>
-                </BasicModal>
+            <TableRow  sx={{'&:last-child td, &:last-child th': {border: 0}}}>
                 <TableCell align="left">
                     <NavLink to={`/cards?cardsPack_id=${packId}&page=1&pageCount=5`}>{name}</NavLink>
                 </TableCell>
@@ -83,6 +81,9 @@ export const Pack = React.memo(({
                     {isMyPacks && <DeleteOutlineIcon onClick={onDeletePackHandler}/>}
                 </TableCell>
             </TableRow>
+                <DeletePackModal title='Delete pack' openModal={openDeletePack} packId={packId} closeModal={handlerDeletePackClose} packName={name}/>
+                <EditPackModal title='Edit pack' openModal={openEditModal} packId={packId} closeModal={handleEditModalClose} packName={name}/>
+
         </>
     )
 })

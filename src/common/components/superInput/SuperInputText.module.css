@@ -16,9 +16,7 @@
     border: 2px solid #ED5464FF;
     border-radius: 5px;
 }
-.errorInput:focus{
-    box-shadow: 0 0 8px 0 #ED5464FF;
-}
+
 
 .error {
     display: block;

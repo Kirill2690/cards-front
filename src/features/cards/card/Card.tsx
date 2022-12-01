@@ -7,8 +7,8 @@ import {useAppSelector} from "../../../common/hooks/hooks";
 import {Stars} from "../../../common/components/stars/Stars";
 import {CardsType} from "../cards-reducer";
 import {BasicModal} from "../../../common/components/modals/basicModal/BasicModal";
-import {DeleteCardModal} from "../../../common/components/modals/cards/DeleteCardModal";
-import {EditCardModal} from "../../../common/components/modals/cards/EditCardModal";
+import {DeleteCardModal} from "../../../common/components/modals/cards/deleteCardModal/DeleteCardModal";
+import {EditCardModal} from "../../../common/components/modals/cards/editCardModal/EditCardModal";
 
 export type CardPropsType = {
     card: CardsType
@@ -28,25 +28,24 @@ export const Card = ({card}: CardPropsType) => {
     const [openCardModal, setOpenCardModal] = useState(false)
     const [openDeleteCardModal, setOpenDeleteCardModal] = useState(false)
 
-    const onDeleteCardHandler=()=>{
+    const onDeleteCardHandler = () => {
         setOpenDeleteCardModal(true)
     }
-    const onChangeCardHandler=()=>{
+    const onChangeCardHandler = () => {
         setOpenCardModal(true)
     }
- const handleCardModalClose = ()=>{
-     setOpenCardModal(false)
- }
+    const handleCardModalClose = () => {
+        setOpenCardModal(false)
+    }
     return (
         <>
-            <BasicModal title={"Delete card"} openModal={openDeleteCardModal}
-                        closeHandler={handleCardModalClose}>
-                <DeleteCardModal question={card.question} closeModal={handleCardModalClose} id={card._id}/>
-            </BasicModal>
-            <BasicModal title={"Edit card"} openModal={openCardModal}
-                        closeHandler={handleCardModalClose}>
-                <EditCardModal answer={card.answer} question={card.question} cardId={card._id} closeModal={handleCardModalClose}/>
-            </BasicModal>
+            <DeleteCardModal title={"Delete card"} openModal={openDeleteCardModal} question={card.question}
+                             closeModal={handleCardModalClose} id={card._id}/>
+
+            <EditCardModal title={"Edit card"} openModal={openCardModal} answer={card.answer} question={card.question}
+                           cardId={card._id}
+                           closeModal={handleCardModalClose}/>
+
             <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
                 <TableCell className={finalQuestionColumn} component="th" scope="row">
                     {card.question}

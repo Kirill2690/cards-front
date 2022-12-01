@@ -6,22 +6,26 @@ import {Path} from "../../../app/pages/Routes";
 import {setQueryCardsParamsAC} from "../../../features/cards/cards-reducer";
 import {Button, Menu, MenuItem} from "@mui/material";
 import ListIcon from '@mui/icons-material/List';
+import {EditPackModal} from "../modals/packs/editPackModal/EditPackModal";
+import {DeletePackModal} from "../modals/packs/deletaPackModal/DeletePackModal";
 
 
 
 type PropsType = {
+    isMyPack: string
+    packName?: string
     packId: string
-    isMyPack: boolean
-    packData?: PackType
+    cardPack_id:string
 }
 
-export const PackMenu: React.FC<PropsType> = ({packId, isMyPack, packData}) => {
+export const PackMenu: React.FC<PropsType> = ({cardPack_id,isMyPack,packName,packId }) => {
 
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [openModal, setOpenModal] = useState(false);
+    const [typeModal, setTypeModal] = useState('')
 
     const open = Boolean(anchorEl);
 
@@ -29,7 +33,7 @@ export const PackMenu: React.FC<PropsType> = ({packId, isMyPack, packData}) => {
     const openHandler = () => setOpenModal(true);
     const closeHandler = () => setOpenModal(false);
 
-    const [typeModal, setTypeModal] = useState('')
+
     const openEditHandler = () => {
         setTypeModal('edit')
         openHandler()
@@ -47,11 +51,8 @@ export const PackMenu: React.FC<PropsType> = ({packId, isMyPack, packData}) => {
         setAnchorEl(null);
     };
 
-    const handleLearn = () => {
-        handleClose()
-        navigate(`${Path.Learn}/${packId}`)
-        dispatch(setQueryCardsParamsAC({cardsPack_id: packId}))
-
+    const onLearnClickHandler = () => {
+        navigate(`/learn/${cardPack_id}`)
     }
     const handleDelete = () => {
         handleClose()
@@ -92,13 +93,21 @@ export const PackMenu: React.FC<PropsType> = ({packId, isMyPack, packData}) => {
                     ? <>
                         <MenuItem onClick={handleEdit}>Edit</MenuItem>
                         <MenuItem onClick={handleDelete}>Delete</MenuItem>
-                        <MenuItem onClick={handleLearn}>Learn</MenuItem>
+                        <MenuItem onClick={onLearnClickHandler}>Learn</MenuItem>
                     </>
-                    : <MenuItem onClick={handleLearn}>Learn</MenuItem>
+                    : <MenuItem onClick={onLearnClickHandler}>Learn</MenuItem>
 
                 }
 
             </Menu>
+            {/*{typeModal === 'edit' &&
+                <EditPackModal title={'Edit pack'} openModal={openModal} closeModal={closeHandler}
+                               packId={packId} packName={}/>
+            }
+            {typeModal === 'delete' &&
+                <DeletePackModal title={'Delete pack'} openModal={openModal} closeModal={closeHandler}
+                 packId={packId} packName={packId} />
+            }*/}
         </div>
     );
 };

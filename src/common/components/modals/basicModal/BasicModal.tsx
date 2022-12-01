@@ -18,7 +18,7 @@ export const BasicModal: React.FC<BasicModalPropsType> = (
     }) => {
 
     return (
-        <div>
+        <>
             <Modal open={openModal} onClose={closeHandler} sx={{zIndex: 1}}>
                 <div className={s.main}>
                     <div className={s.titleBox}>
@@ -31,6 +31,6 @@ export const BasicModal: React.FC<BasicModalPropsType> = (
                     {children}
                 </div>
             </Modal>
-        </div>
+        </>
     );
 }

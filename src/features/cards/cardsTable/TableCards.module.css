@@ -1,14 +1,4 @@
-.backToCardsBlock {
-    margin-top: -30px;
-}
 
-.goToPacksTitle {
-    cursor: pointer;
-}
-
-.goToPacksTitle:hover .arrowText {
-    color: #525252 !important;
-}
 
 .arrowText {
     color: black;

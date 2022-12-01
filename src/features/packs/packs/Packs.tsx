@@ -9,8 +9,8 @@ import {Pagination} from "../pagination/Paginator";
 import {SearchInput} from "../searchInput/SearchInput";
 import {NewSlider} from "../../../common/components/slider/NewSlider";
 import {ButtonGroup} from "../ButtonGroup/ButtonGroup";
-import {BasicModal} from "../../../common/components/modals/basicModal/BasicModal";
-import {AddNewPackModal} from "../../../common/components/modals/packs/AddNewPackModal";
+
+import {AddNewPackModal} from "../../../common/components/modals/packs/addPackModal/AddNewPackModal";
 
 export type ButtonValuesType = "all" | "my";
 
@@ -27,12 +27,17 @@ export const Packs = React.memo(() => {
     const packName = useAppSelector(state => state.packs.params.packName)
     const page = useAppSelector(state => state.packs.params.page)
     const pageCount = useAppSelector(state => state.packs.params.pageCount)
-    const sortPacks = useAppSelector(state => state.packs.params.sortPacks)
 
-    const [searchText, setSearchText] = useState<string>('')
+
+    const [newName, setNewName] = useState<string>('My new pack')
+    const [searchText, setSearchText] = useState<string | undefined>(undefined)
     const [buttonValue, setButtonValue] = useState<ButtonValuesType>(userIDParams?"my":"all")
     const [sliderValue, setSliderValue] = useState<number[]>([min, max])
-    const [openAddPackModal, setOpenAddPackModal] = useState<boolean>(false)
+    const [openModal, setOpenModal] = useState(false);
+    const openHandler = () => setOpenModal(true);
+    const closeHandler = () => setOpenModal(false);
+
+
 
     useEffect(() => {
         setSliderValue([min, max])
@@ -40,34 +45,31 @@ export const Packs = React.memo(() => {
 
     useEffect(() => {
         dispatch(getPacksTC())
-    }, [packName, minParams, maxParams, userIDParams, page, pageCount,sortPacks])
+    }, [packName, minParams, maxParams, userIDParams, page, pageCount])
 
-    const handlerChangeSearch = (text: string) => {
-        dispatch(setQueryParamsAC(text.length? {packName: text}:{packName: undefined}))
+    //Search
+    const handleChangeSearch = (text: string | undefined) => {
+        dispatch(setQueryParamsAC({packName: text}))
     }
-
-    const handlerButtonClick = (value: ButtonValuesType) => {
+    //Button
+    const handleButtonClick = (value: ButtonValuesType) => {
         setButtonValue(value)
         value === "my" ? dispatch(setQueryParamsAC({userID: userId}))
             : dispatch(setQueryParamsAC({userID: undefined}))
     }
-
-    const handlerChangeSlider = (newValue: number[]) => {
+    //Slider
+    const handleChangeSlider = (newValue: number[]) => {
         setSliderValue(newValue)
         dispatch(setQueryParamsAC({min: newValue[0].toString(), max: newValue[1].toString()}))
     }
 
-    const addNewPackHandler = () => {
-        setOpenAddPackModal(true)
-    }
-
+    //Reset
     const setResetFilterHandler = () => {
-        setSearchText('')
-        handlerButtonClick("all")
-        handlerChangeSlider([min, max])
-        dispatch(setQueryParamsAC({sortPacks:undefined}))
+        setSearchText(undefined)
+        handleButtonClick("all")
+        handleChangeSlider([min, max])
     }
-
+    //Pagination
     const pageHandler = (valuePage: number) => {
         dispatch(setQueryParamsAC({page: valuePage.toString()}))
     }
@@ -75,39 +77,32 @@ export const Packs = React.memo(() => {
         dispatch(setQueryParamsAC({pageCount: valuePageCount.toString()}))
     }
 
-    const handlerAddNewPackModal = () => {
-        setOpenAddPackModal(false)
-    }
+
 
     return (
         <div className={s.packs_wrapper}>
             <div className={s.packs_header}>
                 <h2>Packs List</h2>
-                <div>
-                    <BasicModal title={"Add new pack"} openModal={openAddPackModal}
-                                closeHandler={handlerAddNewPackModal}>
-                        <AddNewPackModal closeModal={handlerAddNewPackModal}></AddNewPackModal>
-                    </BasicModal>
-                </div>
                 <Button variant={'contained'}
                         className={s.button}
-                        onClick={addNewPackHandler}
+                        onClick={openHandler}
                 >
                     Add new pack
                 </Button>
             </div>
             <div className={s.packs_tools}>
-                <SearchInput handleChangeSearch={handlerChangeSearch} searchText={searchText}
+                <SearchInput handleChangeSearch={handleChangeSearch} searchText={searchText}
                              setSearchText={setSearchText}/>
-                <ButtonGroup buttonValue={buttonValue} changeButton={handlerButtonClick}/>
+                <ButtonGroup buttonValue={buttonValue} changeButton={handleButtonClick}/>
                 <NewSlider sliderValue={sliderValue} setSliderValue={setSliderValue}
-                           handleChangeSlider={handlerChangeSlider}/>
+                           handleChangeSlider={handleChangeSlider}/>
                 <Button onClick={setResetFilterHandler}>
                     <FilterListOffIcon/>
                 </Button>
             </div>
             <PacksList/>
             <Pagination callBackPage={pageHandler} callBackPageCount={pageCountHandler}/>
-        </div>
+            <AddNewPackModal  title={"Add new pack"} openModal={openModal}  closeModal={closeHandler}></AddNewPackModal>
+    </div>
     )
 })
