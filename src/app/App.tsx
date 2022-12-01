@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import s from './App.module.css'
-import {Header} from "../features/header/Header";
+import {Header} from "../common/components/header/Header";
 import {RoutesPages} from "./pages/Routes";
 import {useAppDispatch, useAppSelector} from "../common/hooks/hooks";
 import {authMeTC} from "./app-reducer";

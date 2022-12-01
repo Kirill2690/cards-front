@@ -10,7 +10,6 @@ import {DeletePackModal} from "../../../common/components/modals/packs/deletaPac
 import {EditPackModal} from "../../../common/components/modals/packs/editPackModal/EditPackModal";
 
 
-
 type PackPropsType = {
     userId: string
     packId: string
@@ -18,7 +17,7 @@ type PackPropsType = {
     cardsCount: number
     updated: string
     user_name: string
-    cardPack_id:string
+    cardPack_id: string
 }
 
 export const Pack = React.memo(({
@@ -68,7 +67,7 @@ export const Pack = React.memo(({
     return (
 
         <>
-            <TableRow  sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+            <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
                 <TableCell align="left">
                     <NavLink to={`/cards?cardsPack_id=${packId}&page=1&pageCount=5`}>{name}</NavLink>
                 </TableCell>
@@ -81,8 +80,10 @@ export const Pack = React.memo(({
                     {isMyPacks && <DeleteOutlineIcon onClick={onDeletePackHandler}/>}
                 </TableCell>
             </TableRow>
-                <DeletePackModal title='Delete pack' openModal={openDeletePack} packId={packId} closeModal={handlerDeletePackClose} packName={name}/>
-                <EditPackModal title='Edit pack' openModal={openEditModal} packId={packId} closeModal={handleEditModalClose} packName={name}/>
+            <DeletePackModal title='Delete pack' openModal={openDeletePack} packId={packId}
+                             closeModal={handlerDeletePackClose} packName={name}/>
+            <EditPackModal title='Edit pack' openModal={openEditModal} packId={packId} closeModal={handleEditModalClose}
+                           packName={name}/>
 
         </>
     )

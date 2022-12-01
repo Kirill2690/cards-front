@@ -13,14 +13,14 @@ export const PacksList = () => {
     const sort = useAppSelector(state => state.packs.params.sortPacks)
 
     const sortUpdate = (sortParams: string) => {
-        sort === `1${sortParams}` ? dispatch(setQueryParamsAC({sortPacks:`0${sortParams}`}))
-            : dispatch(setQueryParamsAC({sortPacks:`1${sortParams}`}));
+        sort === `1${sortParams}` ? dispatch(setQueryParamsAC({sortPacks: `0${sortParams}`}))
+            : dispatch(setQueryParamsAC({sortPacks: `1${sortParams}`}));
     }
 
     return (
         <TableContainer component={Paper}>
             <Table sx={{minWidth: 600}} aria-label="Packs table">
-                <TableHead>
+                <TableHead sx={{backgroundColor: '#EFEFEF'}}>
                     <TableRow>
                         <TableCell onClick={() => sortUpdate('name')}
                                    className={sort === '1name' ? s.sortUp : s.sortDown}>Name</TableCell>

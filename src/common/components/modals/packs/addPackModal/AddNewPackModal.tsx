@@ -27,8 +27,10 @@ export const AddNewPackModal = ({closeModal,title,openModal}: AddNewPackModalPro
         },
         validate: (values) => {
             const errors: FormikErrorsType = {}
-            if (values.packName.length < 1) {
-                errors.packName = 'enter pack name'
+            if (!values.packName) {
+                errors.packName = 'Name is required'
+            } else if (values.packName.length <= 1) {
+                errors.packName = 'Name should be more then 1 symbols'
             }
             if (values.packName.length > 40) {
                 errors.packName = 'your pack name is too long'
@@ -39,6 +41,8 @@ export const AddNewPackModal = ({closeModal,title,openModal}: AddNewPackModalPro
         }
 
     })
+
+    const { isValid, dirty } = { ...formik };
 
     const saveHandler = () => {
         dispatch(addPackTC(formik.values.packName))
@@ -57,14 +61,9 @@ export const AddNewPackModal = ({closeModal,title,openModal}: AddNewPackModalPro
                     {formik.touched.packName && formik.errors.packName &&
                         <div className={s.error} style={{color:'red'}}>{formik.errors.packName}</div>}
                 </div>
-                {/*<SuperCheckbox
-                checked={formik.values.isPrivate}
-                {...formik.getFieldProps('isPrivate')}>
-                    Private pack
-                </SuperCheckbox>*/}
                 <div className={s.button_wrapper}>
                     <button onClick={closeModal} className={s.button_cancel}>Cancel</button>
-                    <button className={s.button_save} onClick={saveHandler} >Save</button>
+                    <button className={s.button_save} disabled={!isValid || !dirty} onClick={saveHandler} >Save</button>
                 </div>
             </form>
         </BasicModal>

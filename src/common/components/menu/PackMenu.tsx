@@ -13,12 +13,13 @@ import {DeletePackModal} from "../modals/packs/deletaPackModal/DeletePackModal";
 
 type PropsType = {
     isMyPack: string
-    packName?: string
-    packId: string
-    cardPack_id:string
+    packName: string,
+    packId: string,
+    pack:string
+
 }
 
-export const PackMenu: React.FC<PropsType> = ({cardPack_id,isMyPack,packName,packId }) => {
+export const PackMenu: React.FC<PropsType> = ({isMyPack,packName,packId,pack }) => {
 
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
@@ -52,7 +53,7 @@ export const PackMenu: React.FC<PropsType> = ({cardPack_id,isMyPack,packName,pac
     };
 
     const onLearnClickHandler = () => {
-        navigate(`/learn/${cardPack_id}`)
+        navigate(`/learn/${packId}`)
     }
     const handleDelete = () => {
         handleClose()
@@ -100,14 +101,14 @@ export const PackMenu: React.FC<PropsType> = ({cardPack_id,isMyPack,packName,pac
                 }
 
             </Menu>
-            {/*{typeModal === 'edit' &&
+            {typeModal === 'edit' &&
                 <EditPackModal title={'Edit pack'} openModal={openModal} closeModal={closeHandler}
-                               packId={packId} packName={}/>
+                               packId={packId} packName={packName}/>
             }
             {typeModal === 'delete' &&
                 <DeletePackModal title={'Delete pack'} openModal={openModal} closeModal={closeHandler}
-                 packId={packId} packName={packId} />
-            }*/}
+                 packId={packId} packName={packName} />
+            }
         </div>
     );
 };

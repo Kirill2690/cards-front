@@ -1,10 +1,10 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import s from './Header.module.css';
-import logo from '../../assets/images/logo_learn.jpeg'
+import logo from '../../../assets/images/logo_learn.jpeg'
 import {Avatar, Button} from "@mui/material";
-import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
-import {logoutTC} from "../auth/profile/profile-reducer";
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
+import {logoutTC} from "../../../features/auth/profile/profile-reducer";
 
 
 export const Header = () => {

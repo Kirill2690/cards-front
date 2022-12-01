@@ -1,9 +1,7 @@
 import React from 'react';
-import {Button, Input} from "@mui/material";
 import {useAppDispatch} from "../../../../hooks/hooks";
 import {useFormik} from "formik";
 import { changePackTC} from "../../../../../features/packs/packs-reducer";
-import SuperCheckbox from "../../../superCheckbox/SuperCheckbox";
 import s from "../addPackModal/AddNewPackModal.module.css";
 import {SuperInputText} from "../../../superInput/SuperInputText";
 import {BasicModal} from "../../basicModal/BasicModal";
@@ -13,7 +11,8 @@ type EditPackModalPropsType = {
     packId: string
     packName: string
     title:string
-    openModal:boolean
+    openModal:boolean,
+
 
 }
 type FormikErrorsType = {
@@ -26,20 +25,17 @@ export const EditPackModal = ({packName,packId,title,closeModal,openModal}: Edit
 
     const formik = useFormik({
         initialValues: {
-            name: packName
+            name: packName,
         },
         validate: (values) => {
             const errors: FormikErrorsType = {}
             if (!values.name) {
-                errors.name = 'required'
-            }
-            if (values.name.length > 40) {
-                errors.name = 'your pack name is too long'
-            }
-            if (!values.name) {
                 errors.name = 'Name is required'
             } else if (values.name.length <= 1) {
                 errors.name = 'Name should be more then 1 symbols'
+            }
+            if (values.name.length > 40) {
+                errors.name = 'your pack name is too long'
             }
                 return errors
 
@@ -48,6 +44,8 @@ export const EditPackModal = ({packName,packId,title,closeModal,openModal}: Edit
 
         }
     })
+
+    const { isValid } = { ...formik };
 
     const saveHandler=()=>{
         const updatePackData = {_id:packId, name: formik.values.name}
@@ -70,7 +68,7 @@ export const EditPackModal = ({packName,packId,title,closeModal,openModal}: Edit
                 </div>
                 <div className={s.button_wrapper}>
                     <button onClick={closeModal} className={s.button_cancel}>Cancel</button>
-                    <button className={s.button_save} onClick={saveHandler}>Save</button>
+                    <button className={s.button_save} disabled={!isValid} onClick={saveHandler}>Save</button>
                 </div>
             </form>
         </BasicModal>

@@ -50,6 +50,8 @@ export const EditCardModal = ({closeModal,cardId,answer,question,title,openModal
         },
     })
 
+    const { isValid } = { ...formik };
+
     const saveHandler = () => {
         dispatch(updateCardsTC({_id:cardId,question:formik.values.question,answer:formik.values.answer}))
         closeModal()
@@ -78,7 +80,7 @@ export const EditCardModal = ({closeModal,cardId,answer,question,title,openModal
 
                 <div className={s.button_wrapper}>
                     <button onClick={closeModal} className={s.button_cancel}>Cancel</button>
-                    <button className={s.button_save} onClick={saveHandler}>Save</button>
+                    <button className={s.button_save} disabled={!isValid} onClick={saveHandler}>Save</button>
                 </div>
             </form>
         </BasicModal>

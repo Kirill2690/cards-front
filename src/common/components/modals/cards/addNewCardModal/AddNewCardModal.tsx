@@ -17,7 +17,7 @@ type  EditModalType = {
     answer?: string
 }
 
-export const AddNewCardModal = ({title,closeModal,openModal,id}: AddNewCardModalPropsType) => {
+export const AddNewCardModal = ({title, closeModal, openModal, id}: AddNewCardModalPropsType) => {
 
     const dispatch = useAppDispatch()
 
@@ -49,39 +49,42 @@ export const AddNewCardModal = ({title,closeModal,openModal,id}: AddNewCardModal
         },
     })
 
+    const {isValid, dirty} = {...formik};
+
     const saveHandler = () => {
-        id && dispatch(addCardTC({cardsPack_id:id,question:formik.values.question,answer:formik.values.answer}))
+        id && dispatch(addCardTC({cardsPack_id: id, question: formik.values.question, answer: formik.values.answer}))
         closeModal()
         formik.resetForm()
     }
 
 
-
     return (
+
         <BasicModal title={title} openModal={openModal} closeHandler={closeModal}>
             <form className={s.form} onSubmit={formik.handleSubmit}>
-                    <div className={s.input_wrapper}>
-                        <SuperInputText
-                            placeholder={'Question'}
-                            {...formik.getFieldProps('question')}
-                        />
-                            {formik.touched.answer && formik.errors.answer &&
-                                <div className={s.error} style={{color:'red'}}>{formik.errors.answer}</div>}
-                        </div>
-                    <div className={s.input_wrapper}>
-                        <SuperInputText
-                            placeholder={'Answer'}
-                            {...formik.getFieldProps('answer')}
-                        />
-                            {formik.touched.answer && formik.errors.answer &&
-                                <div className={s.error} style={{color: 'red'}}>{formik.errors.answer}</div>}
-                        </div>
-
-                        <div className={s.button_wrapper}>
-                            <button onClick={closeModal} className={s.button_cancel}>Cancel</button>
-                            <button className={s.button_save} onClick={saveHandler}>Save</button>
-                    </div>
-                </form>
-        </BasicModal>
-    )
+                <div className={s.input_wrapper}>
+                    <SuperInputText
+                        placeholder={'Question'}
+                        {...formik.getFieldProps('question')}
+                    />
+                    {formik.touched.answer && formik.errors.answer &&
+                        <div className={s.error} style={{color: 'red'}}>{formik.errors.answer}</div>}
+                </div>
+                <div className={s.input_wrapper}>
+                    <SuperInputText
+                        placeholder={'Answer'}
+                        {...formik.getFieldProps('answer')}
+                    />
+                    {formik.touched.answer && formik.errors.answer &&
+                        <div className={s.error} style={{color: 'red'}}>{formik.errors.answer}</div>}
+                </div>
+                <div className={s.button_wrapper}>
+                    <button onClick={closeModal} className={s.button_cancel}>Cancel</button>
+                    <button className={s.button_save} disabled={!isValid || !dirty}
+                    onClick={saveHandler}>Save
+                </button>
+            </div>
+        </form>
+</BasicModal>
+)
 }

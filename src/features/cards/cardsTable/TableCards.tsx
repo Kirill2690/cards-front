@@ -5,12 +5,11 @@ import {getCardsTC, QueryParamsType, setQueryCardsParamsAC} from "../cards-reduc
 import {useDebounce} from "../../../common/hooks/debounce";
 import {filterQueryParams} from "../../../common/utils/filterQueryParams";
 import {Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-import {CardsPagination} from "../PaginatorFromCards/PaginatorCards";
+import {CardsPagination} from "../paginatorFromCards/PaginatorCards";
 import s from "./TableCards.module.css"
 import {Card} from "../card/Card";
 import {AddNewCardModal} from "../../../common/components/modals/cards/addNewCardModal/AddNewCardModal";
 import {BackToPackList} from "../../../common/components/backToPackList/BackToPacksList";
-import {PackMenu} from "../../../common/components/menu/PackMenu";
 
 
 export const TableCards = () => {
@@ -18,8 +17,8 @@ export const TableCards = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
-    const packs= useAppSelector(state => state.packs);
     const cards = useAppSelector(state => state.cards.cards)
+
 
     const [searchParams, setSearchParams] = useSearchParams()
     const cardsPack_idURL = searchParams.get('cardsPack_id') ? searchParams.get('cardsPack_id') + '' : '1'
@@ -113,7 +112,8 @@ export const TableCards = () => {
 
     return (
         <div>
-                <AddNewCardModal title={"Add new card"} openModal={openCardModal} id={cardsPack_idURL} closeModal={handleCardModalClose} />
+            <AddNewCardModal title={"Add new card"} openModal={openCardModal} id={cardsPack_idURL}
+                             closeModal={handleCardModalClose}/>
             <BackToPackList/>
             <div className={s.infoBox}>
                 <div className={s.titleMenu}>
@@ -122,7 +122,6 @@ export const TableCards = () => {
                         {isPackAuthor ?
                             <div
                                 className={s.iconMenu}>
-
                             </div>
                             : <div></div>
                         }
@@ -131,13 +130,13 @@ export const TableCards = () => {
                         <div className={s.cardsMenu}>
                             <div className={s.pointer}></div>
                             <div className={s.menu}>
-                                <div  className={s.menuEl}>
+                                <div className={s.menuEl}>
                                     <span className={s.elTitle}>Edit</span>
                                 </div>
-                                <div  className={s.menuEl}>
+                                <div className={s.menuEl}>
                                     <span className={s.elTitle}>Delete</span>
                                 </div>
-                                <div  className={s.menuEl}>
+                                <div className={s.menuEl}>
                                     <span className={s.elTitle}>Learn</span>
                                 </div>
                             </div>
@@ -147,7 +146,8 @@ export const TableCards = () => {
                 <div>
                     {isPackAuthor
                         ?
-                        <Button className={s.button} variant='contained' onClick={addNewCardHandler}>Add new cart</Button>
+                        <Button className={s.button} variant='contained' onClick={addNewCardHandler}>Add new
+                            cart</Button>
                         :
                         <Button className={s.button} variant='contained' onClick={learnCards}>Learn to pack</Button>
                     }
@@ -155,15 +155,16 @@ export const TableCards = () => {
             </div>
             <div className={s.inputBlock}>
                 <label className={s.label}>Search</label>
-                <input
-                    type={"search"}
-                    value={cardQuestion}
-                    onChange={searchValueTextHandler}
+                <input className={s.input}
+                       type={"search"}
+                       placeholder={'Provide your text'}
+                       value={cardQuestion}
+                       onChange={searchValueTextHandler}
                 />
             </div>
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
-                    <TableHead sx={{backgroundColor:'gray'}}>
+                    <TableHead sx={{backgroundColor: '#EFEFEF'}}>
                         <TableRow>
                             <TableCell className={s.header}>Question</TableCell>
                             <TableCell className={s.header}>Answer</TableCell>

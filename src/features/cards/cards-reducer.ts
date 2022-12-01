@@ -15,6 +15,7 @@ const initialState = {
     cards: [] as CardsType[],
     packUserId: '',
     packName: '',
+    packId: '',
     page: 1,
     pageCount: 5,
     cardsTotalCount: 0,

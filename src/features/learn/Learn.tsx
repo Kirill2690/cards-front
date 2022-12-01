@@ -38,7 +38,6 @@ export const Learn = () => {
     });
 
 
-
     const showHandler = () => {
         setShow(true)
     }
@@ -83,7 +82,7 @@ export const Learn = () => {
                     {!show
                         ?
                         <div className={s.buttonContainer}>
-                            <Button variant={'contained'}  onClick={showHandler}
+                            <Button variant={'contained'} onClick={showHandler}
                                     className={s.button}>Show answer</Button>
                         </div>
                         :
