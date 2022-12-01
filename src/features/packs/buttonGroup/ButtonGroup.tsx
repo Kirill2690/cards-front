@@ -1,25 +1,25 @@
-import React, { useCallback } from 'react';
+import React, {useCallback} from 'react';
 import {Button} from "@mui/material";
 import s from './ButtonGroup.module.css'
 import {ButtonValuesType} from "../packs/Packs";
 
 
 type ButtonGroupPropsType = {
-    buttonValue:ButtonValuesType,
-    changeButton:(value:ButtonValuesType)=>void
+    buttonValue: ButtonValuesType,
+    changeButton: (value: ButtonValuesType) => void
 }
 
-export const ButtonGroup = React.memo((props:ButtonGroupPropsType) => {
+export const ButtonGroup = React.memo((props: ButtonGroupPropsType) => {
 
-    const handleClickMy = useCallback(()=>{
+    const handleClickMy = useCallback(() => {
         props.changeButton("my")
-    },[props.changeButton])
-    const handleClickAll =useCallback(()=>{
+    }, [props.changeButton])
+    const handleClickAll = useCallback(() => {
         props.changeButton("all")
-    },[props.changeButton])
+    }, [props.changeButton])
 
     return (
-        <div >
+        <div>
             <Button
                 className={s.button}
                 variant={props.buttonValue === "my" ? 'contained' : 'outlined'}

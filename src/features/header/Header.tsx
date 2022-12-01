@@ -14,7 +14,6 @@ export const Header = () => {
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn);
     const navigate = useNavigate()
 
-
     const logoutHandler = () => {
         dispatch(logoutTC())
         navigate('/login')

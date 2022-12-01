@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {Paper, TableContainer, Table, TableHead, TableRow, TableCell, TableBody} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import s from '../packs/Packs.module.css'

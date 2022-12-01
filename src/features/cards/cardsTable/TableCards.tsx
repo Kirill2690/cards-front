@@ -1,7 +1,7 @@
 import {Navigate, useNavigate, useSearchParams} from "react-router-dom"
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks"
 import React, {ChangeEvent, useEffect, useState} from "react";
-import {addCardTC, getCardsTC, QueryParamsType, setQueryCardsParamsAC} from "../cards-reducer";
+import {getCardsTC, QueryParamsType, setQueryCardsParamsAC} from "../cards-reducer";
 import {useDebounce} from "../../../common/hooks/debounce";
 import {filterQueryParams} from "../../../common/utils/filterQueryParams";
 import {Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
@@ -31,10 +31,6 @@ export const TableCards = () => {
     const userCardID = useAppSelector(state => state.cards.packUserId)
     const pack = useAppSelector(state => state.packs.cardPacks.find(el => el._id === cardsPack_idURL))
     const packName = useAppSelector(state => state.cards.packName)
-
-
-
-
 
     const [visibilityValue, setVisibilityValue] = useState<boolean>(false)
     const [paramsSearchState, setParamsSearchState] = useState<QueryParamsType>({

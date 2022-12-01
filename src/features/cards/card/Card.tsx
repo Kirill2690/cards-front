@@ -6,7 +6,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import {useAppSelector} from "../../../common/hooks/hooks";
 import {Stars} from "../../../common/components/stars/Stars";
 import {CardsType} from "../cards-reducer";
-import {BasicModal} from "../../../common/components/modals/basicModal/BasicModal";
 import {DeleteCardModal} from "../../../common/components/modals/cards/deleteCardModal/DeleteCardModal";
 import {EditCardModal} from "../../../common/components/modals/cards/editCardModal/EditCardModal";
 
@@ -14,7 +13,6 @@ export type CardPropsType = {
     card: CardsType
 
 }
-
 
 export const Card = ({card}: CardPropsType) => {
 
