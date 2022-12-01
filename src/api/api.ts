@@ -48,7 +48,8 @@ export const packsAPI = {
                 packName: data.packName,
                 user_id: data.userID,
                 min: data.min,
-                max: data.max
+                max: data.max,
+                sortPacks:data.sortPacks
             }
         })
     },
@@ -201,6 +202,7 @@ export type PacksParamsType = {
     userID?: string
     min?: string
     max?: string
+    sortPacks?:string
 }
 
 export type ResponsePacksType = {
