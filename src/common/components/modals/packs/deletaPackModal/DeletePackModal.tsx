@@ -3,20 +3,25 @@ import {useAppDispatch} from "../../../../hooks/hooks";
 import {deletePackTC} from "../../../../../features/packs/packs-reducer";
 import {BasicModal} from "../../basicModal/BasicModal";
 import s from './DeletePackModal.module.css'
+import {useNavigate} from "react-router-dom";
 
 type DeletePackModalPropsType = {
     closeModal: () => void
     packName?: string
     packId: string
-    title:string
-    openModal:boolean
+    title: string
+    openModal: boolean
+    cardsPack_id:string
 }
-export const DeletePackModal = ({closeModal,packName,packId,title,openModal}: DeletePackModalPropsType) => {
+export const DeletePackModal = ({cardsPack_id,closeModal, packName, packId, title, openModal}: DeletePackModalPropsType) => {
 
     const dispatch = useAppDispatch()
+    const navigate=useNavigate()
 
     const deletePackHandler = () => {
-        dispatch(deletePackTC(packId))
+        dispatch(deletePackTC(cardsPack_id))
+        closeModal()
+        navigate('/packs')
     }
 
     return (

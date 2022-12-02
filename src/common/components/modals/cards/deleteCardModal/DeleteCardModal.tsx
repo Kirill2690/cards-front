@@ -19,7 +19,7 @@ export const DeleteCardModal = ({title,id,openModal,question,closeModal}:DeleteC
 
     const deleteCardHandler = ()=>{
         dispatch(deleteCardsTC(id))
-        closeModal()
+
     }
 
     return (

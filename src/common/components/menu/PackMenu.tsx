@@ -1,28 +1,30 @@
-import {PackType} from "../../../api/api";
+
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../../hooks/hooks";
 import React, {useState} from "react";
-import {Path} from "../../../app/pages/Routes";
-import {setQueryCardsParamsAC} from "../../../features/cards/cards-reducer";
 import {Button, Menu, MenuItem} from "@mui/material";
-import ListIcon from '@mui/icons-material/List';
 import {EditPackModal} from "../modals/packs/editPackModal/EditPackModal";
 import {DeletePackModal} from "../modals/packs/deletaPackModal/DeletePackModal";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SchoolIcon from '@mui/icons-material/School';
+import MenuIcon from '@mui/icons-material/Menu';
 
 
 
 type PropsType = {
-    isMyPack: string
+    isMyPack:string,
     packName: string,
     packId: string,
-    pack:string
+    cardsPack_id:string
+
 
 }
 
-export const PackMenu: React.FC<PropsType> = ({isMyPack,packName,packId,pack }) => {
+export const PackMenu: React.FC<PropsType> = ({packName,packId ,isMyPack,cardsPack_id}) => {
 
     const navigate = useNavigate()
-    const dispatch = useAppDispatch()
+    const dispatch=useAppDispatch()
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [openModal, setOpenModal] = useState(false);
@@ -39,6 +41,7 @@ export const PackMenu: React.FC<PropsType> = ({isMyPack,packName,packId,pack }) 
         setTypeModal('edit')
         openHandler()
     }
+
     const openDeleteHandler = () => {
         setTypeModal('delete')
         openHandler()
@@ -52,8 +55,8 @@ export const PackMenu: React.FC<PropsType> = ({isMyPack,packName,packId,pack }) 
         setAnchorEl(null);
     };
 
-    const onLearnClickHandler = () => {
-        navigate(`/learn/${packId}`)
+    const learnCards = () => {
+        navigate(`/learn/${packId ? packId: cardsPack_id}`)
     }
     const handleDelete = () => {
         handleClose()
@@ -73,7 +76,7 @@ export const PackMenu: React.FC<PropsType> = ({isMyPack,packName,packId,pack }) 
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
             >
-                <ListIcon/>
+                <MenuIcon sx={{color:'black'}}/>
             </Button>
             <Menu
                 id="demo-positioned-menu"
@@ -92,11 +95,11 @@ export const PackMenu: React.FC<PropsType> = ({isMyPack,packName,packId,pack }) 
             >
                 {isMyPack
                     ? <>
-                        <MenuItem onClick={handleEdit}>Edit</MenuItem>
-                        <MenuItem onClick={handleDelete}>Delete</MenuItem>
-                        <MenuItem onClick={onLearnClickHandler}>Learn</MenuItem>
+                        <MenuItem onClick={handleEdit}>Edit <EditIcon/></MenuItem>
+                        <MenuItem onClick={handleDelete}>Delete <DeleteIcon/></MenuItem>
+                        <MenuItem onClick={learnCards}>Learn <SchoolIcon/> </MenuItem>
                     </>
-                    : <MenuItem onClick={onLearnClickHandler}>Learn</MenuItem>
+                    : <MenuItem onClick={learnCards}>Learn <SchoolIcon/></MenuItem>
 
                 }
 
@@ -105,9 +108,10 @@ export const PackMenu: React.FC<PropsType> = ({isMyPack,packName,packId,pack }) 
                 <EditPackModal title={'Edit pack'} openModal={openModal} closeModal={closeHandler}
                                packId={packId} packName={packName}/>
             }
+
             {typeModal === 'delete' &&
                 <DeletePackModal title={'Delete pack'} openModal={openModal} closeModal={closeHandler}
-                 packId={packId} packName={packName} />
+                                 packId={packId} packName={packName} cardsPack_id={cardsPack_id}/>
             }
         </div>
     );

@@ -4,10 +4,11 @@ import TableRow from "@mui/material/TableRow";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import {useAppSelector} from "../../../common/hooks/hooks";
+import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {NavLink, useNavigate} from "react-router-dom";
 import {DeletePackModal} from "../../../common/components/modals/packs/deletaPackModal/DeletePackModal";
 import {EditPackModal} from "../../../common/components/modals/packs/editPackModal/EditPackModal";
+
 
 
 type PackPropsType = {
@@ -31,30 +32,28 @@ export const Pack = React.memo(({
                                 }: PackPropsType) => {
     const navigate = useNavigate()
 
+    const dispatch=useAppDispatch()
+
 
     const profile_Id = useAppSelector(state => state.profile?._id)
-    const [openDeletePack, setOpenDeletePack] = useState(false);
-    const [openEditModal, setOpenEditModal] = useState(false);
+    const [typeModal,setTypeModal]=useState('')
+    const [openModal, setOpenModal] = useState(false);
+    const openHandler = () => setOpenModal(true);
+    const closeHandler = () => setOpenModal(false);
 
     const isMyPacks = userId === profile_Id
 
-    const handleEditModalClose = () => {
-        setOpenEditModal(false)
+    const handleEditModal = () => {
+        setTypeModal('edit')
+        openHandler()
 
     };
 
-    const handlerDeletePackClose = () => {
-        setOpenDeletePack(false)
-    }
-
     const onDeletePackHandler = () => {
-        setOpenDeletePack(true)
-
+        setTypeModal('delete')
+        openHandler()
     }
 
-    const onChangePackHandler = () => {
-        setOpenEditModal(true)
-    }
 
     const onLearnClickHandler = () => {
         navigate(`/learn/${cardPack_id}`)
@@ -76,15 +75,18 @@ export const Pack = React.memo(({
                 <TableCell align="right">{user_name}</TableCell>
                 <TableCell align="right">
                     <SchoolOutlinedIcon onClick={onLearnClickHandler}/>
-                    {isMyPacks && <EditIcon onClick={onChangePackHandler}/>}
+                    {isMyPacks && <EditIcon onClick={handleEditModal}/>}
                     {isMyPacks && <DeleteOutlineIcon onClick={onDeletePackHandler}/>}
                 </TableCell>
+                {typeModal === 'edit' &&
+                    <EditPackModal title='Edit pack' openModal={openModal} packId={packId} closeModal={closeHandler}
+                                   packName={name}/>
+                }
+                {typeModal === 'delete' &&
+                    <DeletePackModal title='Delete pack' openModal={openModal} packId={packId}
+                                     closeModal={closeHandler} packName={name} cardsPack_id={cardPack_id}/>
+                }
             </TableRow>
-            <DeletePackModal title='Delete pack' openModal={openDeletePack} packId={packId}
-                             closeModal={handlerDeletePackClose} packName={name}/>
-            <EditPackModal title='Edit pack' openModal={openEditModal} packId={packId} closeModal={handleEditModalClose}
-                           packName={name}/>
-
         </>
     )
 })

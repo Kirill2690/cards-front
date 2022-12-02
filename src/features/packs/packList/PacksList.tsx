@@ -33,7 +33,7 @@ export const PacksList = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {packs && packs.map((p) => (
+                    {packs.length && packs.map((p) => (
                         <Pack key={p._id}
                               packId={p._id}
                               userId={p.user_id}

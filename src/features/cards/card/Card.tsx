@@ -59,10 +59,8 @@ export const Card = ({card}: CardPropsType) => {
                         <Stars ratingValue={card.grade}/>
                         {isPersonPack &&
                             <div className={s.icons}>
+                                <EditIcon onClick={onChangeCardHandler}/>
                                 <DeleteOutlineIcon onClick={onDeleteCardHandler}/>
-                                <div className={s.icon}>
-                                    <EditIcon onClick={onChangeCardHandler}/>
-                                </div>
                             </div>
                         }
                     </div>

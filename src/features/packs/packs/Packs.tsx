@@ -79,7 +79,7 @@ export const Packs = () => {
     return (
         <div className={s.packs_wrapper}>
             <div className={s.packs_header}>
-                <h2>Packs List</h2>
+                <div className={s.pack_list}>Packs List</div>
                 <Button variant={'contained'}
                         className={s.button}
                         onClick={openHandler}

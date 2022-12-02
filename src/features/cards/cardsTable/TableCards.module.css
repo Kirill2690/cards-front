@@ -1,5 +1,4 @@
 
-
 .arrowText {
     color: black;
     font-weight: 600;
@@ -21,7 +20,8 @@
 }
 
 .titleMenu {
-    position: relative;
+    display: flex;
+    justify-content: space-between;
 
 }
 
@@ -30,13 +30,15 @@
     font-weight: 600;
     font-size: 25px;
     line-height: 27px;
+    font-family: 'Montserrat';
+    font-style: normal;
 }
 
 .iconMenu {
     position: absolute;
-    right: -35px;
-    top: 3px;
+    top: -4px;
     cursor: pointer;
+    left: 30px;
 }
 
 .cardsMenu {
@@ -102,7 +104,18 @@
 
 .label {
     position: absolute;
-    bottom: 51px
+    bottom: 51px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    display: flex;
+    align-items: center;
+    width: 49px;
+    height: 18px;
+
+
 }
 
 .input {
@@ -121,7 +134,7 @@
 }
 
 
-.button{
+.button {
     border-radius: 30px !important;
     width: 373px;
     height: 32px;
@@ -132,9 +145,10 @@
     font-size: 14px !important;
     font-weight: 500;
     color: white;
+    top: -7px;
 }
 
-.input{
+.input {
     box-sizing: border-box;
     width: 876px;
     height: 36px;

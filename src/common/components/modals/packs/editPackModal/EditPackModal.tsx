@@ -5,6 +5,7 @@ import { changePackTC} from "../../../../../features/packs/packs-reducer";
 import s from "../addPackModal/AddNewPackModal.module.css";
 import {SuperInputText} from "../../../superInput/SuperInputText";
 import {BasicModal} from "../../basicModal/BasicModal";
+import {useNavigate} from "react-router-dom";
 
 type EditPackModalPropsType = {
     closeModal: () => void
@@ -22,6 +23,7 @@ type FormikErrorsType = {
 export const EditPackModal = ({packName,packId,title,closeModal,openModal}: EditPackModalPropsType) => {
 
     const dispatch = useAppDispatch()
+
 
     const formik = useFormik({
         initialValues: {
@@ -52,6 +54,7 @@ export const EditPackModal = ({packName,packId,title,closeModal,openModal}: Edit
         dispatch(changePackTC(updatePackData))
         formik.resetForm()
         closeModal()
+
 
     }
 

@@ -10,6 +10,7 @@ import s from "./TableCards.module.css"
 import {Card} from "../card/Card";
 import {AddNewCardModal} from "../../../common/components/modals/cards/addNewCardModal/AddNewCardModal";
 import {BackToPackList} from "../../../common/components/backToPackList/BackToPacksList";
+import {PackMenu} from "../../../common/components/menu/PackMenu";
 
 
 export const TableCards = () => {
@@ -18,6 +19,7 @@ export const TableCards = () => {
     const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
     const cards = useAppSelector(state => state.cards.cards)
+    const id=useAppSelector(state => state.cards.packId)
 
 
     const [searchParams, setSearchParams] = useSearchParams()
@@ -120,8 +122,8 @@ export const TableCards = () => {
                     <h2 className={s.title}>
                         {pack ? pack.name : packName}
                         {isPackAuthor ?
-                            <div
-                                className={s.iconMenu}>
+                            <div className={s.iconMenu}>
+                                <PackMenu packName={packName} packId={id} isMyPack={userID} cardsPack_id={cardsPack_idURL}  />
                             </div>
                             : <div></div>
                         }

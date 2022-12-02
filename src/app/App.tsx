@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import s from './App.module.css'
 import {Header} from "../common/components/header/Header";
-import {RoutesPages} from "./pages/Routes";
+import {RoutesPages} from "../common/pages/Routes";
 import {useAppDispatch, useAppSelector} from "../common/hooks/hooks";
 import {authMeTC} from "./app-reducer";
 import {ErrorSnackbar} from "../common/components/errorSnackBar/ErrorSnackBar";
