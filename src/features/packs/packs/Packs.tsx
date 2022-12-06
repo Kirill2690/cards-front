@@ -88,8 +88,10 @@ export const Packs = () => {
                 </Button>
             </div>
             <div className={s.packs_tools}>
+                <div className={s.search_title}>Search</div>
                 <SearchInput handleChangeSearch={handlerChangeSearch} searchText={searchText}
                              setSearchText={setSearchText}/>
+                <div className={s.buttonGroup_title}>Search</div>
                 <ButtonGroup buttonValue={buttonValue} changeButton={handlerButtonClick}/>
                 <NewSlider sliderValue={sliderValue} setSliderValue={setSliderValue}
                            handleChangeSlider={handlerChangeSlider}/>

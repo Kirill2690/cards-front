@@ -18,13 +18,12 @@ type PackPropsType = {
     cardsCount: number
     updated: string
     user_name: string
-    cardPack_id: string
+
 }
 
 export const Pack = React.memo(({
                                     userId,
                                     packId,
-                                    cardPack_id,
                                     name,
                                     cardsCount,
                                     updated,
@@ -41,6 +40,9 @@ export const Pack = React.memo(({
     const openHandler = () => setOpenModal(true);
     const closeHandler = () => setOpenModal(false);
 
+
+
+
     const isMyPacks = userId === profile_Id
 
     const handleEditModal = () => {
@@ -56,7 +58,7 @@ export const Pack = React.memo(({
 
 
     const onLearnClickHandler = () => {
-        navigate(`/learn/${cardPack_id}`)
+        navigate(`/learn/${packId}`)
     }
 
     const formatDate = (date: Date | string | number) => {
@@ -84,7 +86,7 @@ export const Pack = React.memo(({
                 }
                 {typeModal === 'delete' &&
                     <DeletePackModal title='Delete pack' openModal={openModal} packId={packId}
-                                     closeModal={closeHandler} packName={name} cardsPack_id={cardPack_id}/>
+                                     closeModal={closeHandler} packName={name} />
                 }
             </TableRow>
         </>

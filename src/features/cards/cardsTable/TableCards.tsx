@@ -10,7 +10,8 @@ import s from "./TableCards.module.css"
 import {Card} from "../card/Card";
 import {AddNewCardModal} from "../../../common/components/modals/cards/addNewCardModal/AddNewCardModal";
 import {BackToPackList} from "../../../common/components/backToPackList/BackToPacksList";
-import {PackMenu} from "../../../common/components/menu/PackMenu";
+
+
 
 
 export const TableCards = () => {
@@ -33,16 +34,16 @@ export const TableCards = () => {
     const pack = useAppSelector(state => state.packs.cardPacks.find(el => el._id === cardsPack_idURL))
     const packName = useAppSelector(state => state.cards.packName)
 
-    const [visibilityValue, setVisibilityValue] = useState<boolean>(false)
+    const [visibilityValue, setVisibilityValue] = useState(false)
     const [paramsSearchState, setParamsSearchState] = useState<QueryParamsType>({
         page: '1',
         pageCount: '5',
         cardsPack_id: cardsPack_idURL
     })
-    const [cardQuestion, setCardQuestion] = useState<string>(cardQuestionURL ? cardQuestionURL : '')
+    const [cardQuestion, setCardQuestion] = useState(cardQuestionURL ? cardQuestionURL : '')
     const [openCardModal, setOpenCardModal] = useState(false)
 
-    const debouncedValue = useDebounce<string>(cardQuestion, 500)
+    const debouncedValue = useDebounce(cardQuestion, 500)
 
     const urlParamsFilter = filterQueryParams({
         cardsPack_id: cardsPack_idURL,
@@ -119,15 +120,16 @@ export const TableCards = () => {
             <BackToPackList/>
             <div className={s.infoBox}>
                 <div className={s.titleMenu}>
-                    <h2 className={s.title}>
+                    <div className={s.title}>
                         {pack ? pack.name : packName}
-                        {isPackAuthor ?
-                            <div className={s.iconMenu}>
-                                <PackMenu packName={packName} packId={id} isMyPack={userID} cardsPack_id={cardsPack_idURL}  />
-                            </div>
+                    </div>
+                      {/* {isPackAuthor ?
+
+                             <PackMenu packName={packName} packId={id} isMyPack={userID}/>
+
                             : <div></div>
-                        }
-                    </h2>
+                            }*/}
+
                     {visibilityValue &&
                         <div className={s.cardsMenu}>
                             <div className={s.pointer}></div>

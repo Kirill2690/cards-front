@@ -83,17 +83,35 @@
     text-transform: none !important;
     font-size: 14px !important;
     font-weight: 500;
+    top: 12.75%;
+    bottom: 84.8%;
 }
 
 .pack_list {
-    width: 127px;
     height: 27px;
-    left: 126px;
+    left: 136px;
     top: 99px;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 600;
     font-size: 22px;
     line-height: 27px;
+    color: #000000;
 }
 
+.search_title{
+    position: absolute;
+    width: 49px;
+    height: 18px;
+    top: 166px;
+    left: 169px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+
+}

@@ -101,7 +101,6 @@ export const Learn = () => {
                                             <div
                                                 className={s.inputRadio}
                                                 onClick={onClickHandler}
-                                                /*onChange={setValue}*/
                                             >
                                                 <input
                                                     type={'radio'}

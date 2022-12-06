@@ -1,6 +1,4 @@
-
 import {useNavigate} from "react-router-dom";
-import {useAppDispatch} from "../../hooks/hooks";
 import React, {useState} from "react";
 import {Button, Menu, MenuItem} from "@mui/material";
 import {EditPackModal} from "../modals/packs/editPackModal/EditPackModal";
@@ -8,23 +6,22 @@ import {DeletePackModal} from "../modals/packs/deletaPackModal/DeletePackModal";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SchoolIcon from '@mui/icons-material/School';
-import MenuIcon from '@mui/icons-material/Menu';
 
 
 
 type PropsType = {
-    isMyPack:string,
+    isMyPack: string,
     packName: string,
     packId: string,
-    cardsPack_id:string
+
 
 
 }
 
-export const PackMenu: React.FC<PropsType> = ({packName,packId ,isMyPack,cardsPack_id}) => {
+export const PackMenu: React.FC<PropsType> = ({packName, packId, isMyPack}) => {
 
     const navigate = useNavigate()
-    const dispatch=useAppDispatch()
+
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [openModal, setOpenModal] = useState(false);
@@ -56,7 +53,7 @@ export const PackMenu: React.FC<PropsType> = ({packName,packId ,isMyPack,cardsPa
     };
 
     const learnCards = () => {
-        navigate(`/learn/${packId ? packId: cardsPack_id}`)
+        navigate(`/learn/${packId ? packId:''}`)
     }
     const handleDelete = () => {
         handleClose()
@@ -75,8 +72,9 @@ export const PackMenu: React.FC<PropsType> = ({packName,packId ,isMyPack,cardsPa
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
+                sx={{maxWidth:'1px',color:'black',left:'10px',top:'-18px',fontSize:'30px'}}
             >
-                <MenuIcon sx={{color:'black'}}/>
+                ≡
             </Button>
             <Menu
                 id="demo-positioned-menu"
@@ -85,12 +83,12 @@ export const PackMenu: React.FC<PropsType> = ({packName,packId ,isMyPack,cardsPa
                 open={open}
                 onClose={handleClose}
                 anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
+                    vertical: 'bottom',
+                    horizontal: 'center',
                 }}
                 transformOrigin={{
                     vertical: 'top',
-                    horizontal: 'left',
+                    horizontal: 'center',
                 }}
             >
                 {isMyPack
@@ -111,7 +109,7 @@ export const PackMenu: React.FC<PropsType> = ({packName,packId ,isMyPack,cardsPa
 
             {typeModal === 'delete' &&
                 <DeletePackModal title={'Delete pack'} openModal={openModal} closeModal={closeHandler}
-                                 packId={packId} packName={packName} cardsPack_id={cardsPack_id}/>
+                                 packId={packId} packName={packName}/>
             }
         </div>
     );

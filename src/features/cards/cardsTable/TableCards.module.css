@@ -11,8 +11,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 30px;
-    margin-bottom: 50px;
+    margin-top: 50px;
+
 }
 
 .infoBox button {
@@ -22,11 +22,9 @@
 .titleMenu {
     display: flex;
     justify-content: space-between;
-
 }
 
 .title {
-    position: relative;
     font-weight: 600;
     font-size: 25px;
     line-height: 27px;
@@ -36,9 +34,9 @@
 
 .iconMenu {
     position: absolute;
-    top: -4px;
+    padding: 10px;
     cursor: pointer;
-    left: 30px;
+
 }
 
 .cardsMenu {
@@ -119,7 +117,7 @@
 }
 
 .input {
-    width: 100%;
+    minWidth: 650;
     height: 38.19px;
     border-radius: 10px;
     border: 1px solid #9b9b9b;
@@ -145,7 +143,7 @@
     font-size: 14px !important;
     font-weight: 500;
     color: white;
-    top: -7px;
+    top: -35px;
 }
 
 .input {

@@ -1,0 +1,10 @@
+.button_icon {
+    box-sizing: border-box !important;
+    position: absolute;
+    width: 2px !important;
+    height: 10px !important;
+    top: 10px;
+    left: 100px;
+    border-radius: 90px !important;
+    border: 1px solid #0b76ef;
+}

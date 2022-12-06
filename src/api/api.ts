@@ -267,8 +267,8 @@ export type ResponseCardsType = {
 
 
 export type CardType = {
-    _id: string
-    cardsPack_id: string
+    _id: string //карта
+    cardsPack_id: string //колода
     user_id: string
     answer: string
     question: string

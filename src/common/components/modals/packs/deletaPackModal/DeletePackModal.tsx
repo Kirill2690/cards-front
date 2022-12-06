@@ -8,18 +8,20 @@ import {useNavigate} from "react-router-dom";
 type DeletePackModalPropsType = {
     closeModal: () => void
     packName?: string
-    packId: string
     title: string
     openModal: boolean
-    cardsPack_id:string
+    packId:string
 }
-export const DeletePackModal = ({cardsPack_id,closeModal, packName, packId, title, openModal}: DeletePackModalPropsType) => {
+export const DeletePackModal = ({packId,closeModal, packName, title, openModal}: DeletePackModalPropsType) => {
+
+
+
 
     const dispatch = useAppDispatch()
     const navigate=useNavigate()
 
     const deletePackHandler = () => {
-        dispatch(deletePackTC(cardsPack_id))
+        dispatch(deletePackTC(packId))
         closeModal()
         navigate('/packs')
     }
