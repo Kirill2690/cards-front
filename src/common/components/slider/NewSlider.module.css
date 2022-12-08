@@ -1,7 +1,7 @@
 .wrapper{
     display: flex;
     justify-content:space-between;
-    width:350px;
+    width:250px;
 }
 .minMaxBox {
     display: flex;
@@ -18,5 +18,4 @@
     padding-right: 12px;
     padding-left: 12px;
     width: 60%;
-
 }

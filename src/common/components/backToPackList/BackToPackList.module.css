@@ -1,10 +1,10 @@
 .arrowBack {
     display: flex;
     align-items: center;
-    height: 60px;
     cursor: default;
     left: 168px;
     top: 84px;
+    margin-top: 24px;
 }
 
 a {
@@ -18,9 +18,8 @@ a {
 
 }
 
-span {
+.arrowBack span {
     margin: 0 10px;
-
 }
 
 .icon{

@@ -12,15 +12,13 @@ import {AddNewCardModal} from "../../../common/components/modals/cards/addNewCar
 import {BackToPackList} from "../../../common/components/backToPackList/BackToPacksList";
 
 
-
-
 export const TableCards = () => {
 
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
     const cards = useAppSelector(state => state.cards.cards)
-    const id=useAppSelector(state => state.cards.packId)
+    const id = useAppSelector(state => state.cards.packId)
 
 
     const [searchParams, setSearchParams] = useSearchParams()
@@ -33,6 +31,7 @@ export const TableCards = () => {
     const userCardID = useAppSelector(state => state.cards.packUserId)
     const pack = useAppSelector(state => state.packs.cardPacks.find(el => el._id === cardsPack_idURL))
     const packName = useAppSelector(state => state.cards.packName)
+    const packCover = useAppSelector(state => state.cards.packDeckCover)
 
     const [visibilityValue, setVisibilityValue] = useState(false)
     const [paramsSearchState, setParamsSearchState] = useState<QueryParamsType>({
@@ -123,7 +122,8 @@ export const TableCards = () => {
                     <div className={s.title}>
                         {pack ? pack.name : packName}
                     </div>
-                      {/* {isPackAuthor ?
+
+                    {/* {isPackAuthor ?
 
                              <PackMenu packName={packName} packId={id} isMyPack={userID}/>
 
@@ -158,13 +158,16 @@ export const TableCards = () => {
                 </div>
             </div>
             <div className={s.inputBlock}>
-                <label className={s.label}>Search</label>
-                <input className={s.input}
-                       type={"search"}
-                       placeholder={'Provide your text'}
-                       value={cardQuestion}
-                       onChange={searchValueTextHandler}
-                />
+                <img className={s.pack_img} src={packCover}/>
+                <div>
+                    <div className={s.label}>Search</div>
+                    <input className={s.input}
+                           type={"search"}
+                           placeholder={'Provide your text'}
+                           value={cardQuestion}
+                           onChange={searchValueTextHandler}
+                    />
+                </div>
             </div>
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">

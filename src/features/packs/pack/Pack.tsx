@@ -5,15 +5,18 @@ import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
+import s from '../packs/Packs.module.css'
 import {NavLink, useNavigate} from "react-router-dom";
 import {DeletePackModal} from "../../../common/components/modals/packs/deletaPackModal/DeletePackModal";
 import {EditPackModal} from "../../../common/components/modals/packs/editPackModal/EditPackModal";
+import noCoverImg from "../../../assets/images/noCover.jpeg"
 
 
 
 type PackPropsType = {
     userId: string
     packId: string
+    cover:string
     name: string
     cardsCount: number
     updated: string
@@ -24,15 +27,14 @@ type PackPropsType = {
 export const Pack = React.memo(({
                                     userId,
                                     packId,
+                                    cover,
                                     name,
                                     cardsCount,
                                     updated,
                                     user_name
                                 }: PackPropsType) => {
+    cover = cover?cover:noCoverImg
     const navigate = useNavigate()
-
-    const dispatch=useAppDispatch()
-
 
     const profile_Id = useAppSelector(state => state.profile?._id)
     const [typeModal,setTypeModal]=useState('')
@@ -66,9 +68,9 @@ export const Pack = React.memo(({
     }
 
     return (
-
         <>
             <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                <TableCell align="left"><img className={s.packs_img} src={cover}/></TableCell>
                 <TableCell align="left">
                     <NavLink to={`/cards?cardsPack_id=${packId}&page=1&pageCount=5`}>{name}</NavLink>
                 </TableCell>
@@ -82,7 +84,7 @@ export const Pack = React.memo(({
                 </TableCell>
                 {typeModal === 'edit' &&
                     <EditPackModal title='Edit pack' openModal={openModal} packId={packId} closeModal={closeHandler}
-                                   packName={name}/>
+                                   packName={name} packCover={cover}/>
                 }
                 {typeModal === 'delete' &&
                     <DeletePackModal title='Delete pack' openModal={openModal} packId={packId}

@@ -20,15 +20,18 @@ export const ButtonGroup = React.memo((props: ButtonGroupPropsType) => {
 
     return (
         <div>
-            <Button
-                className={s.button}
-                variant={props.buttonValue === "my" ? 'contained' : 'outlined'}
-                onClick={handleClickMy}
-            >My</Button>
-            <Button className={s.button}
-                    variant={props.buttonValue === "all" ? 'contained' : 'outlined'}
-                    onClick={handleClickAll}
-            >All</Button>
+            <div style={{paddingBottom:8}}>Show packs cards</div>
+            <div className={s.button_wrapper}>
+                <Button
+                    className={s.button1}
+                    variant={props.buttonValue === "my" ? 'contained' : 'outlined'}
+                    onClick={handleClickMy}
+                >My</Button>
+                <Button className={s.button2}
+                        variant={props.buttonValue === "all" ? 'contained' : 'outlined'}
+                        onClick={handleClickAll}
+                >All</Button>
+            </div>
         </div>
 
     );
