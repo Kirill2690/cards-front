@@ -11,8 +11,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 50px;
-
 }
 
 .infoBox button {
@@ -30,6 +28,12 @@
     line-height: 27px;
     font-family: 'Montserrat';
     font-style: normal;
+}
+.pack_img {
+    display: flex;
+    width: 170px;
+    height: 107px;
+    border-radius: 2px;
 }
 
 .iconMenu {
@@ -101,10 +105,7 @@
 }
 
 .label {
-    width: 49px;
-    height: 18px;
-    left: 136px;
-    top: 190px;
+    bottom: 51px;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
@@ -112,11 +113,13 @@
     line-height: 17px;
     display: flex;
     align-items: center;
+    width: 49px;
+    height: 18px;
+    padding-top: 28px;
+    padding-bottom: 8px;
 
-    color: #000000;
+
 }
-
-
 
 .input {
     minWidth: 650;
@@ -139,13 +142,14 @@
     width: 373px;
     height: 32px;
     background-color: #366EFF !important;
-    margin-top: 45px !important;
-    margin-bottom: 31px !important;
+    margin-top: 24px !important;
+    margin-bottom: 13px !important;
     text-transform: none !important;
     font-size: 14px !important;
     font-weight: 500;
     color: white;
     top: -35px;
+    position:static !important;
 }
 
 .input {

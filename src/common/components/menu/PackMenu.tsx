@@ -6,6 +6,7 @@ import {DeletePackModal} from "../modals/packs/deletaPackModal/DeletePackModal";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SchoolIcon from '@mui/icons-material/School';
+import {useAppSelector} from "../../hooks/hooks";
 
 
 
@@ -20,9 +21,9 @@ type PropsType = {
 
 export const PackMenu: React.FC<PropsType> = ({packName, packId, isMyPack}) => {
 
+    const cover= useAppSelector(state => state.cards.packDeckCover)
+
     const navigate = useNavigate()
-
-
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [openModal, setOpenModal] = useState(false);
     const [typeModal, setTypeModal] = useState('')
@@ -104,7 +105,7 @@ export const PackMenu: React.FC<PropsType> = ({packName, packId, isMyPack}) => {
             </Menu>
             {typeModal === 'edit' &&
                 <EditPackModal title={'Edit pack'} openModal={openModal} closeModal={closeHandler}
-                               packId={packId} packName={packName}/>
+                               packId={packId} packName={packName} packCover={cover}/>
             }
 
             {typeModal === 'delete' &&

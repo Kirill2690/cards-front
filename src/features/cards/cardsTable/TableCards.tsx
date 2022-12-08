@@ -33,6 +33,7 @@ export const TableCards = () => {
     const userCardID = useAppSelector(state => state.cards.packUserId)
     const pack = useAppSelector(state => state.packs.cardPacks.find(el => el._id === cardsPack_idURL))
     const packName = useAppSelector(state => state.cards.packName)
+    const packCover = useAppSelector(state => state.cards.packDeckCover)
 
     const [visibilityValue, setVisibilityValue] = useState(false)
     const [paramsSearchState, setParamsSearchState] = useState<QueryParamsType>({
@@ -43,7 +44,7 @@ export const TableCards = () => {
     const [cardQuestion, setCardQuestion] = useState(cardQuestionURL ? cardQuestionURL : '')
     const [openCardModal, setOpenCardModal] = useState(false)
 
-    const debouncedValue = useDebounce<string>(cardQuestion, 500)
+    const debouncedValue = useDebounce(cardQuestion, 500)
 
     const urlParamsFilter = filterQueryParams({
         cardsPack_id: cardsPack_idURL,
@@ -159,13 +160,16 @@ export const TableCards = () => {
             <div className={s.deckCover}><img src={packDeckCover ? packDeckCover : noImage} alt={'deck cover img'}
                                               className={s.packDeckCover}/></div>
             <div className={s.inputBlock}>
-                <label className={s.label}>Search</label>
-                <input className={s.input}
-                       type={"search"}
-                       placeholder={'🔍 Provide your text'}
-                       value={cardQuestion}
-                       onChange={searchValueTextHandler}
-                />
+                <img className={s.pack_img} src={packCover}/>
+                <div>
+                    <div className={s.label}>Search</div>
+                    <input className={s.input}
+                           type={"search"}
+                           placeholder={'Provide your text'}
+                           value={cardQuestion}
+                           onChange={searchValueTextHandler}
+                    />
+                </div>
             </div>
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">

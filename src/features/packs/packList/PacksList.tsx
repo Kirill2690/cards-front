@@ -24,7 +24,9 @@ export const PacksList = () => {
                     <TableRow>
                         <TableCell onClick={() => sortUpdate('name')}
                                    className={sort === '1name' ? s.sortUp : s.sortDown}>Name</TableCell>
-                        <TableCell align="right" onClick={() => sortUpdate('cardsCount')}
+                        <TableCell></TableCell>
+
+                        <TableCell onClick={() => sortUpdate('cardsCount')}
                                    className={sort === '1cardsCount' ? s.sortUp : s.sortDown}>Cards</TableCell>
                         <TableCell align="right" onClick={() => sortUpdate('updated')}
                                    className={sort === '1updated' ? s.sortUp : s.sortDown}>Last updated</TableCell>
@@ -37,13 +39,14 @@ export const PacksList = () => {
                         <Pack key={p._id}
                               packId={p._id}
                               userId={p.user_id}
+                              cover={p.deckCover}
                               user_name={p.user_name}
                               name={p.name}
                               updated={p.updated}
                               cardsCount={p.cardsCount}
 
-
-                        />)
+                        />
+                        )
                     )}
                 </TableBody>
             </Table>

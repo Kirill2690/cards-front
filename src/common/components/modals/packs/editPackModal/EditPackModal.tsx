@@ -1,11 +1,11 @@
-import React from 'react';
-import {useAppDispatch} from "../../../../hooks/hooks";
+import React, {useEffect, useState} from 'react';
+import {useAppDispatch, useAppSelector} from "../../../../hooks/hooks";
 import {useFormik} from "formik";
 import { changePackTC} from "../../../../../features/packs/packs-reducer";
 import s from "../addPackModal/AddNewPackModal.module.css";
 import {SuperInputText} from "../../../superInput/SuperInputText";
 import {BasicModal} from "../../basicModal/BasicModal";
-import {useNavigate} from "react-router-dom";
+import {InputFilePack} from "../../../inputFilePack/InputFilePack";
 
 type EditPackModalPropsType = {
     closeModal: () => void
@@ -13,6 +13,7 @@ type EditPackModalPropsType = {
     packName: string
     title:string
     openModal:boolean,
+    packCover:string
 
 
 }
@@ -20,10 +21,10 @@ type FormikErrorsType = {
     name?: string
 }
 
-export const EditPackModal = ({packName,packId,title,closeModal,openModal}: EditPackModalPropsType) => {
+export const EditPackModal = ({packName,packId,title,closeModal,openModal,packCover}: EditPackModalPropsType) => {
 
     const dispatch = useAppDispatch()
-
+    const [cover, setCover] = useState(packCover)
 
     const formik = useFormik({
         initialValues: {
@@ -49,18 +50,25 @@ export const EditPackModal = ({packName,packId,title,closeModal,openModal}: Edit
 
     const { isValid } = { ...formik };
 
+    const changeCoverHandler = (img:string) =>{
+        setCover(img)
+    }
+
     const saveHandler=()=>{
-        const updatePackData = {_id:packId, name: formik.values.name}
+        const updatePackData = {_id:packId, name: formik.values.name, deckCover: cover}
         dispatch(changePackTC(updatePackData))
         formik.resetForm()
         closeModal()
-
-
     }
 
     return (
         <BasicModal title={title} openModal={openModal} closeHandler={closeModal}>
             <form className={s.form} onSubmit={formik.handleSubmit}>
+                <div className={s.img_title}>
+                    <div>Cover</div>
+                    <InputFilePack changeCoverHandler={changeCoverHandler}/>
+                </div>
+                <img className={s.form_img} src={cover}/>
                 <div className={s.input_wrapper}>
                     <SuperInputText
                         placeholder={'New pack'}

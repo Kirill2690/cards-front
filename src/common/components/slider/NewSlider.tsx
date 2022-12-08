@@ -28,19 +28,23 @@ export const NewSlider = React.memo((props: NewSliderPropsType) => {
     const dis = minCards === maxCards
 
     return (
-        <div className={s.wrapper}>
-            <div className={s.minMaxBox}>{props.sliderValue[0]}</div>
-            <div className={s.slider}><Slider size={'small'}
-                                              min={minCards}
-                                              max={maxCards}
-                                              getAriaLabel={() => 'Minimum distance'}
-                                              value={props.sliderValue}
-                                              onChangeCommitted={handleChangeCommitted}
-                                              onChange={handleChange}
-                                              valueLabelDisplay="auto" disabled={dis}
+        <div>
+            <div style={{paddingBottom:8}}>Number of cards</div>
+            <div className={s.wrapper}>
+                <div className={s.minMaxBox}>{props.sliderValue[0]}</div>
+                <div className={s.slider}>
+                    <Slider size={'small'}
+                            min={minCards}
+                            max={maxCards}
+                            getAriaLabel={() => 'Minimum distance'}
+                            value={props.sliderValue}
+                            onChangeCommitted={handleChangeCommitted}
+                            onChange={handleChange}
+                            valueLabelDisplay="auto" disabled={dis}
 
-            /></div>
-            <div className={s.minMaxBox}>{props.sliderValue[1]}</div>
+                    /></div>
+                <div className={s.minMaxBox}>{props.sliderValue[1]}</div>
+            </div>
         </div>);
 })
 

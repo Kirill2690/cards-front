@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useAppDispatch} from "../../../../hooks/hooks";
 import {useFormik} from "formik";
 import {addPackTC} from "../../../../../features/packs/packs-reducer";
 import {BasicModal} from "../../basicModal/BasicModal";
 import s from "./AddNewPackModal.module.css";
 import {SuperInputText} from "../../../superInput/SuperInputText";
+import noCoverImg from "../../../../../assets/images/noCover.jpeg"
+import {InputFilePack} from "../../../inputFilePack/InputFilePack";
 
 
 
@@ -20,6 +22,8 @@ type  FormikErrorsType = {
 
 export const AddNewPackModal = React.memo(({closeModal,title,openModal}: AddNewPackModalPropsType) => {
     const dispatch = useAppDispatch()
+
+    const [cover, setCover] = useState(noCoverImg)
 
     const formik = useFormik({
         initialValues: {
@@ -44,8 +48,12 @@ export const AddNewPackModal = React.memo(({closeModal,title,openModal}: AddNewP
 
     const { isValid, dirty } = { ...formik };
 
+    const changeCoverHandler = (img:string) =>{
+        setCover(img)
+    }
+
     const saveHandler = () => {
-        dispatch(addPackTC(formik.values.packName))
+        dispatch(addPackTC(formik.values.packName, cover))
         formik.resetForm()
         closeModal()
     }
@@ -53,6 +61,12 @@ export const AddNewPackModal = React.memo(({closeModal,title,openModal}: AddNewP
     return (
         <BasicModal title={title} openModal={openModal} closeHandler={closeModal}>
             <form className={s.form} onSubmit={formik.handleSubmit}>
+                <div className={s.img_title}>
+                    <div>Cover</div>
+                    <InputFilePack changeCoverHandler={changeCoverHandler}
+                    />
+                </div>
+                <img className={s.form_img} src={cover}/>
                 <div className={s.input_wrapper}>
                     <SuperInputText
                         placeholder={'Name pack'}

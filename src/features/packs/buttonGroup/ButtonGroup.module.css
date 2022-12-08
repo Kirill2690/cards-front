@@ -1,6 +1,18 @@
-.button {
+.button_wrapper {
+    display: flex;
+    padding-right: 9px;
+    width: 25%;
+}
+.button1 {
     width: 50%!important;
     height: 36px!important;
     margin: 0!important;
-    border-radius: 0!important;
+    border-radius: 4px 0px 0px 4px!important;
+}
+
+.button2 {
+    width: 50%!important;
+    height: 36px!important;
+    margin: 0!important;
+    border-radius: 0px 4px 4px 0px!important;
 }
