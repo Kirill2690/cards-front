@@ -25,8 +25,8 @@ export const authAPI = {
     authRegister(data: RegisterDataType) {
         return instance.post<RegisterDataType, AxiosResponse<ResponseType>>('auth/register', data)
     },
-    changeUserName(name:string) {
-        return instance.put<{name:string}, AxiosResponse<{updateUser:UserType}>>('auth/me', {name})
+    changeUserProfileData(data: ChangeUserDataType) {
+        return instance.put<ChangeUserDataType, AxiosResponse<{updateUser:UserType}>>('auth/me', data)
     },
     forgotPassword(data:ForgotDataType) {
         return instanceHeroku.post<ForgotDataType, AxiosResponse<ForgotDataResponseType>>('auth/forgot',data)
@@ -149,8 +149,9 @@ export type RegisterDataType = {
     password: string
 }
 
-export type ChangeUserNameDataType = {
-    name?: string
+export type ChangeUserDataType = {
+    name?: string |undefined
+    avatar?:string | undefined
 }
 
 export type SetNewPasswordType = {
@@ -238,6 +239,7 @@ export type PackType = {
 export type UpdatePackType={
     _id: string
     name?: string
+
 }
 export type CreatePackType = {
     name: string
