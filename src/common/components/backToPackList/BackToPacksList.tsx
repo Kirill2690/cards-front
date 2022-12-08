@@ -1,14 +1,19 @@
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import {NavLink} from "react-router-dom";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import {useNavigate} from "react-router-dom";
 import s from './BackToPackList.module.css'
 
 
 export const BackToPackList = () => {
+
+    const navigate = useNavigate()
+
+    const onClickBackHandler = () => {
+        navigate('/packs')
+    }
     return (
-        <div className={s.arrowBack}>
-            <NavLink to={'/packs'}>
-                <span> <KeyboardBackspaceIcon className={s.icon}/> Back to Packs List</span>
-            </NavLink>
+        <div onClick={onClickBackHandler} className={s.arrowBack}>
+            <ArrowBackIcon/>
+            <div className={s.title}>Back to Packs List</div>
         </div>
     );
 };

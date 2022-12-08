@@ -42,6 +42,7 @@ export const PacksList = () => {
                               updated={p.updated}
                               cardsCount={p.cardsCount}
 
+
                         />)
                     )}
                 </TableBody>

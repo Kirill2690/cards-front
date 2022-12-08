@@ -18,7 +18,7 @@ type  FormikErrorsType = {
     packName?: string
 }
 
-export const AddNewPackModal = ({closeModal,title,openModal}: AddNewPackModalPropsType) => {
+export const AddNewPackModal = React.memo(({closeModal,title,openModal}: AddNewPackModalPropsType) => {
     const dispatch = useAppDispatch()
 
     const formik = useFormik({
@@ -68,4 +68,4 @@ export const AddNewPackModal = ({closeModal,title,openModal}: AddNewPackModalPro
             </form>
         </BasicModal>
     )
-}
+})

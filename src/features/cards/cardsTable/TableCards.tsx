@@ -10,8 +10,8 @@ import s from "./TableCards.module.css"
 import {Card} from "../card/Card";
 import {AddNewCardModal} from "../../../common/components/modals/cards/addNewCardModal/AddNewCardModal";
 import {BackToPackList} from "../../../common/components/backToPackList/BackToPacksList";
-
-
+import {PackMenu} from "../../../common/components/menu/PackMenu";
+import noImage from './../../../assets/images/noImage.jpg'
 
 
 export const TableCards = () => {
@@ -20,7 +20,7 @@ export const TableCards = () => {
     const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
     const cards = useAppSelector(state => state.cards.cards)
-    const id=useAppSelector(state => state.cards.packId)
+    const packDeckCover = useAppSelector(state => state.cards.packDeckCover)
 
 
     const [searchParams, setSearchParams] = useSearchParams()
@@ -43,7 +43,7 @@ export const TableCards = () => {
     const [cardQuestion, setCardQuestion] = useState(cardQuestionURL ? cardQuestionURL : '')
     const [openCardModal, setOpenCardModal] = useState(false)
 
-    const debouncedValue = useDebounce(cardQuestion, 500)
+    const debouncedValue = useDebounce<string>(cardQuestion, 500)
 
     const urlParamsFilter = filterQueryParams({
         cardsPack_id: cardsPack_idURL,
@@ -120,16 +120,15 @@ export const TableCards = () => {
             <BackToPackList/>
             <div className={s.infoBox}>
                 <div className={s.titleMenu}>
-                    <div className={s.title}>
+                    <h2 className={s.title}>
                         {pack ? pack.name : packName}
-                    </div>
-                      {/* {isPackAuthor ?
-
-                             <PackMenu packName={packName} packId={id} isMyPack={userID}/>
-
+                        {isPackAuthor ?
+                            <div className={s.iconMenu}>
+                                <PackMenu packName={packName} isMyPack={userID} packId={cardsPack_idURL}/>
+                            </div>
                             : <div></div>
-                            }*/}
-
+                        }
+                    </h2>
                     {visibilityValue &&
                         <div className={s.cardsMenu}>
                             <div className={s.pointer}></div>
@@ -157,11 +156,13 @@ export const TableCards = () => {
                     }
                 </div>
             </div>
+            <div className={s.deckCover}><img src={packDeckCover ? packDeckCover : noImage} alt={'deck cover img'}
+                                              className={s.packDeckCover}/></div>
             <div className={s.inputBlock}>
                 <label className={s.label}>Search</label>
                 <input className={s.input}
                        type={"search"}
-                       placeholder={'Provide your text'}
+                       placeholder={'🔍 Provide your text'}
                        value={cardQuestion}
                        onChange={searchValueTextHandler}
                 />

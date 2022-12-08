@@ -1,8 +1,19 @@
-import {Modal} from "@mui/material";
+import {Box, IconButton, Modal, Typography} from "@mui/material";
 import {ReactNode} from "react";
 import React from "react";
-import ClearIcon from '@mui/icons-material/Clear';
+import CloseIcon from '@mui/icons-material/Close';
 import s from './BasicModal.module.css'
+
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '395px',
+    bgcolor: 'background.paper',
+    borderRadius: '2px',
+    boxShadow: 24,
+};
 
 type BasicModalPropsType = {
     title: string
@@ -11,26 +22,27 @@ type BasicModalPropsType = {
     closeHandler: () => void
 }
 
-export const BasicModal: React.FC<BasicModalPropsType> = (
+export const BasicModal = React.memo((
     {
         openModal, title, closeHandler,
         children
-    }) => {
+    }:BasicModalPropsType) => {
 
     return (
         <>
             <Modal open={openModal} onClose={closeHandler} sx={{zIndex: 1}}>
-                <div className={s.main}>
-                    <div className={s.titleBox}>
-                        <h3>{title}</h3>
-                        <ClearIcon sx={{
-                            cursor: 'pointer', width: '14px',
-                            height: '14px'
-                        }} onClick={closeHandler}/>
-                    </div>
-                    {children}
+                <div>
+                    <Box sx={style}>
+                        <div className={s.titleModals}>
+                            <Typography>{title}</Typography>
+                            <IconButton onClick={closeHandler}>
+                                <CloseIcon />
+                            </IconButton>
+                        </div>
+                        <Box>{children}</Box>
+                    </Box>
                 </div>
             </Modal>
         </>
     );
-}
+})

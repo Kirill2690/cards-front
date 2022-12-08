@@ -262,7 +262,8 @@ export type ResponseCardsType = {
     minGrade: number
     maxGrade: number
     token: string
-    tokenDeathTime: number
+    tokenDeathTime: number,
+    questionImg: string
 }
 
 

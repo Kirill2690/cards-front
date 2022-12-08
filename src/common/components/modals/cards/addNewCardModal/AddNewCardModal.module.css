@@ -1,5 +1,5 @@
 .form {
-    width: 395px;
+    max-width: 100vh;
     display: flex;
     flex-direction: column;
     padding: 35px 5%;
@@ -40,6 +40,10 @@ form input:focus-visible {
     display: flex;
     justify-content: space-between;
     margin-top: 34px;
+    left: 36.48%;
+    right: 54.69%;
+    top: 78%;
+    bottom: 17.45%;
 }
 
 .button_cancel {
@@ -64,4 +68,49 @@ form input:focus-visible {
     box-shadow: 0 4px 18px 0 rgba(54, 110, 255, 0.35);
     font-weight: 500;
     font-size: 16px;
+}
+
+.formatTitle{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 0.5;
+
+}
+
+.selectType{
+    height: 36px;
+    margin-bottom: 10px;
+}
+
+
+.uploadButton {
+    width:120px!important;
+    height: 20px!important;
+    text-decoration-line: underline !important;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+
+}
+
+.previewTitle {
+    margin-top: 20px;
+}
+
+.frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    border: solid black 1px;
+}
+
+.image {
+    max-width: 10vh;
+    max-height: 20vh
 }

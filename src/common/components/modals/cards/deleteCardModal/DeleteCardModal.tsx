@@ -13,7 +13,7 @@ type DeleteCardModalPropsType={
     title:string
 }
 
-export const DeleteCardModal = ({title,id,openModal,question,closeModal}:DeleteCardModalPropsType) => {
+export const DeleteCardModal =React.memo (({title,id,openModal,question,closeModal}:DeleteCardModalPropsType) => {
 
     const dispatch=useAppDispatch()
 
@@ -24,15 +24,17 @@ export const DeleteCardModal = ({title,id,openModal,question,closeModal}:DeleteC
 
     return (
         <BasicModal title={title} openModal={openModal} closeHandler={closeModal}>
-            <p className={s.text}>
-                Do you really want to remove <b>{question}</b>?
-                <br/>
-                All cards will be deleted.
-            </p>
+            <div>
+                <p>Do you really want to remove card with question?</p>
+                {question.slice(0, 10) === 'data:image'
+                    ? <img src={question} alt={'question img'} style={{width: '100px'}}/>
+                    : <b>{question}</b>}
+                <p>This card will be deleted.</p>
+            </div>
             <div className={s.button_wrapper}>
                 <button onClick={closeModal} className={s.button_cancel}>Cancel</button>
                 <button className={s.button_delete} onClick={deleteCardHandler}>Delete</button>
             </div>
         </BasicModal>
     )
-}
+})

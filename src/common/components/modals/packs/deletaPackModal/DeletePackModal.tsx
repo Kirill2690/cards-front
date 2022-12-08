@@ -12,7 +12,7 @@ type DeletePackModalPropsType = {
     openModal: boolean
     packId:string
 }
-export const DeletePackModal = ({packId,closeModal, packName, title, openModal}: DeletePackModalPropsType) => {
+export const DeletePackModal = React.memo(({packId,closeModal, packName, title, openModal}: DeletePackModalPropsType) => {
 
 
 
@@ -39,4 +39,4 @@ export const DeletePackModal = ({packId,closeModal, packName, title, openModal}:
             </div>
         </BasicModal>
     )
-}
+})

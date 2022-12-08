@@ -1,11 +1,12 @@
 import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../common/hooks/hooks";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {CardsType, createLearnCardsTC, setCardsLearnTC} from "../cards/cards-reducer";
 import {getCard} from "../../common/utils/getCard";
 import {BackToPackList} from "../../common/components/backToPackList/BackToPacksList";
 import {Button} from "@mui/material";
 import s from './Learn.module.css'
+import noImage from "../../assets/images/noImage.jpg";
 
 const grades = ['Did not know', 'Forgot', 'A lot of thought', 'Confused', 'Knew the answer'];
 
@@ -26,15 +27,15 @@ export const Learn = () => {
         user_id: '',
         answer: '',
         question: '',
-        grade: 0,
+        grade: 1,
         shots: 0,
         comments: '',
         type: '',
         rating: 0,
         more_id: '',
-        __v: 0,
         created: '',
         updated: '',
+        __v: 0
     });
 
 
@@ -61,6 +62,16 @@ export const Learn = () => {
     }, [cards]);
 
 
+    const cardQuestion = (question: string) => {
+        if (question.includes('data:image')) {
+            return <img src={question} alt={'img question'}
+                        style={{width: '100px'}}/>
+        } else if (question.includes('/learn')) {
+            return <img src={noImage} className={s.packDeckCover} alt={'no img'}/>
+        }
+        return <>{question}</>
+    }
+
     return (
         <div>
             <BackToPackList/>
@@ -71,7 +82,7 @@ export const Learn = () => {
                 <div className={s.learn}>
                     {cards.cards.length > 0 ?
                         <div>
-                            <span className={s.question}>Question: </span> {card.question}
+                            <span className={s.question}>Question: </span> {cardQuestion(card.question)}
                             <p className={s.numberShots}>Number of answers per question: {card.shots} </p>
                         </div>
                         :

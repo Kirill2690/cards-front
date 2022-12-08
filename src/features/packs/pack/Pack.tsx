@@ -31,15 +31,12 @@ export const Pack = React.memo(({
                                 }: PackPropsType) => {
     const navigate = useNavigate()
 
-    const dispatch=useAppDispatch()
-
 
     const profile_Id = useAppSelector(state => state.profile?._id)
     const [typeModal,setTypeModal]=useState('')
     const [openModal, setOpenModal] = useState(false);
     const openHandler = () => setOpenModal(true);
     const closeHandler = () => setOpenModal(false);
-
 
 
 

@@ -39,7 +39,7 @@ form input:focus-visible {
 .button_wrapper {
     display: flex;
     justify-content: space-between;
-    margin-top: 34px;
+    margin-top: 56px;
 }
 
 .button_cancel {
