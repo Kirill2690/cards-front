@@ -1,8 +1,8 @@
 .form {
-    max-width: 100vh;
+    width: 395px;
     display: flex;
     flex-direction: column;
-    padding: 35px 5%;
+    padding: 35px 8%;
     box-sizing: border-box;
 }
 
@@ -22,10 +22,9 @@ form input:focus-visible {
     display: flex;
     flex-direction: column;
     width: 100%;
-    position: relative;
 }
 
-.input_wrapper label{
+.input_wrapper label {
     font-weight: 400;
     font-size: 13px;
 }
@@ -70,7 +69,7 @@ form input:focus-visible {
     font-size: 16px;
 }
 
-.formatTitle{
+.formatTitle {
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 400;
@@ -79,38 +78,45 @@ form input:focus-visible {
 
 }
 
-.selectType{
+.selectType {
     height: 36px;
-    margin-bottom: 10px;
 }
 
-
 .uploadButton {
-    width:120px!important;
-    height: 20px!important;
-    text-decoration-line: underline !important;
     font-family: 'Montserrat';
     font-style: normal;
-    font-weight: 500;
     font-size: 14px;
-    line-height: 20px;
-
+    text-decoration-line: underline !important;
+    color: #366EFF;
+    position: absolute !important;
+    top:130px !important;
 }
 
 .previewTitle {
-    margin-top: 20px;
+    font-family:'Montserrat';
+
+    font-weight: 500;
+    font-size: 16px;
+
 }
 
-.frame {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-
-    border: solid black 1px;
+.title_question{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
 }
 
 .image {
-    max-width: 10vh;
-    max-height: 20vh
+    padding-top: 7px;
+    width: 147px;
+    height: 119px;
+    border-radius: 2px;
+}
+
+.img_wrapper{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
 }

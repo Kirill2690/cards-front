@@ -6,7 +6,8 @@ import {BasicModal} from "../../basicModal/BasicModal";
 import s from "./AddNewPackModal.module.css";
 import {SuperInputText} from "../../../superInput/SuperInputText";
 import noCoverImg from "../../../../../assets/images/noCover.jpeg"
-import {InputFilePack} from "../../../inputFilePack/InputFilePack";
+import {InputFile} from "../../../inputFile/InputFile";
+import Button from "@mui/material/Button";
 
 
 
@@ -63,7 +64,9 @@ export const AddNewPackModal = React.memo(({closeModal,title,openModal}: AddNewP
             <form className={s.form} onSubmit={formik.handleSubmit}>
                 <div className={s.img_title}>
                     <div>Cover</div>
-                    <InputFilePack changeCoverHandler={changeCoverHandler}
+                    <InputFile uploadImage={changeCoverHandler} children={<Button className={s.button_change} variant="text" component="span">
+                        Change cover
+                    </Button>}
                     />
                 </div>
                 <img className={s.form_img} src={cover}/>

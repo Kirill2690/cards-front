@@ -23,11 +23,18 @@
 }
 
 .title {
-    font-weight: 600;
-    font-size: 25px;
-    line-height: 27px;
+    display: flex;
+    align-items: center;
+    width: 96px;
+    height: 27px;
+    left: 136px;
+    top: 155px;
+
     font-family: 'Montserrat';
     font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
 }
 .pack_img {
     display: flex;
@@ -37,8 +44,6 @@
 }
 
 .iconMenu {
-    position: absolute;
-    padding: 10px;
     cursor: pointer;
 
 }
@@ -121,14 +126,6 @@
 
 }
 
-.input {
-    minWidth: 650;
-    height: 38.19px;
-    border-radius: 10px;
-    border: 1px solid #9b9b9b;
-    padding-left: 10px;
-    font-size: 18px;
-}
 
 .headerRow {
     font-size: 18px !important;
@@ -154,7 +151,7 @@
 
 .input {
     box-sizing: border-box;
-    width: 876px;
+    width: 1137px;
     height: 36px;
     left: 136px;
     top: 216px;

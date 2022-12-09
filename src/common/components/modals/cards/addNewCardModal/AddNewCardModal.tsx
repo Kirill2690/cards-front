@@ -5,7 +5,7 @@ import {useFormik} from "formik";
 import {BasicModal} from "../../basicModal/BasicModal";
 import s from '../../packs/addPackModal/AddNewPackModal.module.css'
 import {SuperInputText} from "../../../superInput/SuperInputText";
-import {Button, NativeSelect, TextField} from "@mui/material";
+import {Button, Input, MenuItem, NativeSelect, Select, SelectChangeEvent, TextField} from "@mui/material";
 import {InputFile} from "../../../inputFile/InputFile";
 import InputLabel from "@mui/material/InputLabel";
 import noImage from './../../../../../assets/images/noImage.jpg'
@@ -34,7 +34,7 @@ export const AddNewCardModal = React.memo(({title, closeModal, openModal, id}: A
     const [isImageBroken, setIsImageBroken] = useState(false)
 
 
-    const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const handleChange = (event: SelectChangeEvent) => {
         setQuestionFormat(event.target.value as 'text' | 'image');
     };
 
@@ -78,7 +78,7 @@ export const AddNewCardModal = React.memo(({title, closeModal, openModal, id}: A
 
         if (id && (questionFormat === 'image')) {
             dispatch(addCardTC({
-                cardsPack_id: id, question:questionImg, answer: newCardAnswer
+                cardsPack_id: id, question: questionImg, answer: newCardAnswer
             }))
 
         }
@@ -97,16 +97,21 @@ export const AddNewCardModal = React.memo(({title, closeModal, openModal, id}: A
     return (
         <BasicModal title={title} openModal={openModal} closeHandler={closeModal}>
             <form className={s.form} onSubmit={formik.handleSubmit}>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                <InputLabel  variant="standard" htmlFor="uncontrolled-native">
                     Choose question format
                 </InputLabel>
-                <NativeSelect
+                <Select
                     defaultValue={questionFormat}
+                    className={s.selectType}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={questionFormat}
+                    label="typeQuestion"
                     onChange={handleChange}
                 >
-                    <option value={'text'}>Text</option>
-                    <option value={'image'}>Picture</option>
-                </NativeSelect>
+                    <MenuItem value="text">Text</MenuItem>
+                    <MenuItem value="image">Picture</MenuItem>
+                </Select>
                 {questionFormat === 'text' &&
                     <>
                         <div className={s.input_wrapper}>
@@ -126,42 +131,34 @@ export const AddNewCardModal = React.memo(({title, closeModal, openModal, id}: A
                                 <div className={s.error} style={{color: 'red'}}>{formik.errors.answer}</div>}
                         </div>
                     </>}
-            </form>
-
                 {questionFormat === 'image' &&
-                    <>
-                    <div className={s.previewTitle}>
-                        Question image preview
-                    </div>
-                    <div className={s.frame}>
-                        <img
-                            src={isImageBroken ? noImage : questionImg}
-                            className={s.image}
-                            onError={errorHandler}
-                            alt="img"
-                        />
-                    </div>
-                        <InputFile uploadImage={(image: string) => setQuestionImg(image)}>
-                            <Button variant="text" component="span" className={s.uploadButton}>
-                                📷 Change cover
-                            </Button>
-                        </InputFile>
-                        <TextField id="standard-basic"
-                                   fullWidth
-                                   label="Enter Answer"
-                                   variant="standard"
+                    <div className={s.img_wrapper}>
+                            <p className={s.title_question}>Question image preview:</p>
+                            <img
+                                src={isImageBroken ? noImage : questionImg}
+                                className={s.image}
+                                onError={errorHandler}
+                                alt="img"
+                            />
+                        <InputFile uploadImage={(image: string) => setQuestionImg(image)}
+                                   children={<Button variant="text" component="span" className={s.uploadButton}>
+                                       📷 Change cover
+                                   </Button>}/>
+                        <SuperInputText
+                                   placeholder="✍ Enter Answer"
+                                   style={{width:'347px'}}
                                    value={newCardAnswer}
                                    onChange={(e) => setNewCardAnswer(e.currentTarget.value)}
                         />
-                    </>
-                    }
-                    <div className={s.button_wrapper}>
-                        <button onClick={closeModal} className={s.button_cancel}>Cancel</button>
-                        <button className={s.button_save}
-                                onClick={saveHandler}>Save
-                        </button>
                     </div>
-
-                    </BasicModal>
-                    )
-                })
+                }
+                <div className={s.button_wrapper}>
+                    <button onClick={closeModal} className={s.button_cancel}>Cancel</button>
+                    <button className={s.button_save}
+                            onClick={saveHandler}>Save
+                    </button>
+                </div>
+            </form>
+        </BasicModal>
+    )
+})

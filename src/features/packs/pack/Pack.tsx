@@ -4,7 +4,7 @@ import TableRow from "@mui/material/TableRow";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
+import {useAppSelector} from "../../../common/hooks/hooks";
 import s from '../packs/Packs.module.css'
 import {NavLink, useNavigate} from "react-router-dom";
 import {DeletePackModal} from "../../../common/components/modals/packs/deletaPackModal/DeletePackModal";
@@ -72,7 +72,7 @@ export const Pack = React.memo(({
             <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
                 <TableCell align="left"><img className={s.packs_img} src={cover}/></TableCell>
                 <TableCell align="left">
-                    <NavLink to={`/cards?cardsPack_id=${packId}&page=1&pageCount=5`}>{name}</NavLink>
+                    <NavLink style={{textDecoration:'none'}} to={`/cards?cardsPack_id=${packId}&page=1&pageCount=5`}>{name}</NavLink>
                 </TableCell>
                 <TableCell align="left">{cardsCount}</TableCell>
                 <TableCell align="right">{formatDate(updated)}</TableCell>

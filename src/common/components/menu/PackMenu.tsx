@@ -7,6 +7,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SchoolIcon from '@mui/icons-material/School';
 import {useAppSelector} from "../../hooks/hooks";
+import s from './PackMenu.module.css'
 
 
 
@@ -14,8 +15,6 @@ type PropsType = {
     isMyPack: string,
     packName: string,
     packId: string,
-
-
 
 }
 
@@ -66,14 +65,14 @@ export const PackMenu: React.FC<PropsType> = ({packName, packId, isMyPack}) => {
     }
 
     return (
-        <div>
+        <div className={s.pack_menu}>
             <Button
                 id="demo-positioned-button"
                 aria-controls={open ? 'demo-positioned-menu' : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
-                sx={{maxWidth:'1px',color:'black',left:'10px',top:'-18px',fontSize:'30px'}}
+                sx={{maxWidth:'1px',color:'black',fontSize:'30px',position:'fixed'}}
             >
                 ≡
             </Button>

@@ -65,3 +65,12 @@ form input:focus-visible {
     font-weight: 500;
     font-size: 16px;
 }
+
+.button_change{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-size: 14px;
+    line-height: 20px;
+    text-decoration-line: underline !important;
+    color: #366EFF;
+}

@@ -1,11 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {useAppDispatch, useAppSelector} from "../../../../hooks/hooks";
+import React, {useState} from 'react';
+import {useAppDispatch} from "../../../../hooks/hooks";
 import {useFormik} from "formik";
 import { changePackTC} from "../../../../../features/packs/packs-reducer";
 import s from "../addPackModal/AddNewPackModal.module.css";
 import {SuperInputText} from "../../../superInput/SuperInputText";
 import {BasicModal} from "../../basicModal/BasicModal";
-import {InputFilePack} from "../../../inputFilePack/InputFilePack";
+import {InputFile} from "../../../inputFile/InputFile";
+import Button from "@mui/material/Button";
 
 type EditPackModalPropsType = {
     closeModal: () => void
@@ -66,7 +67,9 @@ export const EditPackModal = ({packName,packId,title,closeModal,openModal,packCo
             <form className={s.form} onSubmit={formik.handleSubmit}>
                 <div className={s.img_title}>
                     <div>Cover</div>
-                    <InputFilePack changeCoverHandler={changeCoverHandler}/>
+                    <InputFile uploadImage={changeCoverHandler} children={<Button className={s.button_change} variant="text" component="span">
+                        Change cover
+                    </Button>}/>
                 </div>
                 <img className={s.form_img} src={cover}/>
                 <div className={s.input_wrapper}>

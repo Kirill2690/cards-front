@@ -10,9 +10,15 @@ import {logoutTC} from "../../../features/auth/profile/profile-reducer";
 export const Header = () => {
 
     const dispatch = useAppDispatch()
+
     const profile = useAppSelector(state => state.profile);
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn);
+
     const navigate = useNavigate()
+
+    const navigateToProfile=()=>{
+        navigate('/profile')
+    }
 
     const logoutHandler = () => {
         dispatch(logoutTC())
@@ -27,7 +33,7 @@ export const Header = () => {
                 </div>
                 {isLoggedIn
                     ?
-                    <div className={`${s.wrapper} ${s.dropdown}`}>
+                    <div className={`${s.wrapper} ${s.dropdown}`} style={{cursor:'pointer'}} onClick={navigateToProfile}>
                         {profile.name}
                         <Avatar style={{height: '36px', width: '36px', marginLeft: '12px'}}
                                 alt="Remy Sharp"

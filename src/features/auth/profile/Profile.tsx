@@ -1,14 +1,17 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './Profile.module.css'
 import {useAppDispatch, useAppSelector} from "../../../common/hooks/hooks";
 import {changeUserInfoTC, logoutTC} from "./profile-reducer";
 import {Button, IconButton} from "@mui/material";
+import LogoutIcon from '@mui/icons-material/Logout';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import {Navigate, NavLink} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {SuperEditableSpan} from "../../../common/components/superEditableSpan/SuperEditableSpan";
-import {convertFileToBase64} from "../../../common/utils/convertFileToBase64";
+import {BackToPackList} from "../../../common/components/backToPackList/BackToPacksList";
+import {InputFile} from "../../../common/components/inputFile/InputFile";
 
 export const Profile = () => {
+
     const name = useAppSelector(state => state.profile.name)
     const avatar = useAppSelector(state => state.profile.avatar)
     const email = useAppSelector(state => state.profile.email)
@@ -17,26 +20,11 @@ export const Profile = () => {
 
     const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        if (name) {
-            setValue(name)
-        }
-    }, [name])
-
-    const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files.length) {
-            const file = e.target.files[0]
-            if (file.size < 40000) {
-                convertFileToBase64(file, (file64: string) => {
-                    dispatch(changeUserInfoTC({avatar: file64}));
-                });
-            } else {
-                console.error('Error: ', 'Файл слишком большого размера')
-            }
-        }
-    }
-
     const newUserAvatar = avatar ? avatar : ''
+
+    const changeAvatar = (file64: string) => {
+        dispatch(changeUserInfoTC({avatar: file64}))
+    };
 
     const changeUserNameProfile = (value: string) => {
         if (value !== name) {
@@ -47,6 +35,12 @@ export const Profile = () => {
         e.key === 'Enter' && changeUserNameProfile(value)
     }
 
+    useEffect(() => {
+        if (name) {
+            setValue(name)
+        }
+    }, [name])
+
     const logoutHandler = () => {
         dispatch(logoutTC())
     }
@@ -55,38 +49,32 @@ export const Profile = () => {
         return <Navigate to={'/login'}/>;
     }
     return (
+
         <div className={s.wrapper_profile}>
-            <NavLink to={'/packs'}>🠔 Back to Packs List</NavLink>
+                <BackToPackList/>
             <div className={s.profile_Block}>
                 <div className={s.title}>Personal Information</div>
                 <div className={s.photo}>
                     <img src={newUserAvatar} alt={"avatar"}/>
                     <label>
-                        <input type="file"
-                               onChange={uploadHandler}
-                               style={{display: 'none'}}
-                        />
-                        <IconButton component="span">
+                        <InputFile uploadImage={changeAvatar} children={<IconButton component="span">
                             <CameraAltIcon/>
-                        </IconButton>
+                        </IconButton>}/>
                     </label>
                 </div>
-
                 <SuperEditableSpan value={value}
                                    onChangeText={setValue}
                                    spanProps={{children: value ? value : 'enter nickname...'}}
                                    onKeyDown={(e) => onKeyDownHandler(e)}
                 />
-
                 <div className={s.email}>{email}</div>
-                <div className={s.button_block}>
-                    <Button variant={'contained'}
-                            className={s.button}
-                            onClick={logoutHandler}
-                    >
-                        Log out
-                    </Button>
-                </div>
+                <Button variant={'contained'}
+                        className={s.button}
+                        onClick={logoutHandler}
+                >
+                    <LogoutIcon className={s.logOut}/>
+                    Log out
+                </Button>
             </div>
         </div>
     );

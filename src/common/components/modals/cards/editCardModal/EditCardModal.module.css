@@ -2,7 +2,7 @@
     width: 395px;
     display: flex;
     flex-direction: column;
-    padding: 35px 5%;
+    align-items: center;
     box-sizing: border-box;
 }
 
@@ -22,7 +22,6 @@ form input:focus-visible {
     display: flex;
     flex-direction: column;
     width: 100%;
-    position: relative;
 }
 
 .input_wrapper label{
@@ -39,7 +38,7 @@ form input:focus-visible {
 .button_wrapper {
     display: flex;
     justify-content: space-between;
-    margin-top: 34px;
+
 }
 
 .button_cancel {
@@ -64,4 +63,12 @@ form input:focus-visible {
     box-shadow: 0 4px 18px 0 rgba(54, 110, 255, 0.35);
     font-weight: 500;
     font-size: 16px;
+}
+
+.image{
+    padding-top: 7px;
+    width: 147px;
+    height: 119px;
+    border-radius: 2px;
+
 }

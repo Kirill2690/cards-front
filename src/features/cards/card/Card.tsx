@@ -63,7 +63,7 @@ export const Card = React.memo(({card}: CardPropsType) => {
                     {cardQuestion(card.question)}
                 </TableCell>
                 <TableCell className={finalAnswerColumn}>
-                    {card.answer}
+                    {cardQuestion(card.answer)}
                 </TableCell>
                 <TableCell className={s.dateColumn}>
                     {card.updated.replace(/^(\d+)\-(\d+)\-(\d+)\D.+$/, '$3.$2.$1')}
