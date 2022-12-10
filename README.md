@@ -8,6 +8,6 @@ It's time to learn a little)
 
 # The project was made by:
 
-# Kirill Muraviev
-# Janna Bohan https://github.com/zhanetfio
-# Mykola Kotliarenko
+# <a href="https://github.com/Kirill2690">Kirill Muraviev</a>
+# <a href="https://github.com/zhanetfio">Janna Bohan</a>
+# <a href="https://github.com/zhanetfio">Mykola Kotliarenko</a>
