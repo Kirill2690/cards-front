@@ -9,5 +9,5 @@ It's time to learn a little)
 # The project was made by:
 
 # Kirill Muraviev
-# Janna Bohan
+# Janna Bohan https://github.com/zhanetfio
 # Mykola Kotliarenko
