@@ -10,4 +10,4 @@ It's time to learn a little)
 
 # <a href="https://github.com/Kirill2690">Kirill Muraviev</a>
 # <a href="https://github.com/zhanetfio">Janna Bohan</a>
-# <a href="https://github.com/zhanetfio">Mykola Kotliarenko</a>
+# <a href="https://github.com/MKotliarenko">Mykola Kotliarenko</a>
