@@ -1,6 +1,6 @@
 # Hello,my friend!🤚
 
-# Project for your attention CARDS 🤓.
+# Project for your attention "Cards" 🤓.
                                                             
 The Cards Project is a learning platform. Anyone can create decks of cards to store questions and answers on topics of interest to you.
 -You can create your own decks with cards where questions and answers are stored.
