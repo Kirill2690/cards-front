@@ -1,6 +1,6 @@
 # Hello,my friend!🤚
 
-# Project for your attention CARDS 💣.
+# Project for your attention CARDS 🤓.
                                                             
 The Cards Project is a learning platform. Anyone can create decks of cards to store questions and answers on topics of interest to you.
 -You can create your own decks with cards where questions and answers are stored.
@@ -12,6 +12,20 @@ The Cards Project is a learning platform. Anyone can create decks of cards to st
 
 ## Welcome to the card world. Time to learn a little my friend.
 
+<hr/>
+
+## Technologies:
+<ul>
+  <li>React</li>
+  <li>Redux</li>
+  <li>React-router-dom v.6</li>
+  <li>TypeScript</li>
+  <li>MUI</li>
+  <li>Axios</li>
+  <li>Formik</li>
+  </ul>
+
+<hr/>
 
 # The project was made by:
 
