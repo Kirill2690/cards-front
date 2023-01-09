@@ -27,7 +27,7 @@ The Cards Project is a learning platform. Anyone can create decks of cards to st
 
 <hr/>
 
-# The project was made by:
+## The project was made by:
 
 <a href="https://github.com/Kirill2690">✅Kirill Muraviev 👨‍💻</a>
 <a href="https://github.com/zhanetfio">✅Janna Bohan 👩‍💻</a>
